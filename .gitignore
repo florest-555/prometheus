@@ -12,6 +12,7 @@ build
 out
 
 # Environment files
+package-lock.json
 .env
 .env.local
 .env.development.local
