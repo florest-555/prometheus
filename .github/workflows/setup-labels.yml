@@ -1,3 +1,7 @@
+# ===============================
+# TEMPLATE COMPATÍVEL COM GITHUB ACTIONS
+# Documentação: https://docs.github.com/actions
+# ===============================
 name: Setup Labels
 
 on:
