@@ -20,7 +20,7 @@ assignees: ''
 **Thank you for reporting security vulnerabilities!**
 
 Please do NOT create a public GitHub issue for security vulnerabilities.
-Instead, please follow our security policy: https://github.com/i-c-l-org/prometheus/security/policy
+Instead, please follow our security policy: https://github.com/florest-555/prometheus/security/policy
 
 ---
 
