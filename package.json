@@ -40,6 +40,8 @@
     "adn": "prometheus licencas disclaimer add",
     "verify": "prometheus licencas disclaimer verify",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "vitest": "vitest",
+    "coverage": "vitest run --coverage --passWithNoTests",
     "lint": "eslint ."
   },
   "keywords": [
