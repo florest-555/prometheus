@@ -19,25 +19,25 @@
 
 ## Status do Projeto
 
-![Clones](https://kitsune-galeria.vercel.app/api/clones/i-c-l-org/prometheus/badge.svg)
-![Unique Clones](https://kitsune-galeria.vercel.app/api/unique-clones/i-c-l-org/prometheus/badge.svg)
+![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
+![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
 
-![analitico](https://kitsune-galeria.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
-![colaborador](https://kitsune-galeria.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
+![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
+![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
 
 **Versao Atual:** 0.4.0 | **Node.js:** >=24.12.0 | **Licenca:** MIT-0
 
-[![Stars](https://img.shields.io/github/stars/i-c-l-org/prometheus?style=social)](https://github.com/i-c-l-org/prometheus/stargazers)
-[![Forks](https://img.shields.io/github/forks/i-c-l-org/prometheus?style=social)](https://github.com/i-c-l-org/prometheus/network/members)
-[![Issues](https://img.shields.io/github/issues/i-c-l-org/prometheus)](https://github.com/i-c-l-org/prometheus/issues)
-[![Contributors](https://img.shields.io/github/contributors/i-c-l-org/prometheus)](https://github.com/i-c-l-org/prometheus/graphs/contributors)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/i-c-l-org/prometheus/blob/main/CONTRIBUTING.md)
+[![Stars](https://img.shields.io/github/stars/florest-555/prometheus?style=social)](https://github.com/florest-555/prometheus/stargazers)
+[![Forks](https://img.shields.io/github/forks/florest-555/prometheus?style=social)](https://github.com/florest-555/prometheus/network/members)
+[![Issues](https://img.shields.io/github/issues/florest-555/prometheus)](https://github.com/florest-555/prometheus/issues)
+[![Contributors](https://img.shields.io/github/contributors/florest-555/prometheus)](https://github.com/florest-555/prometheus/graphs/contributors)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/florest-555/prometheus/blob/main/CONTRIBUTING.md)
 
 ## Demo Rapido
 
 ```bash
 # Teste em 30 segundos sem instalar (requer Node.js 24+)
-npx github:i-c-l-org/prometheus diagnosticar --help
+npx github:florest-555/prometheus diagnosticar --help
 ```
 
 ## Por que usar o Prometheus?
@@ -64,7 +64,7 @@ Prometheus é uma CLI modular para analisar, diagnosticar e manter projetos (JS/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/i-c-l-org/prometheus.git
+git clone https://github.com/florest-555/prometheus.git
 cd prometheus
 
 # Instale dependências e compile
@@ -78,7 +78,7 @@ node dist/bin/index.js diagnosticar --json
 **Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/i-c-l-org/prometheus.git; cd prometheus; npm install; npm run build; node dist/bin/index.js diagnosticar --json
+git clone https://github.com/florest-555/prometheus.git; cd prometheus; npm install; npm run build; node dist/bin/index.js diagnosticar --json
 ```
 
 ### Instalação Global (Opcional)
@@ -803,10 +803,11 @@ prometheus diagnosticar --json
 
 ## Licenca
 
- ![MIT-0](https://kitsune-galeria.vercel.app/api/svg/badges/info/badge-license-mit.svg)
+ ![MIT-0](https://kitsune-free.vercel.app/api/svg/badges/info/badge-license-mit.svg)
 
  Avisos de terceiros: **THIRD-PARTY-NOTICES.txt**.
 
 <img align="right" src="./img/fenix.png" width="90" height="90"/>
 # prometheus
+
 # prometheus

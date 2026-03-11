@@ -2,7 +2,7 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Maintainers (have final approval on all changes)
-* @i-c-l-org/maintainers
+* @florest-555/maintainers
 
 # Core Team (can approve most changes)
 # Add your core team members here
@@ -10,28 +10,28 @@
 # @username2
 
 # Skills - Require review from skills team
-skills/** @i-c-l-org/maintainers
+skills/** @florest-555/maintainers
 
 # CI/CD and GitHub Actions
-.github/workflows/* @i-c-l-org/maintainers
-.github/labeler.yml @i-c-l-org/maintainers
-.github/dependabot.yml @i-c-l-org/maintainers
+.github/workflows/* @florest-555/maintainers
+.github/labeler.yml @florest-555/maintainers
+.github/dependabot.yml @florest-555/maintainers
 
 # Documentation
-docs/** @i-c-l-org/maintainers
-README.md @i-c-l-org/maintainers
-CONTRIBUTING.md @i-c-l-org/maintainers
-CHANGELOG.md @i-c-l-org/maintainers
-CODE_OF_CONDUCT.md @i-c-l-org/maintainers
+docs/** @florest-555/maintainers
+README.md @florest-555/maintainers
+CONTRIBUTING.md @florest-555/maintainers
+CHANGELOG.md @florest-555/maintainers
+CODE_OF_CONDUCT.md @florest-555/maintainers
 
 # Configuration files
-*.config.js @i-c-l-org/maintainers
-*.config.json @i-c-l-org/maintainers
-tsconfig*.json @i-c-l-org/maintainers
-vitest.config.* @i-c-l-org/maintainers
-eslint.config.js @i-c-l-org/maintainers
+*.config.js @florest-555/maintainers
+*.config.json @florest-555/maintainers
+tsconfig*.json @florest-555/maintainers
+vitest.config.* @florest-555/maintainers
+eslint.config.js @florest-555/maintainers
 
 # Security related
-SECURITY.md @i-c-l-org/maintainers
-.github/workflows/defender-for-devops.yml @i-c-l-org/maintainers
-.github/workflows/codeql.yml @i-c-l-org/maintainers
+SECURITY.md @florest-555/maintainers
+.github/workflows/defender-for-devops.yml @florest-555/maintainers
+.github/workflows/codeql.yml @florest-555/maintainers
