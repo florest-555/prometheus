@@ -1,0 +1,316 @@
+// SPDX-License-Identifier: MIT-0
+// @prometheus-disable PROBLEMA_PERFORMANCE
+// Justificativa: analista que processa código - loops são esperados
+import type { NodePath } from '@babel/traverse';
+import type { Node } from '@babel/types';
+import { findQuickFixes, type PatternBasedQuickFix } from '@core/config/auto/fix-config.js';
+
+import type { Analista, ConfiguracaoPontuacaoZelador, IntlComDisplayNames, Ocorrencia, ProblemaPontuacao } from '@';
+import { criarOcorrencia } from '@';
+
+  /* -------------------------- Helpers / Config -------------------------- */
+
+// Constantes de limites e valores de threshold
+// Constantes de limites e valores de threshold
+const LIMITES = {
+  ASCII_EXTENDED_MIN: 128,
+  CARACTERES_INCOMUNS_PADRAO: 10,
+  ESPACAMENTO_CORRECAO_CONTAGEM: 1,
+  CONTEXTO_TYPESCRIPT_LOOKBACK: 50,
+  CONTEXTO_TYPESCRIPT_LOOKAHEAD: 50
+} as const;
+const CONFIANCA = {
+  MIN_ALTA: 80,
+  UNICODE: 90,
+  PONTUACAO: 95,
+  ESPACAMENTO: 85,
+  CARACTERES_INCOMUNS: 70
+} as const;
+const COMUM_SUBSTITUICOES: Record<string, string> = {
+  '\u201c': '"',
+  '\u201d': '"',
+  '\u2018': "'",
+  '\u2019': "'",
+  '\u2013': '-',
+  '\u2014': '-',
+  '\u00A0': ' ',
+  '\u00B4': "'"
+};
+const REPEATABLE_TO_SINGLE = new Set([',', '.', '!', '?', ':', ';', '-', '_', '*']);
+const MULTI_PUNCT_RE = /([,\.!?:;_\-\*]){2,}/g;
+const SPACE_BEFORE_PUNCT_RE = /\s+([,.:;!?])/g;
+const NO_SPACE_AFTER_PUNCT_RE = /([,.:;!?])([^\s\)\]\}])/g;
+const CONFIGURACAO_PADRAO: ConfiguracaoPontuacaoZelador = {
+  normalizarUnicode: true,
+  colapsarPontuacaoRepetida: true,
+  corrigirEspacamento: true,
+  balancearParenteses: false,
+  detectarCaracteresIncomuns: true,
+  limiteCaracteresIncomuns: LIMITES.CARACTERES_INCOMUNS_PADRAO
+};
+function normalizeUnicode(input: string): {
+  text: string;
+  changed: boolean;
+} {
+  let normalized = input.normalize('NFKC');
+  let changed = false;
+  for (const [pattern, replacement] of Object.entries(COMUM_SUBSTITUICOES)) {
+    if (normalized.includes(pattern)) {
+      normalized = normalized.split(pattern).join(replacement);
+      changed = true;
+    }
+  }
+  return {
+    text: normalized,
+    changed
+  };
+}
+function collapseRepeatedPunct(s: string): {
+  text: string;
+  changed: boolean;
+  count: number;
+} {
+  let count = 0;
+  const text = s.replace(MULTI_PUNCT_RE, (m: string) => {
+    count++;
+    const ch = m[0];
+    if (REPEATABLE_TO_SINGLE.has(ch)) return ch;
+    return m;
+  });
+  return {
+    text,
+    changed: count > 0,
+    count
+  };
+}
+function fixSpacingAroundPunct(s: string): {
+  text: string;
+  changed: boolean;
+  count: number;
+} {
+  const t1 = s.replace(SPACE_BEFORE_PUNCT_RE, '$1');
+  const t2 = t1.replace(NO_SPACE_AFTER_PUNCT_RE, '$1 $2');
+  const changed = s !== t2;
+  const count = changed ? LIMITES.ESPACAMENTO_CORRECAO_CONTAGEM : 0;
+  return {
+    text: t2,
+    changed,
+    count
+  };
+}
+function detectUncommonChars(text: string, limite?: number): ProblemaPontuacao[] {
+  const issues: ProblemaPontuacao[] = [];
+  for (let i = 0; i < text.length && issues.length < (limite ?? Infinity); i++) {
+    const ch = text[i];
+    const code = ch.codePointAt(0) ?? 0;
+    if (code >= LIMITES.ASCII_EXTENDED_MIN) {
+      const name = (() => {
+        try {
+          if (typeof Intl !== 'undefined') {
+            const maybe = Intl as IntlComDisplayNames;
+            const DisplayNomesCtor = maybe.DisplayNames;
+            if (DisplayNomesCtor) {
+              const displayNomes = new DisplayNomesCtor(['en'], {
+                type: 'language'
+              });
+              return typeof displayNomes.of === 'function' ? displayNomes.of(ch) ?? '' : '';
+            }
+          }
+          return '';
+        } catch {
+          return '';
+        }
+      })();
+      issues.push({
+        tipo: 'caracteres-incomuns',
+        posicao: i,
+        comprimento: 1,
+        descricao: `Caractere incomum: ${ch} (${name || ch})`,
+        sugestao: 'Considere substituir por equivalente ASCII',
+        confianca: CONFIANCA.CARACTERES_INCOMUNS
+      });
+    }
+  }
+  return issues;
+}
+function analisarTexto(src: string, config: ConfiguracaoPontuacaoZelador = CONFIGURACAO_PADRAO): ProblemaPontuacao[] {
+  const problemas: ProblemaPontuacao[] = [];
+  if (config.normalizarUnicode) {
+    const norm = normalizeUnicode(src);
+    if (norm.changed) {
+      problemas.push({
+        tipo: 'unicode-invalido',
+        posicao: 0,
+        comprimento: src.length,
+        descricao: 'Texto contém caracteres Unicode que podem ser normalizados',
+        sugestao: 'Aplicar normalização Unicode NFKC',
+        confianca: CONFIANCA.UNICODE
+      });
+    }
+  }
+  if (config.colapsarPontuacaoRepetida) {
+    const collapsed = collapseRepeatedPunct(src);
+    if (collapsed.changed) {
+      problemas.push({
+        tipo: 'pontuacao-repetida',
+        posicao: 0,
+        comprimento: src.length,
+        descricao: `Encontrados ${collapsed.count} casos de pontuação repetida`,
+        sugestao: 'Colapsar pontuação repetida para caracteres únicos',
+        confianca: CONFIANCA.PONTUACAO
+      });
+    }
+  }
+  if (config.corrigirEspacamento) {
+    const spacing = fixSpacingAroundPunct(src);
+    if (spacing.changed) {
+      problemas.push({
+        tipo: 'espacamento-incorreto',
+        posicao: 0,
+        comprimento: src.length,
+        descricao: `Encontrados ${spacing.count} problemas de espaçamento em pontuação`,
+        sugestao: 'Corrigir espaçamento antes/depois de pontuação',
+        confianca: CONFIANCA.ESPACAMENTO
+      });
+    }
+  }
+  if (config.detectarCaracteresIncomuns) {
+    const uncommon = detectUncommonChars(src, config.limiteCaracteresIncomuns ?? undefined);
+    problemas.push(...uncommon);
+  }
+  return problemas;
+}
+function mapearCategoriaNivel(category: PatternBasedQuickFix['category']): 'info' | 'aviso' | 'erro' {
+  switch (category) {
+    case 'security':
+      return 'erro';
+    case 'performance':
+      return 'aviso';
+    case 'style':
+    case 'documentation':
+      return 'info';
+    default:
+      return 'info';
+  }
+}
+function calcularLinha(src: string, posOrIndex: number | undefined, match?: RegExpMatchArray): number {
+  if (typeof posOrIndex === 'number') {
+    const before = src.substring(0, posOrIndex);
+    return before.split('\n').length;
+  }
+  // fallback: try to compute from match.index
+  if (match) {
+    const idx = (match as RegExpMatchArray & {
+      index?: number;
+    }).index;
+    if (typeof idx === 'number') {
+      const before = src.substring(0, idx);
+      return before.split('\n').length;
+    }
+  }
+  return 1;
+}
+
+  /* -------------------------- analistaQuickFixes -------------------------- */
+
+export const analistaQuickFixes: Analista = {
+  nome: 'quick-fixes',
+  categoria: 'melhorias',
+  descricao: 'Detecta problemas comuns e oferece correções automáticas',
+  test: (relPath: string): boolean => {
+    // Inclui SVGs para permitir quick-fixes seguros (otimização e viewBox)
+    return /\.(js|jsx|ts|tsx|mjs|cjs|svg)$/.test(relPath);
+  },
+  aplicar: (src: string, relPath: string, _ast: NodePath<Node> | null): Ocorrencia[] => {
+    if (!src) return [];
+    const ocorrencias: Ocorrencia[] = [];
+
+    // Quick fixes gerais
+    const quickFixes = findQuickFixes(src, undefined, undefined, relPath);
+
+    // Quick fixes específicos por tipo de problema detectado
+    const problemaTipos = ['unhandled-async', 'console-log', 'memory-leak', 'dangerous-html', 'eval-usage', 'complex-regex'];
+    for (const problemTipo of problemaTipos) {
+      const specificFixes = findQuickFixes(src, problemTipo, undefined, relPath);
+      quickFixes.push(...specificFixes);
+    }
+
+    // Remover duplicatas por ID
+    const uniqueFixes = quickFixes.filter((fix, index, arr) => arr.findIndex(f => f.id === fix.id) === index);
+    for (const fixResultado of uniqueFixes) {
+      for (const match of fixResultado.matches) {
+        const linha = calcularLinha(src, match.index, match);
+        const previewCorrecao = fixResultado.fix(match, src);
+        const originalLine = src.split('\n')[linha - 1] || '';
+        const fixedLine = previewCorrecao.split('\n')[linha - 1] || '';
+        const sugestao = [fixResultado.description, '', `🔧 Correção sugerida:`, `❌ Antes: ${originalLine.trim()}`, `✅ Depois: ${fixedLine.trim()}`, '', `Confiança: ${fixResultado.confidence}%`, `Categoria: ${fixResultado.category}`, `ID do Fix: ${fixResultado.id}`].join('\n');
+        const nivel = mapearCategoriaNivel(fixResultado.category);
+        const ocorrencia = criarOcorrencia({
+          tipo: 'auto-fix-disponivel',
+          nivel,
+          mensagem: `${fixResultado.title}`,
+          relPath,
+          linha
+        });
+        const ocorrenciaGenerica = ocorrencia as Ocorrencia & {
+          sugestao?: string;
+          quickFixId?: string;
+          confidence?: number;
+          category?: string;
+          matchIndex?: number;
+          matchLength?: number;
+        };
+        ocorrenciaGenerica.sugestao = sugestao;
+        ocorrenciaGenerica.quickFixId = fixResultado.id;
+        ocorrenciaGenerica.confidence = fixResultado.confidence;
+        ocorrenciaGenerica.category = fixResultado.category;
+        ocorrenciaGenerica.matchIndex = match.index;
+        ocorrenciaGenerica.matchLength = match[0].length;
+        ocorrencias.push(ocorrencia);
+      }
+    }
+    return ocorrencias;
+  }
+};
+
+  /* -------------------------- analistaPontuacao -------------------------- */
+
+export const analistaPontuacao: Analista = {
+  nome: 'pontuacao-fix',
+  categoria: 'formatacao',
+  descricao: 'Detecta problemas de pontuação, caracteres estranhos e formatação de texto',
+  test: (relPath: string): boolean => {
+    return /\.(ts|js|tsx|jsx|mjs|cjs|md|txt|json)$/.test(relPath);
+  },
+  aplicar: (src: string, relPath: string): Ocorrencia[] => {
+    if (!src) return [];
+    const problemas = analisarTexto(src);
+    const ocorrencias: Ocorrencia[] = [];
+    for (const problema of problemas) {
+      const linha = calcularLinha(src, problema.posicao);
+      const linhas = src.split('\n');
+      const contexto = linhas[linha - 1] || '';
+      const ocorrencia = criarOcorrencia({
+        tipo: problema.tipo,
+        nivel: (problema.confianca ?? 0) > 80 ? 'aviso' : 'info',
+        mensagem: problema.descricao,
+        relPath,
+        linha
+      });
+      const ocorrenciaExtendida = ocorrencia as Ocorrencia & {
+        sugestao?: string;
+        confianca?: number;
+        contexto?: string;
+      };
+      ocorrenciaExtendida.sugestao = problema.sugestao;
+      ocorrenciaExtendida.confianca = problema.confianca;
+      ocorrenciaExtendida.contexto = contexto;
+      ocorrencias.push(ocorrencia);
+    }
+    return ocorrencias;
+  }
+};
+
+  /* -------------------------- Exports adicionais -------------------------- */
+
+export const analistas: Analista[] = [analistaQuickFixes, analistaPontuacao];

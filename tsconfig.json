@@ -1,0 +1,101 @@
+// ARQUIVO GERADO AUTOMATICAMENTE
+{
+  "$schema": "https://www.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": [
+      "es2022"
+    ],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "disableSizeLimit": false,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@core/*": [
+        "./src/core/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@analistas/*": [
+        "./src/analistas/*"
+      ],
+      "@relatorios/*": [
+        "./src/relatorios/*"
+      ],
+      "@guardian/*": [
+        "./src/guardian/*"
+      ],
+      "@licensas/*": [
+        "./src/licensas/*"
+      ],
+      "@cli/*": [
+        "./src/cli/*"
+      ],
+      "@zeladores/*": [
+        "./src/zeladores/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@types/types": [
+        "./src/types/index.ts"
+      ],
+      "@types/analistas": [
+        "./src/types/analistas/index.ts"
+      ],
+      "@types/guardian": [
+        "./src/types/guardian/index.ts"
+      ],
+      "@types/cli": [
+        "./src/types/cli/index.ts"
+      ],
+      "@types/core": [
+        "./src/types/core/index.ts"
+      ],
+      "@types/relatorios": [
+        "./src/types/relatorios/index.ts"
+      ],
+      "@types/shared": [
+        "./src/types/shared/index.ts"
+      ],
+      "@types/projeto": [
+        "./src/types/projeto/index.ts"
+      ],
+      "@": [
+        "./src/types/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "**/*.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    ".deprecados/**",
+    "scripts",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ]
+}

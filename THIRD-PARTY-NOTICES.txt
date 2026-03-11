@@ -1,0 +1,453 @@
+THIRD-PARTY NOTICES
+====================
+
+prometheus@0.4.0 — Project license: MIT-0
+This file lists third-party components included (production) and their notices/licenses.
+Generated at: 2026-02-28T11:43:14.585Z
+
+Notes:
+- This file is generated automatically; do not edit manually.
+- To update, run: npm run licenses:notice
+- Third-party license texts are reproduced in their original language to preserve legal validity.
+
+----------------------------------------------------------------
+Pacote: @babel/code-frame@7.29.0
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/generator@7.29.1
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/helper-globals@7.28.0
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/helper-string-parser@7.27.1
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/helper-validator-identifier@7.28.5
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/parser@7.29.0
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/template@7.28.6
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/traverse@7.29.0
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @babel/types@7.29.0
+Licenças: MIT
+Publicador: The Babel Team
+Repositório: https://github.com/babel/babel
+
+----------------------------------------------------------------
+Pacote: @chevrotain/cst-dts-gen@11.0.3
+Licenças: Apache-2.0
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: @chevrotain/gast@11.0.3
+Licenças: Apache-2.0
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: @chevrotain/regexp-to-ast@11.0.3
+Licenças: Apache-2.0
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: @chevrotain/types@11.0.3
+Licenças: Apache-2.0
+Publicador: Shahar Soel
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: @chevrotain/utils@11.0.3
+Licenças: Apache-2.0
+Publicador: Shahar Soel
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: @jridgewell/gen-mapping@0.3.13
+Licenças: MIT
+Publicador: Justin Ridgewell
+Contato: justin@ridgewell.name
+Repositório: https://github.com/jridgewell/sourcemaps
+
+----------------------------------------------------------------
+Pacote: @jridgewell/resolve-uri@3.1.2
+Licenças: MIT
+Publicador: Justin Ridgewell
+Contato: justin@ridgewell.name
+Repositório: https://github.com/jridgewell/resolve-uri
+
+----------------------------------------------------------------
+Pacote: @jridgewell/sourcemap-codec@1.5.5
+Licenças: MIT
+Publicador: Justin Ridgewell
+Contato: justin@ridgewell.name
+Repositório: https://github.com/jridgewell/sourcemaps
+
+----------------------------------------------------------------
+Pacote: @jridgewell/trace-mapping@0.3.31
+Licenças: MIT
+Publicador: Justin Ridgewell
+Contato: justin@ridgewell.name
+Repositório: https://github.com/jridgewell/sourcemaps
+
+----------------------------------------------------------------
+Pacote: ansi-regex@6.2.2
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/chalk/ansi-regex
+
+----------------------------------------------------------------
+Pacote: braces@3.0.3
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/micromatch/braces
+
+----------------------------------------------------------------
+Pacote: chalk@5.6.2
+Licenças: MIT
+Repositório: https://github.com/chalk/chalk
+
+----------------------------------------------------------------
+Pacote: chevrotain-allstar@0.3.1
+Licenças: MIT
+Publicador: TypeFox
+Repositório: https://github.com/langium/chevrotain-allstar
+
+----------------------------------------------------------------
+Pacote: chevrotain@11.0.3
+Licenças: Apache-2.0
+Publicador: Shahar Soel
+Repositório: https://github.com/Chevrotain/chevrotain
+
+----------------------------------------------------------------
+Pacote: cli-cursor@5.0.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/cli-cursor
+
+----------------------------------------------------------------
+Pacote: cli-spinners@3.4.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/cli-spinners
+
+----------------------------------------------------------------
+Pacote: commander@14.0.3
+Licenças: MIT
+Publicador: TJ Holowaychuk
+Contato: tj@vision-media.ca
+Repositório: https://github.com/tj/commander.js
+
+----------------------------------------------------------------
+Pacote: css-tree@3.1.0
+Licenças: MIT
+Publicador: Roman Dvornov
+Contato: rdvornov@gmail.com
+Repositório: https://github.com/csstree/csstree
+
+----------------------------------------------------------------
+Pacote: cuint@0.2.2
+Licenças: MIT
+Publicador: Pierre Curto
+Repositório: https://github.com/pierrec/js-cuint
+
+----------------------------------------------------------------
+Pacote: debug@4.4.3
+Licenças: MIT
+Publicador: Josh Junon
+Repositório: https://github.com/debug-js/debug
+
+----------------------------------------------------------------
+Pacote: dom-serializer@2.0.0
+Licenças: MIT
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/cheeriojs/dom-serializer
+
+----------------------------------------------------------------
+Pacote: domelementtype@2.3.0
+Licenças: BSD-2-Clause
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/domelementtype
+
+----------------------------------------------------------------
+Pacote: domhandler@5.0.3
+Licenças: BSD-2-Clause
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/domhandler
+
+----------------------------------------------------------------
+Pacote: domutils@3.2.2
+Licenças: BSD-2-Clause
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/domutils
+
+----------------------------------------------------------------
+Pacote: entities@4.5.0
+Licenças: BSD-2-Clause
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/entities
+
+----------------------------------------------------------------
+Pacote: entities@7.0.1
+Licenças: BSD-2-Clause
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/entities
+
+----------------------------------------------------------------
+Pacote: fast-xml-builder@1.0.0
+Licenças: MIT
+Publicador: Amit Gupta
+Repositório: https://github.com/NaturalIntelligence/fast-xml-builder
+
+----------------------------------------------------------------
+Pacote: fast-xml-parser@5.4.1
+Licenças: MIT
+Publicador: Amit Gupta
+Repositório: https://github.com/NaturalIntelligence/fast-xml-parser
+
+----------------------------------------------------------------
+Pacote: fill-range@7.1.1
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/jonschlinkert/fill-range
+
+----------------------------------------------------------------
+Pacote: get-east-asian-width@1.5.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/get-east-asian-width
+
+----------------------------------------------------------------
+Pacote: htmlparser2@10.1.0
+Licenças: MIT
+Publicador: Felix Boehm
+Contato: me@feedic.com
+Repositório: https://github.com/fb55/htmlparser2
+
+----------------------------------------------------------------
+Pacote: is-interactive@2.0.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/is-interactive
+
+----------------------------------------------------------------
+Pacote: is-number@7.0.0
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/jonschlinkert/is-number
+
+----------------------------------------------------------------
+Pacote: is-unicode-supported@2.1.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/is-unicode-supported
+
+----------------------------------------------------------------
+Pacote: java-parser@3.0.1
+Licenças: Apache-2.0
+Repositório: https://github.com/jhipster/prettier-java.git#main
+
+----------------------------------------------------------------
+Pacote: js-tokens@4.0.0
+Licenças: MIT
+Publicador: Simon Lydell
+Repositório: https://github.com/lydell/js-tokens
+
+----------------------------------------------------------------
+Pacote: jsesc@3.1.0
+Licenças: MIT
+Publicador: Mathias Bynens
+Repositório: https://github.com/mathiasbynens/jsesc
+
+----------------------------------------------------------------
+Pacote: lodash-es@4.17.23
+Licenças: MIT
+Publicador: John-David Dalton
+Contato: john.david.dalton@gmail.com
+Repositório: https://github.com/lodash/lodash
+
+----------------------------------------------------------------
+Pacote: lodash@4.17.23
+Licenças: MIT
+Publicador: John-David Dalton
+Contato: john.david.dalton@gmail.com
+Repositório: https://github.com/lodash/lodash
+
+----------------------------------------------------------------
+Pacote: log-symbols@7.0.1
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/log-symbols
+
+----------------------------------------------------------------
+Pacote: mdn-data@2.12.2
+Licenças: CC0-1.0
+Publicador: Mozilla Developer Network
+Repositório: https://github.com/mdn/data
+
+----------------------------------------------------------------
+Pacote: micromatch@4.0.8
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/micromatch/micromatch
+
+----------------------------------------------------------------
+Pacote: mimic-function@5.0.1
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/mimic-function
+
+----------------------------------------------------------------
+Pacote: ms@2.1.3
+Licenças: MIT
+Repositório: https://github.com/vercel/ms
+
+----------------------------------------------------------------
+Pacote: onetime@7.0.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/onetime
+
+----------------------------------------------------------------
+Pacote: ora@9.3.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/ora
+
+----------------------------------------------------------------
+Pacote: p-limit@7.3.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/p-limit
+
+----------------------------------------------------------------
+Pacote: picocolors@1.1.1
+Licenças: ISC
+Publicador: Alexey Raspopov
+Repositório: https://github.com/alexeyraspopov/picocolors
+
+----------------------------------------------------------------
+Pacote: picomatch@2.3.1
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/micromatch/picomatch
+
+----------------------------------------------------------------
+Pacote: restore-cursor@5.1.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/restore-cursor
+
+----------------------------------------------------------------
+Pacote: signal-exit@4.1.0
+Licenças: ISC
+Publicador: Ben Coe
+Contato: ben@npmjs.com
+Repositório: https://github.com/tapjs/signal-exit
+
+----------------------------------------------------------------
+Pacote: source-map-js@1.2.1
+Licenças: BSD-3-Clause
+Publicador: Valentin 7rulnik Semirulnik
+Contato: v7rulnik@gmail.com
+Repositório: https://github.com/7rulnik/source-map-js
+
+----------------------------------------------------------------
+Pacote: stdin-discarder@0.3.1
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/stdin-discarder
+
+----------------------------------------------------------------
+Pacote: string-width@8.2.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/string-width
+
+----------------------------------------------------------------
+Pacote: strip-ansi@7.2.0
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/chalk/strip-ansi
+
+----------------------------------------------------------------
+Pacote: strnum@2.2.0
+Licenças: MIT
+Publicador: Amit Gupta
+Repositório: https://github.com/NaturalIntelligence/strnum
+
+----------------------------------------------------------------
+Pacote: to-regex-range@5.0.1
+Licenças: MIT
+Publicador: Jon Schlinkert
+Repositório: https://github.com/micromatch/to-regex-range
+
+----------------------------------------------------------------
+Pacote: xxhashjs@0.2.2
+Licenças: MIT
+Publicador: Pierre Curto
+Repositório: https://github.com/pierrec/js-xxhash
+
+----------------------------------------------------------------
+Pacote: yocto-queue@1.2.2
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/yocto-queue
+
+----------------------------------------------------------------
+Pacote: yoctocolors@2.1.2
+Licenças: MIT
+Publicador: Sindre Sorhus
+Contato: sindresorhus@gmail.com
+Repositório: https://github.com/sindresorhus/yoctocolors

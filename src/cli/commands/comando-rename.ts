@@ -1,0 +1,153 @@
+// SPDX-License-Identifier: MIT-0
+// @prometheus-disable PROBLEMA_PERFORMANCE
+// Justificativa: CLI command que pré-carrega conteúdos antes do processamento
+
+import generateModule from '@babel/generator';
+import { parse } from '@babel/parser';
+import traverseModule from '@babel/traverse';
+import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
+import { getFilesWithExtension, getSourceFiles } from '@cli/helpers/get-files-src.js';
+import chalk from '@core/config/chalk-safe.js';
+import { config } from '@core/config/config.js';
+import { CliComandoRenameMensagens } from '@core/messages/cli/cli-comando-rename-messages.js';
+import { log } from '@core/messages/index.js';
+import { Command } from 'commander';
+import * as fs from 'fs';
+import * as path from 'path';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- CJS default interop
+// @ts-ignore
+const traverse = traverseModule.default || traverseModule;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- CJS default interop
+// @ts-ignore
+const generate = generateModule.default || generateModule;
+
+function parseMappingLine(line: string): { oldName: string; newName: string } | null {
+  const parts = line.split('=');
+  if (parts.length < 2) return null;
+  const oldName = parts[0].trim();
+  const newNome = parts[1].trim();
+  if (!oldName || !newNome || oldName === newNome) return null;
+  return { oldName, newName: newNome };
+}
+
+function loadMappingsFromFile(
+  filePath: string,
+  mappings: Map<string, string>,
+  raizDir: string,
+): void {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const lines = content.split('\n');
+  for (const line of lines) {
+    const parsed = parseMappingLine(line);
+    if (parsed) {
+      const existing = mappings.get(parsed.oldName);
+      if (existing !== undefined && existing !== parsed.newName && config.VERBOSE) {
+        log.info(CliComandoRenameMensagens.status.conflito(parsed.oldName, path.relative(raizDir, filePath), parsed.newName, existing));
+      }
+      mappings.set(parsed.oldName, parsed.newName);
+    }
+  }
+}
+
+export function comandoRename(
+  aplicarFlagsGlobais: (opts: Record<string, unknown>) => void,
+): Command {
+  return new Command('rename')
+    .description(CliComandoRenameMensagens.descricao)
+    .action(async function (this: Command) {
+      try {
+        await aplicarFlagsGlobais(
+          this.parent && typeof this.parent.opts === 'function'
+            ? this.parent.opts()
+            : {},
+        );
+      } catch (err) {
+        log.erro(CliComandoRenameMensagens.erros.falhaFlags(err instanceof Error ? err.message : String(err)));
+        sair(ExitCode.Failure);
+        return;
+      }
+
+      const RAIZ_DIR = process.cwd();
+      const SRC_DIR = path.resolve(RAIZ_DIR, 'src');
+      const NAMES_DIR = path.resolve(RAIZ_DIR, 'names');
+      const MAPPING_ARQUIVO = path.resolve(NAMES_DIR, 'name.txt');
+
+      const mappings = new Map<string, string>();
+
+      if (fs.existsSync(MAPPING_ARQUIVO)) {
+        loadMappingsFromFile(MAPPING_ARQUIVO, mappings, RAIZ_DIR);
+      } else if (fs.existsSync(NAMES_DIR)) {
+        const txtFiles = getFilesWithExtension(NAMES_DIR, '.txt');
+        if (txtFiles.length === 0) {
+          log.erro(CliComandoRenameMensagens.erros.nenhumMapeamento);
+          sair(ExitCode.Failure);
+          return;
+        }
+        for (const f of txtFiles) {
+          loadMappingsFromFile(f, mappings, RAIZ_DIR);
+        }
+      } else {
+        log.erro(CliComandoRenameMensagens.erros.pastaNaoEncontrada);
+        sair(ExitCode.Failure);
+        return;
+      }
+
+      if (mappings.size === 0) {
+        log.aviso(CliComandoRenameMensagens.erros.mapeamentoVazio);
+        return;
+      }
+
+      const files = getSourceFiles(SRC_DIR);
+      let totalArquivosUpdated = 0;
+      log.info(chalk.cyan(CliComandoRenameMensagens.status.inicio(mappings.size)));
+
+      // Pre-load all file contents to avoid blocking operations in loop
+      const fileContents: Map<string, string> = new Map();
+      for (const file of files) {
+        try {
+          fileContents.set(file, fs.readFileSync(file, 'utf-8'));
+        } catch {
+          // Skip files that can't be read
+        }
+      }
+
+      // Now process the pre-loaded contents
+      for (const [file, code] of fileContents) {
+        try {
+          const ast = parse(code, {
+            sourceType: 'module',
+            plugins: ['typescript', 'decorators-legacy'],
+          });
+          let changed = false;
+          traverse(ast, {
+            Identifier(path) {
+              const newNome = mappings.get(path.node.name);
+              if (newNome && newNome !== path.node.name) {
+                path.node.name = newNome;
+                changed = true;
+              }
+            },
+          });
+          if (changed) {
+            const output = generate(
+              ast,
+              {
+                retainLines: false,
+                comments: true,
+                compact: false,
+              },
+              code,
+            );
+            fs.writeFileSync(file, output.code);
+            if (config.VERBOSE)
+              log.info(CliComandoRenameMensagens.status.atualizado(path.relative(RAIZ_DIR, file)));
+            totalArquivosUpdated++;
+          }
+        } catch {
+          // ignora erros de parse por arquivo
+        }
+      }
+      log.sucesso(CliComandoRenameMensagens.status.concluido(totalArquivosUpdated));
+    });
+}
