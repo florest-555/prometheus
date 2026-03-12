@@ -22,7 +22,8 @@
 ![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
 ![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
 ![Forks](https://kitsune-free.vercel.app/api/forks/florest-555/prometheus/badge.svg)
-![Watchers](https://kitsune-free.vercel.app/api/watchers/florest-555/prometheus/badge.svg)
+![Watchers](https://kitsune-free.vercel.app/api/watch/florest-555/prometheus/badge.svg)
+![Stars](https://kitsune-free.vercel.app/api/stars/florest-555/prometheus/badge.svg)
 
 ![manteined](https://kitsune-free.vercel.app/api/svg/badges/info/badge-maintained.svg)
 ![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
