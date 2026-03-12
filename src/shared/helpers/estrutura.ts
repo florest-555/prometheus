@@ -96,22 +96,18 @@ export function parseNomeArquivo(baseNome: string): ParseNomeResultado {
   const semExt = baseNome.replace(/\.[^.]+$/i, '');
   const lower = semExt.toLowerCase();
 
-  // Apenas aceite categorias reconhecidas (singular/plural) para evitar falsos positivos
-  const CATS = new Set(Object.keys(CATEGORIAS_PADRAO).map(c => c.toLowerCase()));
-  const dotMatch = /^(?<ent>[\w-]+)\.(?<cat>[\w-]+)$/.exec(semExt);
+  const dotMatch = /^(?<ent>.+)\.(?<cat>[\w-]+)$/.exec(semExt);
   if (dotMatch?.groups) {
-    const cat = dotMatch.groups.cat.toLowerCase();
-    if (CATS.has(cat)) return {
+    return {
       entidade: dotMatch.groups.ent,
-      categoria: cat
+      categoria: dotMatch.groups.cat.toLowerCase()
     };
   }
-  const kebabMatch = /^(?<ent>[\w-]+)-(?<cat>[\w-]+)$/.exec(lower);
+  const kebabMatch = /^(?<ent>.+)-(?<cat>[\w-]+)$/.exec(lower);
   if (kebabMatch?.groups) {
-    const cat = kebabMatch.groups.cat.toLowerCase();
-    if (CATS.has(cat)) return {
+    return {
       entidade: kebabMatch.groups.ent,
-      categoria: cat
+      categoria: kebabMatch.groups.cat.toLowerCase()
     };
   }
   const camelMatch = /^(?<ent>[A-Za-z][A-Za-z0-9]*?)(?<cat>Controller|Webhook|Cliente|Client|Service|Repository)$/.exec(semExt);

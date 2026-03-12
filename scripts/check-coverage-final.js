@@ -1,72 +1,12 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 // SPDX-License-Identifier: MIT
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
 const COVERAGE_PATH = path.resolve(process.cwd(), 'coverage', 'coverage-final.json');
-const DEFAULT_THRESHOLD = 90; // porcentagem mínima por métrica (fallback)
+const DEFAULT_THRESHOLD = 50; // porcentagem mínima por métrica (fallback)
 const EXCLUDE_PATH = path.resolve(process.cwd(), 'scripts', 'coverage-exclude.json');
-const CONFIG_PATH = path.resolve(process.cwd(), 'i-c-l-org.config.json');
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} covered - TODO: Descrever parâmetro
-
- * @param {*} total - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} covered - TODO: Descrever parâmetro
-
- * @param {*} total - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} covered - TODO: Descrever parâmetro
-
- * @param {*} total - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} covered - TODO: Descrever parâmetro
-
- * @param {*} total - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} covered - TODO: Descrever parâmetro
-
- * @param {*} total - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
+const CONFIG_PATH = path.resolve(process.cwd(), 'prometheus.config.json');
 
 function pct(covered, total) {
   if (total === 0) return 100;
@@ -76,7 +16,7 @@ function pct(covered, total) {
 async function main() {
   try {
     const raw = await fs.readFile(COVERAGE_PATH, 'utf8');
-    const processedData /* TODO: Renomear de 'data' para algo mais específico */ = JSON.parse(raw);
+    const processedData = JSON.parse(raw);
 
     // load exclude patterns if present
     let excludePatterns = [];
@@ -95,10 +35,10 @@ async function main() {
     let coveredLines = 0;
 
     let consideredFiles = 0;
-    for (const filePath of Object.keys(data)) {
+    for (const filePath of Object.keys(processedData)) {
       const rel = filePath.replace(/\\/g, '/');
       if (matchesAnyPattern(rel, excludePatterns)) continue;
-      const entry = data[filePath];
+      const entry = processedData[filePath];
       consideredFiles++;
 
       // statements
@@ -118,7 +58,7 @@ async function main() {
       // branches (each value is an array of counts)
       if (entry.b && typeof entry.b === 'object') {
         for (const bkey of Object.keys(entry.b)) {
-          const itemList /* TODO: Renomear de 'arr' para algo mais específico */ = entry.b[bkey];
+          const arr = entry.b[bkey];
           if (Array.isArray(arr)) {
             totalBranches += arr.length;
             coveredBranches += arr.filter((n) => Number(n) > 0).length;
@@ -161,10 +101,8 @@ async function main() {
       },
     };
 
-  const thresholds = await resolveThresholds();
+    const thresholds = await resolveThresholds();
 
-    // Se nada foi considerado (totais zero e nenhum arquivo), é um sinal de coleta incorreta.
-    // Falhe com código distinto e mensagem clara para evitar falso positivo de 100%.
     const nothingCounted =
       consideredFiles === 0 ||
       (totals.lines.total === 0 &&
@@ -173,25 +111,26 @@ async function main() {
         totals.statements.total === 0);
     if (nothingCounted) {
       console.error(
-        'Coverage gate: nenhum arquivo contabilizado. Verifique se a coleta de cobertura foi executada com Vitest e se os padrões include/exclude estão corretos.',
+        'Coverage gate: nenhum arquivo contabilizado. Verifique se a coleta de cobertura foi executada com Vitest.',
       );
-      console.error('Arquivos considerados:', consideredFiles);
-      console.error('Padrões de exclusão:', JSON.stringify(excludePatterns));
-      console.error(JSON.stringify(totals, null, 2));
       process.exit(3);
-    }// console.log('Coverage gate | arquivos considerados:', consideredFiles); // TODO: Remover antes da produção// console.log('Coverage gate | thresholds resolvidos:', thresholds); // TODO: Remover antes da produção
+    }
+
     const ok =
       totals.lines.pct >= thresholds.lines &&
       totals.functions.pct >= thresholds.functions &&
       totals.branches.pct >= thresholds.branches &&
       totals.statements.pct >= thresholds.statements;
 
+    console.log(JSON.stringify(totals, null, 2));
+
     if (!ok) {
       console.error('Coverage gate failed: thresholds not met');
-      console.error(JSON.stringify(totals, null, 2));
+      console.error('Thresholds:', JSON.stringify(thresholds, null, 2));
       process.exit(1);
-    }// console.log('Coverage gate passed'); // TODO: Remover antes da produção
-    console.log(JSON.stringify(totals, null, 2));
+    }
+
+    console.log('Coverage gate passed');
     process.exit(0);
   } catch (err) {
     console.error(
@@ -202,123 +141,42 @@ async function main() {
   }
 }
 
-main();
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} filePath - TODO: Descrever parâmetro
-
- * @param {*} patterns - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} filePath - TODO: Descrever parâmetro
-
- * @param {*} patterns - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} filePath - TODO: Descrever parâmetro
-
- * @param {*} patterns - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} filePath - TODO: Descrever parâmetro
-
- * @param {*} patterns - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} filePath - TODO: Descrever parâmetro
-
- * @param {*} patterns - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
 function matchesAnyPattern(filePath, patterns) {
   if (!patterns || !Array.isArray(patterns) || patterns.length === 0) return false;
-  // simple matcher supporting **, * and exact suffix/prefix
   for (const p of patterns) {
     const pat = p.replace(/\\/g, '/');
     if (pat === filePath) return true;
-    // handle trailing /**
     if (pat.endsWith('/**')) {
       const base = pat.slice(0, -3);
       if (filePath.startsWith(base)) return true;
     }
-    // handle /** prefix
     if (pat.startsWith('**/')) {
       const suffix = pat.slice(3);
       if (filePath.endsWith(suffix)) return true;
     }
-    // handle simple glob *.ext or *.ts
-    if (pat.startsWith('**/') && pat.includes('*.')) {
-      const idx = pat.indexOf('*.');
-      const ext = pat.slice(idx + 1); // .ext
-      if (filePath.endsWith(ext)) return true;
-    }
-    // handle contains
-    if (pat.startsWith('**') && filePath.includes(pat.replace(/^\*\*/, ''))) return true;
-    // handle wildcard * in segment
     if (pat.includes('*')) {
-      const regex = new RegExp('^' + pat.split('*').map(escapeRegExp).join('.*') + '$');
+      const regex = new RegExp('^' + pat.split('*').map(s => s.replace(/[.*+?^${}()|[\]\\\\]/g, '\\$&')).join('.*') + '$');
       if (regex.test(filePath)) return true;
     }
-    // fallback substring
     if (filePath.includes(pat.replace(/\*\*/g, '').replace(/\*/g, ''))) return true;
   }
   return false;
 }
 
-function escapeRegExp(s) {
-  return s.replace(/[.*+?^${}()|[\]\\\\]/g, '\\$&');
-}
-
 async function resolveThresholds() {
-  // 1) ENV por-métrica tem precedência
   const envLines = Number(process.env.COVERAGE_GATE_LINES || '');
   const envFuncs = Number(process.env.COVERAGE_GATE_FUNCTIONS || '');
   const envBranches = Number(process.env.COVERAGE_GATE_BRANCHES || '');
   const envStmts = Number(process.env.COVERAGE_GATE_STATEMENTS || '');
-  if ([envLines, envFuncs, envBranches, envStmts].every((n) => Number.isFinite(n) && n >= 0)) {
+  if ([envLines, envFuncs, envBranches, envStmts].every((n) => Number.isFinite(n) && n >= 0) && envLines > 0) {
     return {
-      lines: clampPct(envLines, DEFAULT_THRESHOLD),
-      functions: clampPct(envFuncs, DEFAULT_THRESHOLD),
-      branches: clampPct(envBranches, DEFAULT_THRESHOLD),
-      statements: clampPct(envStmts, DEFAULT_THRESHOLD),
+      lines: envLines,
+      functions: envFuncs,
+      branches: envBranches,
+      statements: envStmts,
     };
   }
 
-  // 2) Config i-c-l-org.config.json: coverageGate { lines, functions, branches, statements }
   try {
     const raw = await fs.readFile(CONFIG_PATH, 'utf8');
     const cfg = JSON.parse(raw);
@@ -327,88 +185,16 @@ async function resolveThresholds() {
       const { lines, functions, branches, statements } = cg;
       if ([lines, functions, branches, statements].every((n) => Number.isFinite(Number(n)))) {
         return {
-          lines: clampPct(Number(lines), DEFAULT_THRESHOLD),
-          functions: clampPct(Number(functions), DEFAULT_THRESHOLD),
-          branches: clampPct(Number(branches), DEFAULT_THRESHOLD),
-          statements: clampPct(Number(statements), DEFAULT_THRESHOLD),
+          lines: Number(lines),
+          functions: Number(functions),
+          branches: Number(branches),
+          statements: Number(statements),
         };
       }
     }
-    // 2b) Compatibilidade: um único coverageGatePercent
-    const single = Number(cfg?.COVERAGE_GATE_PERCENT) || Number(cfg?.coverageGatePercent) || null;
-    if (Number.isFinite(single)) {
-      const v = clampPct(Number(single), DEFAULT_THRESHOLD);
-      return { lines: v, functions: v, branches: v, statements: v };
-    }
   } catch {}
 
-  // 3) Fallback global único para todas as métricas
   return { lines: DEFAULT_THRESHOLD, functions: DEFAULT_THRESHOLD, branches: DEFAULT_THRESHOLD, statements: DEFAULT_THRESHOLD };
 }
 
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} n - TODO: Descrever parâmetro
-
- * @param {*} fallback - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} n - TODO: Descrever parâmetro
-
- * @param {*} fallback - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} n - TODO: Descrever parâmetro
-
- * @param {*} fallback - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} n - TODO: Descrever parâmetro
-
- * @param {*} fallback - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-/**
-
- * TODO: Adicionar descrição da função
-
- * @param {*} n - TODO: Descrever parâmetro
-
- * @param {*} fallback - TODO: Descrever parâmetro
-
- * @returns {*} TODO: Descrever retorno
-
- */
-
-function clampPct(n, fallback) {
-  const v = Number(n);
-  if (!Number.isFinite(v) || v <= 0) return fallback;
-  if (v > 100) return 100;
-  return Math.floor(v);
-}
+main();

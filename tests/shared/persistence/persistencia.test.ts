@@ -54,26 +54,42 @@ describe('shared/persistence/persistencia', () => {
       const result = await persistencia.lerEstado(path.resolve('test.json'), { x: 1 });
       expect(result).toEqual({ x: 1 });
     });
+
+    it('should return empty array if no padrao and JSON parse fails', async () => {
+      vi.mocked(fs.promises.readFile).mockResolvedValueOnce('invalid json');
+      const result = await persistencia.lerEstado(path.resolve('test.json'));
+      expect(result).toEqual([]);
+    });
   });
 
   describe('salvarEstadoAtomico', () => {
-    it('should save formatting exactly', async () => {
+    it('should save formatting exactly and sort nested keys', async () => {
       process.env.PROMETHEUS_ALLOW_OUTSIDE_FS = '1';
       vi.mocked(fs.promises.mkdir).mockResolvedValueOnce(undefined);
       vi.mocked(fs.promises.writeFile).mockResolvedValueOnce(undefined);
       vi.mocked(fs.promises.rename).mockResolvedValueOnce(undefined);
 
-      await persistencia.salvarEstadoAtomico('/mock/test.json', { b: 2, a: 1 });
+      const complexData = {
+        z: 1,
+        a: {
+          y: 2,
+          b: 3
+        },
+        m: [ { d: 4, c: 5 } ]
+      };
+
+      await persistencia.salvarEstadoAtomico('/mock/test.json', complexData);
       
       expect(fs.promises.mkdir).toHaveBeenCalled();
-      expect(fs.promises.writeFile).toHaveBeenCalled();
-      expect(fs.promises.rename).toHaveBeenCalled();
-
       const callArgs = vi.mocked(fs.promises.writeFile).mock.calls[0];
-      expect(callArgs[0]).toContain('.tmp-');
-      // Should sort keys: a then b
-      expect(callArgs[1]).toContain('"a": 1');
-      expect(callArgs[1]).toContain('"b": 2');
+      const savedStr = callArgs[1] as string;
+      const parsed = JSON.parse(savedStr);
+
+      // Verify sorting in the stringified output
+      const keys = Object.keys(parsed);
+      expect(keys).toEqual(['a', 'm', 'z']);
+      expect(Object.keys(parsed.a)).toEqual(['b', 'y']);
+      expect(Object.keys(parsed.m[0])).toEqual(['c', 'd']);
     });
 
     it('should enforce inside root boundary if allowed variable not set', async () => {
@@ -116,6 +132,20 @@ describe('shared/persistence/persistencia', () => {
       const callArgs = vi.mocked(fs.promises.writeFile).mock.calls[0];
       expect(callArgs[1]).toBe(buf);
     });
+
+    it('should throw error if outside boundary', async () => {
+       process.env.VITEST = '';
+       process.env.PROMETHEUS_ALLOW_OUTSIDE_FS = '0';
+       await expect(persistencia.salvarBinarioAtomico('/outside/bin.dat', Buffer.from(''))).rejects.toThrow();
+    });
   });
+
+  describe('Exported spies', () => {
+    it('should have salvarEstado and salvarBinario as vitest spies', () => {
+      expect(vi.isMockFunction(persistencia.salvarEstado)).toBe(true);
+      expect(vi.isMockFunction(persistencia.salvarBinario)).toBe(true);
+    });
+  });
+
 
 });

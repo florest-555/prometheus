@@ -58,6 +58,16 @@ describe('helpers/estrutura', () => {
     it('should ignore dist', () => {
       expect(deveIgnorar('dist/bundle.js', ['dist'])).toBe(true);
     });
+
+    it('should handle complex ignore patterns with slashes', () => {
+      expect(deveIgnorar('src/foo/bar/baz', ['foo/bar'])).toBe(true);
+      expect(deveIgnorar('src/foo/bar', ['foo/bar'])).toBe(true);
+      expect(deveIgnorar('foo/bar/src', ['foo/bar'])).toBe(true);
+    });
+
+    it('should return false for empty pattern', () => {
+      expect(deveIgnorar('src/index.ts', [''])).toBe(false);
+    });
   });
 
   describe('parseNomeArquivo', () => {
@@ -84,6 +94,11 @@ describe('helpers/estrutura', () => {
       expect(result.entidade).toBeNull();
       expect(result.categoria).toBeNull();
     });
+
+    it('should parse simple suffix (some-service)', () => {
+       const result = parseNomeArquivo('some-service.ts');
+       expect(result.categoria).toBe('service');
+    });
   });
 
   describe('destinoPara', () => {
@@ -98,6 +113,12 @@ describe('helpers/estrutura', () => {
       expect(result.destinoDir).toBeNull();
     });
 
+    it('should return null if category is not configured and only configured is true', () => {
+       const result = destinoPara('user.newcat.ts', 'src', true, true, { controller: 'controllers' });
+       expect(result.destinoDir).toBeNull();
+       expect(result.motivo).toContain('não configurada');
+    });
+
     it('should organize by entity when enabled', () => {
       const result = destinoPara('user.controller.ts', 'src', true, false, CATEGORIAS_PADRAO);
       expect(result.destinoDir).toContain('domains');
@@ -110,4 +131,37 @@ describe('helpers/estrutura', () => {
       expect(result.destinoDir).toContain('controllers');
     });
   });
+
+  // Adding tests for carregarConfigEstrategia by importing it - it wasn't imported before!
 });
+
+import { carregarConfigEstrategia } from '../../../src/shared/helpers/estrutura';
+import * as persistencia from '../../../src/shared/persistence/persistencia';
+import { vi } from 'vitest';
+
+describe('helpers/estrutura - carregarConfigEstrategia', () => {
+  it('should load default options when no config file exists', async () => {
+    // Mock lerEstado to return empty array (default for not found in lerEstado)
+    const spy = vi.spyOn(persistencia, 'lerEstado').mockResolvedValue([]);
+    
+    const result = await carregarConfigEstrategia('/tmp');
+    expect(result.raizCodigo).toBe('src');
+    expect(result.criarSubpastasPorEntidade).toBe(true);
+    spy.mockRestore();
+  });
+
+  it('should apply preset options', async () => {
+    vi.spyOn(persistencia, 'lerEstado').mockResolvedValue({});
+    const result = await carregarConfigEstrategia('/tmp', { preset: 'prometheus' });
+    expect(result.criarSubpastasPorEntidade).toBe(false);
+    expect(result.ignorarPastas).toContain('tests');
+  });
+
+  it('should merge overrides correctly', async () => {
+    vi.spyOn(persistencia, 'lerEstado').mockResolvedValue({ raizCodigo: 'app' });
+    const result = await carregarConfigEstrategia('/tmp', { criarSubpastasPorEntidade: false });
+    expect(result.raizCodigo).toBe('app');
+    expect(result.criarSubpastasPorEntidade).toBe(false);
+  });
+});
+

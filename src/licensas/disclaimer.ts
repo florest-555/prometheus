@@ -26,7 +26,7 @@ function execFileAsync(cmd: string, args: string[], opts: Record<string, unknown
   });
 }
 const defaultDisclaimerCaminho = 'docs/partials/AVISO-PROVENIENCIA.md';
-const marker = /Proveni[eê]ncia e Autoria/i;
+const marker = /Proveni[^\s]{1,5}ncia|Autoria/i;
 async function listMarkdown(root: string): Promise<string[]> {
   try {
     const {
@@ -36,17 +36,18 @@ async function listMarkdown(root: string): Promise<string[]> {
     });
     return stdout.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
   } catch {
-    const out: string[] = [];
     async function walk(dir: string): Promise<string[]> {
-      const entries = await fs.readdir(dir, {
-        withFileTypes: true
-      });
-      for (const e of entries) {
-        const p = path.join(dir, e.name);
-        if (e.isDirectory()) {
-          if (/^(node_modules|dist|\.git|pre-public|preview-prometheus|preview-i-c-l-org|coverage|relatorios|\.prometheus)$/i.test(e.name)) continue;
+      const out: string[] = [];
+      const entries = await fs.readdir(dir).catch(() => []);
+      for (const e of (entries as any)) {
+        const name = typeof e === 'string' ? e : e.name;
+        const p = path.join(dir, name);
+        const stat = await fs.stat(p).catch(() => null);
+        if (!stat) continue;
+        if (stat.isDirectory()) {
+          if (/^(node_modules|dist|\.git|pre-public|preview-prometheus|preview-i-c-l-org|coverage|relatorios|\.prometheus)$/i.test(name)) continue;
           out.push(...(await walk(p)));
-        } else if (/\.md$/i.test(e.name)) {
+        } else if (/\.md$/i.test(name)) {
           out.push(path.relative(root, p));
         }
       }
@@ -54,6 +55,27 @@ async function listMarkdown(root: string): Promise<string[]> {
     }
     return walk(root);
   }
+}
+async function hasDisclaimer(absPath: string): Promise<boolean> {
+  try {
+    const content = await fs.readFile(absPath, 'utf8');
+    const head = content.split('\n').slice(0, 30).join('\n');
+    return marker.test(head);
+  } catch {
+    return false;
+  }
+}
+function shouldSkip(rel: string, disclaimerPath: string): boolean {
+  const norm = rel.replace(/\\/g, '/');
+  const dNorm = disclaimerPath.replace(/\\/g, '/');
+  return norm === dNorm ||
+         norm.startsWith('pre-public/') ||
+         norm.startsWith('.abandonados/') ||
+         norm.startsWith('.deprecados/') ||
+         norm.startsWith('coverage/') ||
+         norm.startsWith('relatorios/') ||
+         norm.includes('preview-prometheus') ||
+         norm.includes('preview-i-c-l-org');
 }
 export async function addDisclaimer({
   root = process.cwd(),
@@ -67,18 +89,12 @@ export async function addDisclaimer({
     throw new Error(`Disclaimer not found: ${disclaimerPath}`);
   });
   const disclaimerText = await fs.readFile(absDisclaimer, 'utf8');
-  const files = (await listMarkdown(root)).filter(f => f !== disclaimerPath && !f.startsWith('pre-public/')).filter(f => !f.startsWith('.abandonados/') && !f.startsWith('.deprecados/') && !f.startsWith('coverage/') && !f.startsWith('relatorios/'));
+  const files = (await listMarkdown(root)).filter(f => !shouldSkip(f, disclaimerPath));
   const updatedArquivos: string[] = [];
   for (const rel of files) {
     const abs = path.join(root, rel);
-    try {
-      await fs.access(abs);
-    } catch {
-      continue;
-    }
+    if (await hasDisclaimer(abs)) continue;
     const content = await fs.readFile(abs, 'utf8');
-    const head = content.split('\n').slice(0, 30).join('\n');
-    if (marker.test(head)) continue;
     const updated = `${disclaimerText}\n\n${content.trimStart()}\n`;
     if (!dryRun) await fs.writeFile(abs, updated, 'utf8');
     updatedArquivos.push(rel);
@@ -93,18 +109,13 @@ export async function verifyDisclaimer({
 }: Pick<DisclaimerOptions, 'root' | 'disclaimerPath'> = {}): Promise<{
   missing: string[];
 }> {
-  const files = (await listMarkdown(root)).filter(f => f !== disclaimerPath && !f.startsWith('pre-public/') && !f.startsWith('preview-prometheus|preview-i-c-l-org/')).filter(f => !f.startsWith('.abandonados/') && !f.startsWith('.deprecados/') && !f.startsWith('coverage/') && !f.startsWith('relatorios/'));
+  const files = (await listMarkdown(root)).filter(f => !shouldSkip(f, disclaimerPath));
   const missing: string[] = [];
   for (const rel of files) {
     const abs = path.join(root, rel);
-    try {
-      await fs.access(abs);
-    } catch {
-      continue;
+    if (!(await hasDisclaimer(abs))) {
+      missing.push(rel);
     }
-    const content = await fs.readFile(abs, 'utf8');
-    const head = content.split('\n').slice(0, 30).join('\n');
-    if (!marker.test(head)) missing.push(rel);
   }
   return {
     missing

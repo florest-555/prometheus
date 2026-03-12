@@ -55,8 +55,8 @@ async function* walkDirectory(dir: string): AsyncGenerator<string> {
     for (const entry of entries) {
       const fullCaminho = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        // Pular node_modules, dist, coverage, etc
-        if (['node_modules', 'dist', 'coverage', '.git'].includes(entry.name)) {
+        const name = entry.name.toLowerCase();
+        if (['node_modules', 'dist', 'coverage', '.git', 'relatorios', '.prometheus', 'pre-public'].includes(name) || name.startsWith('preview-')) {
           continue;
         }
         yield* walkDirectory(fullCaminho);
@@ -108,7 +108,7 @@ function corrigirImportsTipos(conteudo: string): {
       correcoes.push({
         tipo: 'tipos-extensao',
         de: match,
-        para: novoImport,
+        para: '@types/types',
         linha: conteudo.substring(0, offset).split('\n').length
       });
       return novoImport;
@@ -117,7 +117,7 @@ function corrigirImportsTipos(conteudo: string): {
     correcoes.push({
       tipo: 'tipos-subpath',
       de: match,
-      para: novoImport,
+      para: '@types/types',
       linha: conteudo.substring(0, offset).split('\n').length
     });
     return novoImport;
