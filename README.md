@@ -27,13 +27,10 @@
 ![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
 ![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
 
-**Versao Atual:** 0.4.0 | **Node.js:** >=24.12.0 | **Licenca:** MIT-0
-
-[![Stars](https://img.shields.io/github/stars/florest-555/prometheus?style=social)](https://github.com/florest-555/prometheus/stargazers)
-[![Forks](https://img.shields.io/github/forks/florest-555/prometheus?style=social)](https://github.com/florest-555/prometheus/network/members)
-[![Issues](https://img.shields.io/github/issues/florest-555/prometheus)](https://github.com/florest-555/prometheus/issues)
-[![Contributors](https://img.shields.io/github/contributors/florest-555/prometheus)](https://github.com/florest-555/prometheus/graphs/contributors)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/florest-555/prometheus/blob/main/CONTRIBUTING.md)
+![manteined](https://kitsune-free.vercel.app/api/svg/badges/info/badge-maintained.svg)
+![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
+![stable](https://kitsune-free.vercel.app/api/svg/badges/info/badge-stable.svg)
+![beta](https://kitsune-free.vercel.app/api/svg/badges/info/badge-beta.svg)
 
 ## Demo Rapido
 
@@ -807,9 +804,10 @@ prometheus diagnosticar --json
 
  ![MIT-0](https://kitsune-free.vercel.app/api/svg/badges/info/badge-license-mit.svg)
 
+ ---
+
  Avisos de terceiros: **THIRD-PARTY-NOTICES.txt**.
 
-<img align="right" src="./img/fenix.png" width="90" height="90"/>
-# prometheus
+ ---
 
-# prometheus
+<img align="right" src="./img/fenix.png" width="90" height="90"/>
