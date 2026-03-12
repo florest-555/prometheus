@@ -60,7 +60,6 @@ Thumbs.db
 # Project specific
 .prometheus
 .skills
-*.tgz
 
 # Reports and logs
 relatorios/
