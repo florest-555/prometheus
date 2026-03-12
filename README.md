@@ -19,6 +19,8 @@
 
 ## Status do Projeto
 
+<div align="center">
+
 ![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
 ![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
 ![Forks](https://kitsune-free.vercel.app/api/forks/florest-555/prometheus/badge.svg)
@@ -31,6 +33,8 @@
 ![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
 ![stable](https://kitsune-free.vercel.app/api/svg/badges/info/badge-stable.svg)
 ![beta](https://kitsune-free.vercel.app/api/svg/badges/info/badge-beta.svg)
+
+</div>
 
 ## Demo Rapido
 
