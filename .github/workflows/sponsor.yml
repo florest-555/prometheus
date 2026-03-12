@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,10 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Thank You Message
+        if: github.event_name == 'sponsorship'
         env:
           SPONSOR_LOGIN: ${{ github.event.sponsorship.sponsor.login }}
           SPONSOR_TIER: ${{ github.event.sponsorship.tier.name }}
@@ -43,7 +42,7 @@ jobs:
 
       - name: Create GitHub Sponsor Badge
         uses: actions/github-script@v7
-        if: github.event.sponsorship.tier.monthly_price_in_cents >= 500
+        if: github.event_name == 'sponsorship' && github.event.sponsorship.tier.monthly_price_in_cents >= 500
         with:
           script: |
             const sponsor = context.payload.sponsorship.sponsor;

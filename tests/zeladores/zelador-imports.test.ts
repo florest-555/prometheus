@@ -1,75 +1,68 @@
 // SPDX-License-Identifier: MIT-0
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { gerarRelatorioCorrecoes } from '../../src/zeladores/zelador-imports';
+import { describe, it, expect } from 'vitest';
 import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
 
-// Mock dependency modules to avoid actual file system interaction
-vi.mock('node:fs', () => ({
-  promises: {
-    readdir: vi.fn(),
-    readFile: vi.fn(),
-    writeFile: vi.fn(),
-    access: vi.fn(),
+import { executarZeladorImports, gerarRelatorioCorrecoes } from '../../src/zeladores/zelador-imports';
+
+async function withTempDir<T>(fn: (dir: string) => Promise<T>): Promise<T> {
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'prometheus-'));
+  try {
+    return await fn(tmpDir);
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true });
   }
-}));
+}
 
-// We need to export executingZeladorImports as executarZeladorImports if we correctly name it
-// Actually in the file it is 'executarZeladorImports'
-import { executarZeladorImports } from '../../src/zeladores/zelador-imports';
+async function writeFileEnsuringDir(filePath: string, content: string) {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.writeFile(filePath, content, 'utf8');
+}
 
 describe('zeladores/zelador-imports', () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
-  });
-
   describe('executarZeladorImports', () => {
     it('should correctly fix @types/types.js imports', async () => {
-      vi.mocked(fs.access).mockResolvedValue(undefined);
-      vi.mocked(fs.readdir).mockResolvedValueOnce([
-        { name: 'test.ts', isFile: () => true, isDirectory: () => false }
-      ] as any);
-      
-      const originalContent = "import type { Something } from '@types/types.js';";
-      vi.mocked(fs.readFile).mockResolvedValue(originalContent);
+      await withTempDir(async (root) => {
+        const srcFile = path.join(root, 'src', 'test.ts');
+        await writeFileEnsuringDir(srcFile, "import type { Something } from '@types/types.js';");
 
-      const resultados = await executarZeladorImports(['src'], { dryRun: false });
-      
-      expect(resultados).toHaveLength(1);
-      expect(resultados[0].modificado).toBe(true);
-      expect(resultados[0].correcoes[0].para).toBe('@types/types');
-      
-      const writeCall = vi.mocked(fs.writeFile).mock.calls[0];
-      expect(writeCall[1]).toBe("import type { Something } from '@types/types';");
+        const resultados = await executarZeladorImports(['src'], { dryRun: false, projectRaiz: root });
+
+        expect(resultados).toHaveLength(1);
+        expect(resultados[0].modificado).toBe(true);
+        expect(resultados[0].correcoes[0].para).toBe('@types/types');
+
+        const updated = await fs.readFile(srcFile, 'utf8');
+        expect(updated).toBe("import type { Something } from '@types/types';");
+      });
     });
 
     it('should correctly fix @types/subpath imports', async () => {
-      vi.mocked(fs.access).mockResolvedValue(undefined);
-      vi.mocked(fs.readdir).mockResolvedValueOnce([
-        { name: 'test.ts', isFile: () => true, isDirectory: () => false }
-      ] as any);
-      
-      const originalContent = "import type { Something } from '@types/other/path';";
-      vi.mocked(fs.readFile).mockResolvedValue(originalContent);
+      await withTempDir(async (root) => {
+        const srcFile = path.join(root, 'src', 'test.ts');
+        await writeFileEnsuringDir(srcFile, "import type { Something } from '@types/other/path';");
 
-      const resultados = await executarZeladorImports(['src'], { dryRun: false });
-      
-      expect(resultados[0].modificado).toBe(true);
-      expect(resultados[0].correcoes[0].para).toBe('@types/types');
+        const resultados = await executarZeladorImports(['src'], { dryRun: false, projectRaiz: root });
+
+        expect(resultados).toHaveLength(1);
+        expect(resultados[0].modificado).toBe(true);
+        expect(resultados[0].correcoes[0].para).toBe('@types/types');
+
+        const updated = await fs.readFile(srcFile, 'utf8');
+        expect(updated).toBe("import type { Something } from '@types/types';");
+      });
     });
 
     it('should skip node_modules', async () => {
-       vi.mocked(fs.access).mockResolvedValue(undefined);
-       vi.mocked(fs.readdir).mockResolvedValueOnce([
-         { name: 'node_modules', isFile: () => false, isDirectory: () => true }
-       ] as any);
+      await withTempDir(async (root) => {
+        const nmFile = path.join(root, 'node_modules', 'pkg', 'index.ts');
+        await writeFileEnsuringDir(nmFile, "import type { Something } from '@types/types.js';");
 
-       // Ensure no leakage from previous tests
-       vi.mocked(fs.readFile).mockResolvedValue('content'); 
-       vi.mocked(fs.readFile).mockClear();
+        const resultados = await executarZeladorImports(['.'], { dryRun: false, projectRaiz: root });
 
-       const resultados = await executarZeladorImports(['src']);
-       expect(resultados).toHaveLength(0);
-       expect(vi.mocked(fs.readFile)).not.toHaveBeenCalled();
+        expect(resultados).toHaveLength(0);
+      });
     });
   });
 

@@ -1,88 +1,70 @@
-# GitHub Actions & Repository Setup Guide
+# GitHub Actions & Repo Setup Guide
 
-## Required Manual Configuration
+This guide explains how to enable the optional automation in `.github/` and keep workflows running smoothly.
 
-### 1. NPM Token (for publishing packages)
+## Quick Start
 
-1. Go to https://www.npmjs.com/settings/{your-username}/tokens
-2. Create a new automation token
-3. Go to your repository settings: https://github.com/{org}/{repo}/settings/secrets/actions
-4. Add a new secret:
-   - **Name**: `NPM_TOKEN`
-   - **Value**: Your npm automation token
+1. Enable GitHub Actions for the repository.
+2. Add secrets/variables only for the workflows you plan to use.
+3. Run the setup workflows (labels, branch protection) if desired.
 
-### 2. GitHub App (for branch protection workflow)
+## Required for Specific Workflows
 
-To enable the branch protection setup workflow, you need a GitHub App:
+### Release workflow
 
-1. Go to https://github.com/settings/apps/new
-2. Create a new GitHub App with:
-   - **Name**: Prometheus Branch Protection
-   - **Homepage URL**: https://github.com/{org}/{repo}
-   - **Webhook**: Disable (uncheck)
-   - **Permissions**: Read access to administration, Read access to code, Read/write access to repository administration
-3. Create the app and note the **App ID**
-4. Generate a private key for the app
-5. In your repository settings, add these secrets:
-   - **Name**: `APP_ID`
-     **Value**: Your App ID
-   - **Name**: `APP_PRIVATE_KEY`
-     **Value**: The private key you downloaded
+Requires an npm token to publish packages.
 
-### 3. Branch Protection Rules (GUI Alternative)
+1. Create an npm automation token: https://www.npmjs.com/settings/{your-username}/tokens
+2. Add a repository secret:
+   - Name: `NPM_TOKEN`
+   - Value: your npm token
 
-Instead of using the workflow, you can manually configure in:
-https://github.com/{org}/{repo}/settings/branches
+### Branch protection workflow (optional)
 
-1. Click "Add branch protection rule"
-2. Enter branch name pattern: `main` (or `dev`)
-3. Enable:
-   - [OK] Require a pull request before merging
-   - [OK] Require approvals (1)
-   - [OK] Require code owner reviews
-   - [OK] Require status checks to pass before merging
-     - CI / Build
-     - CI / Lint
-     - CI / TypeCheck
-     - CI / Test
-   - [OK] Require branches to be up to date
-   - [OK] Require linear history
-   - [OK] Include administrators
+Uses a GitHub App for elevated permissions.
 
-### 4. Labels
+1. Create a GitHub App: https://github.com/settings/apps/new
+2. Set permissions: Repository administration (read/write)
+3. Generate a private key and note the App ID
+4. Add:
+   - Repository variable `APP_ID`
+   - Repository secret `APP_PRIVATE_KEY`
 
-Run the setup workflow to create all labels:
-1. Go to Actions tab
-2. Select "Setup Labels" workflow
-3. Click "Run workflow"
+If these are missing, the workflow safely skips.
 
-Or manually create labels in:
-https://github.com/{org}/{repo}/labels
+## Labels Setup (optional)
 
-### 5. Enable Workflows
+Run the **Setup Labels** workflow to create/update labels used by automation.
 
-After pushing, make sure to enable the workflows in:
-https://github.com/{org}/{repo}/actions
+## Manual Branch Protection (GUI alternative)
 
-## Quick Setup Checklist
+Settings → Branches → Add rule:
+- Require pull request before merging
+- Require approvals (1+)
+- Require code owner reviews
+- Require status checks:
+  - CI / Lint
+  - CI / TypeCheck
+  - CI / Build
+  - CI / Test
+- Require linear history
 
-- [ ] Add `NPM_TOKEN` secret (for npm publishing)
-- [ ] Configure branch protection on `main` and `dev`
-- [ ] Run "Setup Labels" workflow
-- [ ] Enable all workflows in Actions tab
-- [ ] Update CODEOWNERS with actual usernames
-
-## Workflow Triggers
+## Workflow Triggers (Summary)
 
 | Workflow | Trigger |
-|----------|---------|
-| CI | Push/PR to dev, main |
-| Release | New tag v* or manual |
-| Sponsor | New sponsorship |
-| Stale | Weekly schedule |
-| Greeting | New PR/Issue |
-| Labeler | PR opened/synced |
+| --- | --- |
+| CI | Push/PR to `dev` and `main` |
+| CodeQL | Push/PR to `dev` + schedule |
+| Release | Tag `v*` or manual |
+| Labeler | PR opened/synced (internal PRs) |
+| Greeting | New issue/PR |
+| Stale | Weekday schedule |
 | Auto Approve | Dependabot PR |
-| Setup Labels | Manual trigger |
-| Setup Branch | Manual trigger |
+| Setup Labels | Manual |
+| Setup Branch Protection | Manual |
+| Sponsors | Sponsorship event |
 
+## Notes
+
+- Labeler/auto-approve run only for internal PRs to avoid permission failures on forks.
+- Sponsor workflow does nothing on manual trigger (safe no-op).

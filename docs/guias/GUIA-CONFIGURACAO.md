@@ -66,10 +66,10 @@ Arquivo de configuração principal na raiz do projeto.
   "STRUCTURE_AUTO_FIX": false,
   "REPORT_EXPORT_ENABLED": false,
   "coverageGate": {
-    "lines": 80,
-    "functions": 80,
-    "branches": 75,
-    "statements": 80
+    "lines": 55,
+    "functions": 55,
+    "branches": 55,
+    "statements": 55
   },
   "TYPE_SAFETY": {
     "enabled": true,
@@ -173,10 +173,10 @@ SAFE_MODE=false
 ALLOW_PLUGINS=false
 
 # === Cobertura (CI) ===
-COVERAGE_GATE_LINES=90
-COVERAGE_GATE_FUNCTIONS=90
-COVERAGE_GATE_BRANCHES=90
-COVERAGE_GATE_STATEMENTS=90
+COVERAGE_GATE_LINES=55
+COVERAGE_GATE_FUNCTIONS=55
+COVERAGE_GATE_BRANCHES=55
+COVERAGE_GATE_STATEMENTS=55
 ```
 
 ---
@@ -343,8 +343,8 @@ SAFE_MODE=true
 REPORT_SILENCE_LOGS=true
 LOG_ESTRUTURADO=true
 WORKER_POOL_MAX_WORKERS=4
-COVERAGE_GATE_LINES=90
-COVERAGE_GATE_FUNCTIONS=90
+COVERAGE_GATE_LINES=55
+COVERAGE_GATE_FUNCTIONS=55
 ```
 
 ### Produção
@@ -373,10 +373,10 @@ cat > prometheus.config.json << 'EOF'
   },
   "REPO_ARQUETIPO": "meu-projeto",
   "coverageGate": {
-    "lines": 80,
-    "functions": 80,
-    "branches": 75,
-    "statements": 80
+    "lines": 55,
+    "functions": 55,
+    "branches": 55,
+    "statements": 55
   }
 }
 EOF

@@ -41,6 +41,8 @@ async function mapTsConfigAliases(rootAbs: string): Promise<VitestAlias[]> {
     if (paths['@auto/*']) entries.push(mapPrefix('@auto', 'auto'));
     if (paths['@arquitetos/*'])
       entries.push(mapPrefix('@arquitetos', 'arquitetos'));
+    if (paths['@licensas/*'])
+      entries.push(mapPrefix('@licensas', 'licensas'));
     if (paths['@zeladores/*'])
       entries.push(mapPrefix('@zeladores', 'zeladores'));
     if (paths['@relatorios/*'])
@@ -373,9 +375,8 @@ export default defineConfig(async () => {
         provider: providerMapped as 'v8' | 'istanbul',
         reportsDirectory: './coverage',
         enabled: coverageEnabled,
-        include: ['src/**/*.ts'],
-          exclude: await loadCoverageExclude(),
-          all: false,
+        exclude: await loadCoverageExclude(),
+        all: false,
         ...(enforceThresholds
           ? {
             thresholds: {

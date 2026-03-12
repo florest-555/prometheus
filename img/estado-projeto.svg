@@ -1,0 +1,64 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Estado atual do projeto">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="barLow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="420" fill="url(#bg)"/>
+  <rect x="32" y="32" width="1136" height="356" rx="18" fill="#0b1220" stroke="#1f2a44"/>
+
+  <text x="60" y="78" fill="#e2e8f0" font-family="Inter, Segoe UI, Arial" font-size="28" font-weight="700">
+    Prometheus CLI  Estado Atual do Projeto
+  </text>
+  <text x="60" y="108" fill="#94a3b8" font-family="Inter, Segoe UI, Arial" font-size="14">
+    Atualizado em 2026-03-12 • Gate de cobertura: 55% (por métrica)
+  </text>
+
+  <text x="60" y="152" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial" font-size="16" font-weight="600">Cobertura de Testes</text>
+
+  <!-- Coverage bars -->
+  <g font-family="Inter, Segoe UI, Arial" font-size="13" fill="#e2e8f0">
+    <text x="60" y="186">Linhas</text>
+    <rect x="140" y="174" width="420" height="16" rx="8" fill="#1f2937"/>
+    <rect x="140" y="174" width="71" height="16" rx="8" fill="url(#barLow)"/>
+    <text x="570" y="186">16.78%</text>
+
+    <text x="60" y="214">Branches</text>
+    <rect x="140" y="202" width="420" height="16" rx="8" fill="#1f2937"/>
+    <rect x="140" y="202" width="54" height="16" rx="8" fill="url(#barLow)"/>
+    <text x="570" y="214">12.95%</text>
+
+    <text x="60" y="242">Funções</text>
+    <rect x="140" y="230" width="420" height="16" rx="8" fill="#1f2937"/>
+    <rect x="140" y="230" width="50" height="16" rx="8" fill="url(#barLow)"/>
+    <text x="570" y="242">11.91%</text>
+
+    <text x="60" y="270">Statements</text>
+    <rect x="140" y="258" width="420" height="16" rx="8" fill="#1f2937"/>
+    <rect x="140" y="258" width="71" height="16" rx="8" fill="url(#barLow)"/>
+    <text x="570" y="270">16.78%</text>
+  </g>
+
+  <!-- Stats block -->
+  <rect x="660" y="152" width="478" height="186" rx="14" fill="#111827" stroke="#1f2a44"/>
+  <text x="688" y="186" fill="#e2e8f0" font-family="Inter, Segoe UI, Arial" font-size="16" font-weight="600">Indicadores de Qualidade</text>
+  <text x="688" y="216" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial" font-size="14">Testes: 778 • Arquivos de teste: 123</text>
+  <text x="688" y="240" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial" font-size="14">Suites: 123 • Tempo de execução: ~66s</text>
+  <text x="688" y="264" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial" font-size="14">Ambiente: Node 24.x • Vitest 4</text>
+  <text x="688" y="300" fill="#94a3b8" font-family="Inter, Segoe UI, Arial" font-size="12">Cobertura abaixo do gate. Prioridade: módulos core/cli/analistas.</text>
+
+  <!-- Footer -->
+  <text x="60" y="360" fill="#64748b" font-family="Inter, Segoe UI, Arial" font-size="12">
+    Fonte: execução local de testes com cobertura Istanbul
+  </text>
+</svg>

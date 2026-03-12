@@ -24,6 +24,7 @@ jobs:
   protect:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    if: ${{ vars.APP_ID != '' && secrets.APP_PRIVATE_KEY != '' }}
     steps:
       - name: Get Token
         id: get_token
