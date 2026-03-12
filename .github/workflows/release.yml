@@ -55,6 +55,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Pack npm tarball
+        id: pack
+        run: |
+          PKG=$(npm pack --silent)
+          echo "package_tgz=${PKG}" >> $GITHUB_OUTPUT
+
   release:
     name: Create Release
     needs: build
@@ -112,12 +118,13 @@ jobs:
           draft: false
           prerelease: ${{ contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc') }}
           files: |
-            ./prometheus-${{ steps.version.outputs.version }}.tgz
+            ./${{ steps.pack.outputs.package_tgz }}
 
       - name: Publish to npm
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: ${{ secrets.NPM_TOKEN != '' }}
 
   notify:
     name: Notify

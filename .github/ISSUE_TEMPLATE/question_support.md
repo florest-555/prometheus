@@ -1,6 +1,6 @@
 ---
 name: "[QUESTION] Question / Support"
-about: Ask a question or get help with using Prometheus
+about: Ask a question or get help using Prometheus
 title: '[QUESTION] '
 labels: question, needs triage
 assignees: ''
@@ -9,6 +9,8 @@ assignees: ''
 ## Question Summary
 
 <!-- Brief summary of your question -->
+
+If you're stuck, include the exact command and output. It helps a lot.
 
 ## Description
 
@@ -65,4 +67,3 @@ assignees: ''
 - [ ] Get an answer to my question
 - [ ] Convert this to a bug report
 - [ ] Convert this to a feature request
-

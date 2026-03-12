@@ -1,6 +1,8 @@
-## Description
+## Summary
 
-<!-- Please include a summary of the changes and the related issue. Describe what the problem was and how this fix solves it. -->
+<!-- What changed and why? Link to the issue when applicable. -->
+
+Thanks for the contribution. This template keeps reviews fast and predictable.
 
 ## Type of Change
 
@@ -19,11 +21,11 @@
 
 - [ ] My code follows the project's coding conventions
 - [ ] I have performed a self-review of my code
-- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have commented my code in hard-to-understand areas
 - [ ] I have updated the documentation (if applicable)
 - [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
+- [ ] I added/updated tests (or explained why not)
+- [ ] New and existing unit tests pass locally
 - [ ] Any dependent changes have been merged and published
 
 ## Related Issues
@@ -43,10 +45,12 @@
 <!-- How to test the changes made in this PR -->
 
 ```bash
-# Add testing commands or steps here
+# Example:
+# npm run lint
+# npm run test
 ```
 
-## Release Notes
+## Release Notes (for changelog)
 
 <!-- Describe the changes for the changelog. Use [BREAKING] for breaking changes -->
 
@@ -58,4 +62,3 @@
 - [Removed] Removed feature description
 - [Security] Security-related change
 ```
-

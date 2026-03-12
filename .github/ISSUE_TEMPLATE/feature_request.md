@@ -10,6 +10,8 @@ assignees: ''
 
 <!-- A brief summary of the feature you're proposing -->
 
+We love well-scoped ideas. If you can, include examples or a short use-case.
+
 ## Problem or Motivation
 
 <!-- Describe the problem or motivation behind this feature request -->
@@ -71,4 +73,3 @@ assignees: ''
 - [ ] Yes, I'd like to implement this feature
 - [ ] Yes, but I need some guidance
 - [ ] No, I'd prefer the maintainers to handle it
-

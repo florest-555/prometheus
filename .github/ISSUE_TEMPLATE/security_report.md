@@ -13,7 +13,9 @@ assignees: ''
 **Thank you for reporting security vulnerabilities!**
 
 Please do NOT create a public GitHub issue for security vulnerabilities.
-Instead, please follow our security policy: https://github.com/florest-555/prometheus/security/policy
+Use our security policy for private reporting: https://github.com/florest-555/prometheus/security/policy
+
+We respond as quickly as possible and keep you updated through the advisory.
 
 ---
 
@@ -77,4 +79,3 @@ Instead, please follow our security policy: https://github.com/florest-555/prome
 - CVE ID (if applicable):
 - Related CVEs:
 - Related Security Advisories:
-

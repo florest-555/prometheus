@@ -1,6 +1,6 @@
 ---
 name: 🐛 Bug Report
-about: Create a report to help us reproduce and fix the bug
+about: Help us reproduce and fix a problem in Prometheus
 title: '[BUG] '
 labels: bug, needs triage
 assignees: ''
@@ -9,6 +9,8 @@ assignees: ''
 ## 🐛 Bug Description
 
 <!-- A clear and concise description of what the bug is -->
+
+Thanks for helping us improve Prometheus. The more details you share, the faster we can reproduce and fix it.
 
 ## Steps to Reproduce
 
@@ -53,5 +55,4 @@ assignees: ''
 ## Would you like to help fix this bug?
 
 - [ ] Yes, I'd like to work on this
-- [ ] No, I'd prefer someone else to handle it
-
+- [ ] No, I’d prefer someone else to handle it

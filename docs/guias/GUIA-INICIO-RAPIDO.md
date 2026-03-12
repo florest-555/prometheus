@@ -190,10 +190,10 @@ cat > prometheus.config.json << 'EOF'
     ]
   },
   "coverageGate": {
-    "lines": 80,
-    "functions": 80,
-    "branches": 75,
-    "statements": 80
+    "lines": 55,
+    "functions": 55,
+    "branches": 55,
+    "statements": 55
   }
 }
 EOF

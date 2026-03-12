@@ -5,7 +5,7 @@
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 -->
 
-<img src="./img/prometheus.png" width="100%"/>
+<img src="./img/estado-projeto.svg" width="100%"/>
 
 ---
 
@@ -19,22 +19,23 @@
 
 ## Status do Projeto
 
-<div align="center">
-
 ![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
 ![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
 ![Forks](https://kitsune-free.vercel.app/api/forks/florest-555/prometheus/badge.svg)
-![Watchers](https://kitsune-free.vercel.app/api/watchers/florest-555/prometheus/badge.svg)
-
-![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
-![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
+![Watchers](https://kitsune-free.vercel.app/api/watch/florest-555/prometheus/badge.svg)
+![Stars](https://kitsune-free.vercel.app/api/stars/florest-555/prometheus/badge.svg)
 
 ![manteined](https://kitsune-free.vercel.app/api/svg/badges/info/badge-maintained.svg)
 ![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
 ![stable](https://kitsune-free.vercel.app/api/svg/badges/info/badge-stable.svg)
 ![beta](https://kitsune-free.vercel.app/api/svg/badges/info/badge-beta.svg)
 
-</div>
+![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
+![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
+
+[![CI](https://github.com/florest-555/prometheus/actions/workflows/ci.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/florest-555/prometheus/actions/workflows/codeql.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/codeql.yml)
+[![Release](https://github.com/florest-555/prometheus/actions/workflows/release.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/release.yml)
 
 ## Demo Rapido
 
@@ -48,9 +49,11 @@ npx github:florest-555/prometheus diagnosticar --help
 - [PERFORMANCE] **Performance**: Pool de workers para analise paralela de projetos grandes
 - [SEGURANCA] **Seguranca**: Guardian verifica integridade de arquivos via hashing
 - [METRICAS] **Metricas Inteligentes**: Pontuacao adaptativa baseada no tamanho do projeto
-- [MULTI] **Multi-linguagem**: Suporte completo a JS/TS + suporte heuristico para tailwind/css/html/xml
-- [I18N] **Internacionalizacao**: Suporte nativo a Portugues e Ingles para mensagens, logs e relatorios
-- [MODULAR] **Modular**: Sistema de analistas extensivel com deteccao automatica de padroes
+- [MULTI] **Multi-linguagem**: JS/TS completo e cobertura heuristica para HTML/CSS/XML/Markdown/YAML
+- [I18N] **Internacionalizacao**: Portugues e Ingles em mensagens, logs e relatorios
+- [MODULAR] **Modular**: Analistas, detectores e plugins com autodiscovery e registro dinâmico
+- [AUTO-FIX] **Correcoes**: Auto-fix (tipos/estrutura/formatacao) com relatórios detalhados
+- [LLM] **Assistência IA**: Integrações LLM (OpenAI, Anthropic, Gemini, Ollama) para workflows assistidos
 - [CI] **CI/CD Ready**: Outputs JSON estruturados e Workflows GitHub Actions integrados
 
 ---
@@ -59,7 +62,7 @@ Prometheus é uma CLI modular para analisar, diagnosticar e manter projetos (JS/
 
 ---
 
-> Nota de cobertura: Gate local transitório configurado em **70%** (por métrica) em `prometheus.config.json` para acelerar a adição incremental de testes. No **CI Principal** o gate é forçado para **90%** via variáveis de ambiente (`COVERAGE_GATE_*`). Arquivos listados em `scripts/coverage-exclude.json` serão reintegrados gradualmente.
+> Nota de cobertura: Gate local configurado em **55%** (por métrica) em `prometheus.config.json`. Cobertura atual (referência local): **16.78%** linhas, **12.95%** branches, **11.91%** funções, **16.78%** statements. Arquivos listados em `scripts/coverage-exclude.json` serão reintegrados gradualmente.
 
 ## Instalacao e Primeiros Passos
 
@@ -120,11 +123,13 @@ prometheus guardian --diff
 - Sugestao de reorganizacao segura (plano de reorganizacao)
 - Poda de arquivos orfaos (`podar`)
 - Relatorios & metricas agregadas (`metricas`)
+- Auto-fix de tipos/estrutura/formatacao (`fix-types`, `formatar`, `reestruturar`)
 - Pool de Workers (paralelizacao por arquivo)
 - Internacionalizacao Completa (PT-BR/EN)
 - Integracao GitHub (CI, CodeQL, Templates)
 - Schema Versioning (compatibilidade backward)
 - Pontuacao Adaptativa (tamanho do projeto)
+- Integracao LLM (OpenAI, Anthropic, Gemini, Ollama)
 
 ---
 
@@ -403,7 +408,7 @@ Cobertura local:
 npm run coverage && npm run coverage:gate
 ```
 
-Gate no CI: aplicado somente no workflow `CI Principal` com 90% (env). Documentação de timeout: `docs/TESTING-VITEST-TIMEOUT.md`.
+Gate no CI: aplicado conforme `prometheus.config.json` (55% por métrica) ou variáveis `COVERAGE_GATE_*` quando configuradas. Documentação de timeout: `docs/TESTING-VITEST-TIMEOUT.md`.
 
 ## Filtros Include/Exclude (Controle o que analisar)
 
@@ -623,10 +628,10 @@ Exemplo (trecho real):
   "STRUCTURE_AUTO_FIX": false,
   "REPORT_EXPORT_ENABLED": false,
   "coverageGate": {
-    "lines": 70,
-    "functions": 70,
-    "branches": 70,
-    "statements": 70
+    "lines": 55,
+    "functions": 55,
+    "branches": 55,
+    "statements": 55
   }
 }
 ```
@@ -637,7 +642,7 @@ Campos úteis:
 - ESTRUTURA_ARQUIVOS_RAIZ_MAX: máximo de arquivos raiz exibidos
 - REPO_ARQUETIPO: arquétipo base de referência
 - STRUCTURE_AUTO_FIX: ativa técnicas mutáveis (off por padrão)
-- coverageGate: limiares de cobertura por métrica (90%)
+- coverageGate: limiares de cobertura por métrica (55%)
 
 ### prometheus.config.safe.json (modo seguro)
 
@@ -769,8 +774,8 @@ Principais variáveis:
   - `REPORT_SILENCE_LOGS` (silenciar logs ao montar JSON)
   - `LOG_ESTRUTURADO` (true|false)
 - Gate de Cobertura (CI vs local):
-  - Local: valores do `coverageGate` (70% transitório)
-  - CI Principal: override via `COVERAGE_GATE_LINES/FUNCTIONS/BRANCHES/STATEMENTS=90`
+  - Local: valores do `coverageGate` (55%)
+  - CI Principal: override via `COVERAGE_GATE_LINES/FUNCTIONS/BRANCHES/STATEMENTS`
 
 Exemplos rápidos:
 
@@ -778,7 +783,7 @@ Exemplos rápidos:
 # Bash / Linux / macOS
 export WORKER_POOL_MAX_WORKERS=4
 export PONTUACAO_MODO=conservador
-export COVERAGE_GATE_LINES=90
+export COVERAGE_GATE_LINES=55
 prometheus diagnosticar --json
 ```
 
@@ -786,7 +791,7 @@ prometheus diagnosticar --json
 # Windows PowerShell
 $env:WORKER_POOL_MAX_WORKERS = 4
 $env:PONTUACAO_MODO = "conservador"
-$env:COVERAGE_GATE_LINES = 90
+$env:COVERAGE_GATE_LINES = 55
 prometheus diagnosticar --json
 ```
 

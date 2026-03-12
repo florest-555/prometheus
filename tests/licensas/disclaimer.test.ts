@@ -1,86 +1,73 @@
 // SPDX-License-Identifier: MIT-0
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { addDisclaimer, verifyDisclaimer } from '../../src/licensas/disclaimer';
+import { describe, it, expect } from 'vitest';
 import { promises as fs } from 'node:fs';
-import { execFile } from 'node:child_process';
+import path from 'node:path';
+import os from 'node:os';
 
-vi.mock('node:fs', () => ({
-  promises: {
-    readdir: vi.fn(),
-    readFile: vi.fn(),
-    writeFile: vi.fn(),
-    access: vi.fn(),
+import { addDisclaimer, verifyDisclaimer } from '../../src/licensas/disclaimer';
+
+async function withTempDir<T>(fn: (dir: string) => Promise<T>): Promise<T> {
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'prometheus-'));
+  try {
+    return await fn(tmpDir);
+  } finally {
+    await fs.rm(tmpDir, { recursive: true, force: true });
   }
-}));
+}
 
-vi.mock('node:child_process', () => ({
-  execFile: vi.fn(),
-}));
+async function writeFileEnsuringDir(filePath: string, content: string) {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.writeFile(filePath, content, 'utf8');
+}
 
 describe('licensas/disclaimer', () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
-  });
-
   describe('addDisclaimer', () => {
     it('should throw if disclaimer file not found', async () => {
-      vi.mocked(fs.access).mockRejectedValueOnce(new Error('not found'));
-      await expect(addDisclaimer()).rejects.toThrow('Disclaimer not found');
+      await withTempDir(async (root) => {
+        await expect(addDisclaimer({ root })).rejects.toThrow('Disclaimer not found');
+      });
     });
 
     it('should add disclaimer to files that dont have it', async () => {
-      // Mock disclaimer file exists
-      vi.mocked(fs.access).mockResolvedValue(undefined);
-      vi.mocked(fs.readFile).mockImplementation(async (path) => {
-        if (path.toString().includes('AVISO-PROVENIENCIA.md')) return 'DISCLAIMER HEADER';
-        return 'FILE CONTENT';
-      });
+      await withTempDir(async (root) => {
+        const disclaimerPath = path.join(root, 'docs', 'partials', 'AVISO-PROVENIENCIA.md');
+        await writeFileEnsuringDir(disclaimerPath, 'DISCLAIMER HEADER');
+        await writeFileEnsuringDir(path.join(root, 'file1.md'), 'FILE CONTENT 1');
+        await writeFileEnsuringDir(path.join(root, 'file2.md'), 'FILE CONTENT 2');
 
-      // Mock git ls-files
-      vi.mocked(execFile).mockImplementation((_cmd, _args, _opts, callback) => {
-        (callback as any)(null, 'file1.md\nfile2.md', '');
-        return {} as any;
-      });
+        const result = await addDisclaimer({ root });
+        expect(result.updatedArquivos).toContain('file1.md');
+        expect(result.updatedArquivos).toContain('file2.md');
 
-      const result = await addDisclaimer({ root: '/tmp' });
-      expect(result.updatedArquivos).toContain('file1.md');
-      expect(result.updatedArquivos).toContain('file2.md');
-      expect(fs.writeFile).toHaveBeenCalledTimes(2);
+        const updated1 = await fs.readFile(path.join(root, 'file1.md'), 'utf8');
+        const updated2 = await fs.readFile(path.join(root, 'file2.md'), 'utf8');
+        expect(updated1.startsWith('DISCLAIMER HEADER')).toBe(true);
+        expect(updated2.startsWith('DISCLAIMER HEADER')).toBe(true);
+      });
     });
 
     it('should skip files that already have the marker', async () => {
-       vi.mocked(fs.access).mockResolvedValue(undefined);
-       vi.mocked(fs.readFile).mockImplementation(async (path) => {
-         if (path.toString().includes('AVISO-PROVENIENCIA.md')) return 'DISCLAIMER HEADER';
-         return 'Proveniência e Autoria\nContent';
-       });
+      await withTempDir(async (root) => {
+        const disclaimerPath = path.join(root, 'docs', 'partials', 'AVISO-PROVENIENCIA.md');
+        await writeFileEnsuringDir(disclaimerPath, 'DISCLAIMER HEADER');
+        await writeFileEnsuringDir(path.join(root, 'file1.md'), 'Proveniência e Autoria\nContent');
 
-       vi.mocked(execFile).mockImplementation((_cmd, _args, _opts, callback) => {
-         (callback as any)(null, 'file1.md', '');
-         return {} as any;
-       });
-
-       // Clear calls specifically for this test to be double sure
-       vi.mocked(fs.readFile).mockClear();
-       vi.mocked(fs.writeFile).mockClear();
-
-       const result = await addDisclaimer({ root: '/tmp' });
-       expect(result.updatedArquivos).toHaveLength(0);
-       expect(fs.writeFile).not.toHaveBeenCalled();
+        const result = await addDisclaimer({ root });
+        expect(result.updatedArquivos).toHaveLength(0);
+      });
     });
   });
 
   describe('verifyDisclaimer', () => {
     it('should identify missing disclaimers', async () => {
-      vi.mocked(fs.access).mockResolvedValue(undefined);
-      vi.mocked(fs.readFile).mockResolvedValue('Plain content');
-      vi.mocked(execFile).mockImplementation((_cmd, _args, _opts, callback) => {
-        (callback as any)(null, 'file1.md', '');
-        return {} as any;
-      });
+      await withTempDir(async (root) => {
+        const disclaimerPath = path.join(root, 'docs', 'partials', 'AVISO-PROVENIENCIA.md');
+        await writeFileEnsuringDir(disclaimerPath, 'DISCLAIMER HEADER');
+        await writeFileEnsuringDir(path.join(root, 'file1.md'), 'Plain content');
 
-      const result = await verifyDisclaimer({ root: '/tmp' });
-      expect(result.missing).toContain('file1.md');
+        const result = await verifyDisclaimer({ root });
+        expect(result.missing).toContain('file1.md');
+      });
     });
   });
 });
