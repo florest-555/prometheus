@@ -1,11 +1,3 @@
----
-Proveniencia e Autoria: Este documento integra o projeto Prometheus (licenca MIT-0).
-Nada aqui implica cessao de direitos morais/autorais.
-Conteudos de terceiros nao licenciados de forma compativel nao devem ser incluidos.
-Referencias a materiais externos devem ser linkadas e reescritas com palavras proprias.
----
-
-
 # GitHub Actions & Repository Setup Guide
 
 ## Required Manual Configuration

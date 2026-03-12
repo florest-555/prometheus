@@ -1,12 +1,15 @@
-# ===============================
-# TEMPLATE COMPATÍVEL COM GITHUB ACTIONS
-# Documentação: https://docs.github.com/actions
-# ===============================
+# Esse vai ficar de template e ja pre-pronto pra uso futuro.
+
 name: Sponsors
 
 on:
   sponsorship:
-    types: [created, TierChanged, cancelled]
+    types:
+      - created
+      - tier_changed
+      - cancelled
+      - edited
+  workflow_dispatch: {}
 
 permissions:
   contents: read

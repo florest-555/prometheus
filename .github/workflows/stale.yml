@@ -40,7 +40,7 @@ jobs:
 
             > [TIP] If you want to keep this issue open, please comment with a relevant update showing that you still need this feature or are actively working on it.
           close-issue-message: |
-            This issue has to inactivity. If you still need this been automatically closed due feature or want to reopen it, please feel free to do so.
+            This issue has been automatically closed due to inactivity. If you still need this feature or want to reopen it, please feel free to do so.
 
             ---
 

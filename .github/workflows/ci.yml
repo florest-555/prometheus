@@ -9,6 +9,7 @@ on:
     branches: [dev, main]
   pull_request:
     branches: [dev, main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -29,7 +30,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.12.0'
+          node-version: '24.x'
           cache: 'npm'
 
       - name: Install dependencies
@@ -49,7 +50,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.12.0'
+          node-version: '24.x'
           cache: 'npm'
 
       - name: Install dependencies
@@ -70,7 +71,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.12.0'
+          node-version: '24.x'
           cache: 'npm'
 
       - name: Install dependencies
@@ -98,7 +99,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.12.0'
+          node-version: '24.x'
           cache: 'npm'
 
       - name: Install dependencies
@@ -130,7 +131,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.12.0'
+          node-version: '24.x'
           cache: 'npm'
 
       - name: Install dependencies
