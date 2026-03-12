@@ -43,7 +43,7 @@ jobs:
 
               // Status labels
               { name: 'needs triage', color: 'E4E669', description: 'Needs triage' },
-              { name: 'needs更多信息', color: 'F9D71C', description: 'Needs more information' },
+              { name: 'needs more info', color: 'F9D71C', description: 'Needs more information' },
               { name: 'wontfix', color: 'FFFFFF', description: 'This will not be worked on' },
               { name: 'duplicate', color: 'CCCCCC', description: 'Duplicate issue' },
               { name: 'invalid', color: 'CCCCCC', description: 'Invalid issue' },
