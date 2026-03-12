@@ -5,7 +5,7 @@
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 -->
 
-<img src="./img/o-vida.jpeg" width="100%"/>
+<img src="./img/prometheus.png" width="100%"/>
 
 ---
 
@@ -21,6 +21,8 @@
 
 ![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
 ![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
+![Forks](https://kitsune-free.vercel.app/api/forks/florest-555/prometheus/badge.svg)
+![Watchers](https://kitsune-free.vercel.app/api/watchers/florest-555/prometheus/badge.svg)
 
 ![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
 ![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
