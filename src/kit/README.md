@@ -1,4 +1,4 @@
-## Kit de Sobrevivência
+# Kit de Sobrevivência
 
 Coleção de utilitários e dicas para facilitar o dia a dia em um sistema Ubuntu/Linux, com foco em comandos rápidos e automações via shell.
 
