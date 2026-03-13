@@ -1,4 +1,12 @@
 ---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
+---
 name: 🐛 Bug Report
 about: Help us reproduce and fix a problem in Prometheus
 title: '[BUG] '
@@ -56,3 +64,4 @@ Thanks for helping us improve Prometheus. The more details you share, the faster
 
 - [ ] Yes, I'd like to work on this
 - [ ] No, I’d prefer someone else to handle it
+

@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 ## Summary
 
 <!-- What changed and why? Link to the issue when applicable. -->
@@ -62,3 +70,4 @@ Thanks for the contribution. This template keeps reviews fast and predictable.
 - [Removed] Removed feature description
 - [Security] Security-related change
 ```
+

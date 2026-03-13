@@ -15,7 +15,7 @@ updates:
       - dependencies
       - npm
     reviewers:
-      - florest-555/maintainers
+      - wolf-5-5-5/maintainers
     groups:
       minor-and-patch:
         patterns:

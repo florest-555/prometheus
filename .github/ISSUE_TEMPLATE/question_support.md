@@ -1,4 +1,12 @@
 ---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
+---
 name: "[QUESTION] Question / Support"
 about: Ask a question or get help using Prometheus
 title: '[QUESTION] '
@@ -67,3 +75,4 @@ If you're stuck, include the exact command and output. It helps a lot.
 - [ ] Get an answer to my question
 - [ ] Convert this to a bug report
 - [ ] Convert this to a feature request
+

@@ -36,7 +36,7 @@ git clone https://github.com/SEU-USUARIO/prometheus.git
 cd prometheus
 
 # Adicione o repositório upstream como remote
-git remote add upstream https://github.com/florest-555/prometheus.git
+git remote add upstream https://github.com/wolf-5-5-5/prometheus.git
 ```
 
 ### 2. Instalação de Dependências
@@ -77,8 +77,8 @@ git checkout -b feature/sua-contribuicao-descritiva
 
 ### 🐛 Correção de Bugs
 
-- Issues com label [`bug`](https://github.com/florest-555/prometheus/labels/bug)
-- Issues com label [`good-first-issue`](https://github.com/florest-555/prometheus/labels/good-first-issue)
+- Issues com label [`bug`](https://github.com/wolf-5-5-5/prometheus/labels/bug)
+- Issues com label [`good-first-issue`](https://github.com/wolf-5-5-5/prometheus/labels/good-first-issue)
 - Priorize bugs críticos e regressions
 
 ### ✨ Novas Funcionalidades

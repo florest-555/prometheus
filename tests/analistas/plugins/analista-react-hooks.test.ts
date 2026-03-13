@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT-0
 import { analistaReactHooks } from '../../../src/analistas/plugins/analista-react-hooks';
-import { analistaReactHooks } from '../../../src/analistas/plugins/analista-react-hooks';
 
 describe('analistaReactHooks', () => {
   it('should be defined', () => {

@@ -25,42 +25,56 @@ describe('shared/persistence/persistencia', () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.resetAllMocks();
     process.env = { ...originalEnv };
+    // Default mocks for fs.promises
+    vi.mocked(fs.promises.mkdir).mockResolvedValue(undefined);
+    vi.mocked(fs.promises.writeFile).mockResolvedValue(undefined);
+    vi.mocked(fs.promises.rename).mockResolvedValue(undefined);
   });
 
   afterEach(() => {
     process.env = originalEnv;
   });
 
-  describe('lerEstado', () => {
-    it('should parse valid JSON', async () => {
-      vi.mocked(fs.promises.readFile).mockResolvedValueOnce('{"a": 1}');
-      const result = await persistencia.lerEstado(path.resolve('test.json'));
-      expect(result).toEqual({ a: 1 });
-    });
-
-    it('should return default/empty array if file read fails', async () => {
-      vi.mocked(fs.promises.readFile).mockRejectedValueOnce(new Error('not found'));
-      const result = await persistencia.lerEstado(path.resolve('test.json'), { def: true });
-      expect(result).toEqual({ def: true });
-      
-      const undefResult = await persistencia.lerEstado(path.resolve('test2.json'));
-      expect(undefResult).toEqual([]);
-    });
-
-    it('should return default/empty array if JSON parse fails', async () => {
-      vi.mocked(fs.promises.readFile).mockResolvedValueOnce('invalid json');
-      const result = await persistencia.lerEstado(path.resolve('test.json'), { x: 1 });
-      expect(result).toEqual({ x: 1 });
-    });
-
-    it('should return empty array if no padrao and JSON parse fails', async () => {
-      vi.mocked(fs.promises.readFile).mockResolvedValueOnce('invalid json');
-      const result = await persistencia.lerEstado(path.resolve('test.json'));
-      expect(result).toEqual([]);
-    });
+  afterEach(() => {
+    process.env = originalEnv;
   });
+
+   describe('lerEstado', () => {
+     it('should parse valid JSON', async () => {
+       vi.mocked(fs.promises.readFile).mockResolvedValueOnce('{"a": 1}');
+       const result = await persistencia.lerEstado(path.resolve('test.json'));
+       expect(result).toEqual({ a: 1 });
+     });
+
+     it('should return default/empty array if file read fails', async () => {
+       vi.mocked(fs.promises.readFile).mockRejectedValueOnce(new Error('not found'));
+       const result = await persistencia.lerEstado(path.resolve('test.json'), { def: true });
+       expect(result).toEqual({ def: true });
+       
+       const undefResult = await persistencia.lerEstado(path.resolve('test2.json'));
+       expect(undefResult).toEqual([]);
+     });
+
+     it('should return default/empty array if JSON parse fails', async () => {
+       vi.mocked(fs.promises.readFile).mockResolvedValueOnce('invalid json');
+       const result = await persistencia.lerEstado(path.resolve('test.json'), { x: 1 });
+       expect(result).toEqual({ x: 1 });
+     });
+
+     it('should return empty array if no padrao and JSON parse fails', async () => {
+       vi.mocked(fs.promises.readFile).mockResolvedValueOnce('invalid json');
+       const result = await persistencia.lerEstado(path.resolve('test.json'));
+       expect(result).toEqual([]);
+     });
+
+     it('should return empty array if file read fails and no padrao', async () => {
+       vi.mocked(fs.promises.readFile).mockRejectedValueOnce(new Error('not found'));
+       const result = await persistencia.lerEstado(path.resolve('test3.json'));
+       expect(result).toEqual([]);
+     });
+   });
 
   describe('salvarEstadoAtomico', () => {
     it('should save formatting exactly and sort nested keys', async () => {
@@ -116,22 +130,18 @@ describe('shared/persistence/persistencia', () => {
     });
   });
 
-  describe('salvarBinarioAtomico', () => {
-    it('should save buffer atomicaly', async () => {
-      process.env.PROMETHEUS_ALLOW_OUTSIDE_FS = '1';
-      vi.mocked(fs.promises.mkdir).mockResolvedValueOnce(undefined);
-      vi.mocked(fs.promises.writeFile).mockResolvedValueOnce(undefined);
-      vi.mocked(fs.promises.rename).mockResolvedValueOnce(undefined);
+   describe('salvarBinarioAtomico', () => {
+     it('should save buffer atomicaly', async () => {
+       process.env.PROMETHEUS_ALLOW_OUTSIDE_FS = '1';
 
-      const buf = Buffer.from('abc');
-      await persistencia.salvarBinarioAtomico('/mock/bin.dat', buf);
+       const buf = Buffer.from('abc');
+       await persistencia.salvarBinarioAtomico('/mock/bin.dat', buf);
 
-      expect(fs.promises.mkdir).toHaveBeenCalled();
-      expect(fs.promises.writeFile).toHaveBeenCalled();
-      
-      const callArgs = vi.mocked(fs.promises.writeFile).mock.calls[0];
-      expect(callArgs[1]).toBe(buf);
-    });
+       expect(fs.promises.mkdir).toHaveBeenCalled();
+       expect(fs.promises.writeFile).toHaveBeenCalled();
+       expect(fs.promises.writeFile).toHaveBeenCalledWith(expect.any(String), buf);
+       expect(fs.promises.rename).toHaveBeenCalled();
+     });
 
     it('should throw error if outside boundary', async () => {
        process.env.VITEST = '';

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT-0
 import { analistaReact } from '../../../src/analistas/plugins/analista-react';
-import { analistaReact } from '../../../src/analistas/plugins/analista-react';
 
 describe('analistaReact', () => {
   it('should be defined', () => {
