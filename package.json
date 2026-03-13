@@ -24,7 +24,6 @@
     "postbuild": "node scripts/copy-artifacts.mjs",
     "prepare": "npm run build",
     "start": "prometheus",
-    "agent": "prometheus agent",
     "diagnosticar": "prometheus diagnosticar",
     "diagnosticar:json": "prometheus diagnosticar --json",
     "formatar": "prometheus formatar --write",

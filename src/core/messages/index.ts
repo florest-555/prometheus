@@ -189,6 +189,7 @@ export {
   CliComandoFixTypesMensagens,
   CliComandoFormatarMensagens,
   CliComandoGuardianMensagens,
+  CliComandoKitMensagens,
   CliComandoLicensasMensagens,
   CliComandoMetricasMensagens,
   CliComandoNamesMensagens,

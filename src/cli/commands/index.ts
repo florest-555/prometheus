@@ -13,6 +13,7 @@ export { comandoDiagnosticar } from './comando-diagnosticar.js';
 export { criarComandoFixTypes } from './comando-fix-types.js';
 export { comandoFormatar } from './comando-formatar.js';
 export { comandoGuardian } from './comando-guardian.js';
+export { comandoKit } from './comando-kit.js';
 export { comandoLicencas } from './comando-licensas.js';
 export { comandoMetricas } from './comando-metricas.js';
 export { comandoOtimizarSvg } from './comando-otimizar-svg.js';
@@ -28,4 +29,3 @@ export { comandoNames } from './comando-names.js';
 export { comandoRename } from './comando-rename.js';
 
 // Comandos de agente de IA
-export { comandoAgent } from './comando-agent.js';

@@ -109,7 +109,7 @@ export default [
       'tests/fixtures/**',
       'pre-public/**',
       'relatorios/**',
-      'implementacao/**',
+      'src/kit/**',
     ],
   },
 ];

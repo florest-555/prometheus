@@ -1316,7 +1316,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           await fs.promises.mkdir(dir, {
             recursive: true
           });
-          const outputCaminho = path.join(dir, `prometheus-diagnostico-${ts}.md`);
+          const outputCaminho = path.join(dir, `relatorio-${ts}.md`);
           const resultadoCompleto = {
             ...resultadoExecucao,
             fileEntries: fileEntriesComAst,
@@ -1390,7 +1390,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
               ocorrencias: ocorrenciasLimpas
             };
             const salvar = await getSalvarEstado();
-            await salvar(path.join(dir, `prometheus-relatorio-summary-${ts}.json`), relatorioResumo);
+            await salvar(path.join(dir, `relatorio-${ts}.json`), relatorioResumo);
 
             // Se exportação full estiver ativa, grava também o payload completo em arquivo separado
             let fragmentResultado: {
@@ -1416,7 +1416,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
                 log.info(CliProcessamentoDiagnosticoMensagens.relatorioFullFragmentado(fragmentResultado.manifestFile));
               } catch {
                 // Fallback: salvar como único arquivo caso a fragmentação falhe
-                await salvar(path.join(dir, `prometheus-relatorio-full-${ts}.json`), relatorioFull);
+                await salvar(path.join(dir, `relatorio-full-${ts}.json`), relatorioFull);
               }
             }
 

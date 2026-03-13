@@ -74,6 +74,20 @@ async function copy(src, dest) {
   // console.log(`[copy] ${src} -> ${dest}`); // TODO: Remover antes da produção
 }
 
+async function copyDir(src, dest) {
+  await ensureDir(dest);
+  const entries = await fs.readdir(src, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      await copyDir(srcPath, destPath);
+    } else if (entry.isFile()) {
+      await copy(srcPath, destPath);
+    }
+  }
+}
+
 async function main() {
   const root = process.cwd();
   const loaderSrc = path.join(root, 'src', 'node.loader.mjs');
@@ -82,6 +96,16 @@ async function main() {
     await copy(loaderSrc, loaderDest);
   } catch (e) {
     console.warn('[copy] Aviso: não foi possível copiar node.loader.mjs:', e.message);
+  }
+
+  // Copia o Kit de Sobrevivência para distribuição
+  const kitSrc = path.join(root, 'src', 'kit');
+  const kitDest = path.join(root, 'dist', 'kit');
+  try {
+    await copyDir(kitSrc, kitDest);
+    console.log('[copy] Kit de Sobrevivência copiado para dist/kit');
+  } catch (e) {
+    console.warn('[copy] Aviso: não foi possível copiar o kit:', e.message);
   }
 
   // Garantir que o executável CLI tenha permissões de execução

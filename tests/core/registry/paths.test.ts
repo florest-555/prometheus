@@ -41,12 +41,12 @@ describe('core/registry/paths', () => {
   describe('REPORT_PADROES', () => {
     it('should generate diagnostico path', () => {
       const path = REPORT_PADROES.DIAGNOSTICO('2025-01-01');
-      expect(path).toContain('prometheus-diagnostico-2025-01-01');
+      expect(path).toContain('relatorio-2025-01-01');
     });
 
     it('should generate summary JSON path', () => {
       const path = REPORT_PADROES.SUMMARY_JSON('2025-01-01');
-      expect(path).toContain('prometheus-relatorio-summary-2025-01-01');
+      expect(path).toContain('relatorio-2025-01-01');
     });
   });
 

@@ -10,6 +10,7 @@ export * from './cli-comando-diagnosticar-messages.js';
 export * from './cli-comando-fix-types-messages.js';
 export * from './cli-comando-formatar-messages.js';
 export * from './cli-comando-guardian-messages.js';
+export * from './cli-comando-kit-messages.js';
 export * from './cli-comando-licensas-messages.js';
 export * from './cli-comando-metricas-messages.js';
 export * from './cli-comando-names-messages.js';

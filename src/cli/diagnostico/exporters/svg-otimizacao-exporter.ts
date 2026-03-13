@@ -3,6 +3,8 @@
 import path from 'node:path';
 
 import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
+import { config } from '@core/config/config.js';
+import { RelatorioMensagens } from '@core/messages/index.js';
 
 import type { FileEntryWithAst, SvgCandidate, SvgDirectoryStats, SvgExportResult } from '@';
 
@@ -69,25 +71,26 @@ export async function exportarRelatorioSvgOtimizacao(params: {
     }
   }
   const outputCaminho = path.join(relatoriosDir, `prometheus-svg-otimizacao-${ts}.md`);
+  const locale = config.LANGUAGE === 'en' ? 'en-US' : 'pt-BR';
   let md = '';
-  md += '# Relatório de Otimização de SVG\n\n';
-  md += `Gerado em: ${new Date().toISOString()}\n\n`;
-  md += `Arquivos candidatos: **${candidatos.length}**\n\n`;
-  md += `Economia potencial total: **${formatBytes(totalEconomiaBytes)}**\n\n`;
-  md += '## Por diretório\n\n';
-  md += '| Diretório | Arquivos | Economia |\n';
+  md += `# ${RelatorioMensagens.svgOtimizacao.titulo}\n\n`;
+  md += `${RelatorioMensagens.svgOtimizacao.geradoEm}: ${new Date().toLocaleString(locale)}\n\n`;
+  md += `${RelatorioMensagens.svgOtimizacao.arquivosCandidatos}: **${candidatos.length}**\n\n`;
+  md += `${RelatorioMensagens.svgOtimizacao.economiaTotal}: **${formatBytes(totalEconomiaBytes)}**\n\n`;
+  md += `## ${RelatorioMensagens.svgOtimizacao.porDiretorio}\n\n`;
+  md += `| ${RelatorioMensagens.svgOtimizacao.tabela.diretorio} | ${RelatorioMensagens.svgOtimizacao.tabela.arquivos} | ${RelatorioMensagens.svgOtimizacao.tabela.economia} |\n`;
   md += '|---|---:|---:|\n';
   const dirsOrdenados = Array.from(porDir.entries()).sort((a, b) => b[1].totalSaved - a[1].totalSaved);
   for (const [dir, info] of dirsOrdenados) {
     md += `| ${dir} | ${info.count} | ${formatBytes(info.totalSaved)} |\n`;
   }
-  md += '\n## Exemplos (top 30 por economia)\n\n';
+  md += `\n## ${RelatorioMensagens.svgOtimizacao.exemplos}\n\n`;
   const topArquivos = [...candidatos].sort((a, b) => b.savedBytes - a.savedBytes).slice(0, 30);
   for (const f of topArquivos) {
     const mudancas = f.mudancas.join(', ');
     md += `- ${f.relPath} — ${formatBytes(f.originalBytes)} → ${formatBytes(f.optimizedBytes)} (−${formatBytes(f.savedBytes)})`;
-    md += ` — mudanças: ${mudancas}`;
-    md += f.temViewBox ? '' : ' — (sem viewBox)';
+    md += ` — ${RelatorioMensagens.svgOtimizacao.mudancas}: ${mudancas}`;
+    md += f.temViewBox ? '' : ` — (${RelatorioMensagens.svgOtimizacao.semViewBox})`;
     md += '\n';
   }
   const {
