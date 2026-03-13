@@ -4,12 +4,12 @@ import { registrarComandos } from '../../src/cli/comandos';
 import * as commands from '../../src/cli/commands/index';
 
 vi.mock('../../src/cli/commands/index', () => ({
-  comandoAgent: vi.fn(),
   comandoAnalistas: vi.fn(),
   comandoAtualizar: vi.fn(),
   comandoDiagnosticar: vi.fn(),
   comandoFormatar: vi.fn(),
   comandoGuardian: vi.fn(),
+  comandoKit: vi.fn(),
   comandoLicencas: vi.fn(),
   comandoMetricas: vi.fn(),
   comandoNames: vi.fn(),
@@ -48,7 +48,7 @@ describe('cli/comandos', () => {
     expect(commands.comandoMetricas).toHaveBeenCalled();
     expect(commands.criarComandoFixTypes).toHaveBeenCalled();
     expect(commands.comandoLicencas).toHaveBeenCalled();
-    expect(commands.comandoAgent).toHaveBeenCalled();
+    expect(commands.comandoKit).toHaveBeenCalledWith(mockFlags);
 
     expect(commands.comandoNames).toHaveBeenCalledWith(mockFlags);
     expect(commands.comandoRename).toHaveBeenCalledWith(mockFlags);

@@ -24,6 +24,7 @@ export const CliComandoKitMensagens = createI18nMessages({
   },
   docs: {
     kitVersao: 'Guia rápido de Git',
+    kitIntro: 'Introdução ao Kit de Sobrevivência',
     gitCheatsheet: 'Comandos Git avançados e fluxos',
     linuxCommands: 'Comandos úteis do Linux',
     gitInitGuide: 'Guia detalhado de inicialização de repositório Git',
@@ -67,6 +68,7 @@ export const CliComandoKitMensagens = createI18nMessages({
   },
   docs: {
     kitVersao: 'Quick Git guide',
+    kitIntro: 'Survival Kit introduction',
     gitCheatsheet: 'Advanced Git commands and flows',
     linuxCommands: 'Useful Linux commands',
     gitInitGuide: 'Detailed Git repository initialization guide',

@@ -21,7 +21,7 @@ git config --global --list
 # gerar chave (ed25519 recomendado)
 ssh-keygen -t ed25519 -C "seu@email.com"
 
-# adicionar ao agente
+# iniciar gerenciador de chaves SSH
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 

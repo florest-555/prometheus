@@ -27,6 +27,8 @@
     "diagnosticar": "prometheus diagnosticar",
     "diagnosticar:json": "prometheus diagnosticar --json",
     "formatar": "prometheus formatar --write",
+    "p:kit": "prometheus kit",
+    "p:kit:list": "prometheus kit list",
     "reestruturar": "prometheus reestruturar",
     "podar": "prometheus podar",
     "fix-types": "prometheus fix-types",

@@ -98,14 +98,24 @@ async function main() {
     console.warn('[copy] Aviso: não foi possível copiar node.loader.mjs:', e.message);
   }
 
-  // Copia o Kit de Sobrevivência para distribuição
-  const kitSrc = path.join(root, 'src', 'kit');
-  const kitDest = path.join(root, 'dist', 'kit');
+  // Copia os scripts do Kit de Sobrevivência para distribuição
+  const kitShellSrc = path.join(root, 'src', 'kit', 'shell');
+  const kitShellDest = path.join(root, 'dist', 'kit', 'shell');
   try {
-    await copyDir(kitSrc, kitDest);
-    console.log('[copy] Kit de Sobrevivência copiado para dist/kit');
+    await copyDir(kitShellSrc, kitShellDest);
+    console.log('[copy] Scripts do Kit copiados para dist/kit/shell');
   } catch (e) {
-    console.warn('[copy] Aviso: não foi possível copiar o kit:', e.message);
+    console.warn('[copy] Aviso: não foi possível copiar scripts do kit:', e.message);
+  }
+
+  // Copia os guias do Kit para distribuição
+  const kitDocsSrc = path.join(root, 'docs', 'kit');
+  const kitDocsDest = path.join(root, 'dist', 'kit');
+  try {
+    await copyDir(kitDocsSrc, kitDocsDest);
+    console.log('[copy] Guias do Kit copiados para dist/kit');
+  } catch (e) {
+    console.warn('[copy] Aviso: não foi possível copiar guias do kit:', e.message);
   }
 
   // Garantir que o executável CLI tenha permissões de execução

@@ -537,6 +537,7 @@ export type FormatadorMinimoParser =
   | 'python'
   | 'php'
   | 'xml'
+  | 'bash'
   | 'unknown';
 
 export type FormatadorMinimoResultOk = {

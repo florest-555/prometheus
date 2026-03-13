@@ -951,6 +951,12 @@ export function formatarPrettierMinimo(params: {
       parser: 'php'
     });
   }
+  if (relPath.endsWith('.sh') || relPath.endsWith('.bash')) {
+    return formatarCodeMinimo(code, {
+      normalizarSeparadoresDeSecao: false,
+      parser: 'bash'
+    });
+  }
   return {
     ok: true,
     parser: 'unknown',
@@ -1064,6 +1070,16 @@ export async function formatarComPrettierProjeto(params: {
       formatted: params.code,
       changed: false,
       reason: 'prettier-parser-desconhecido'
+    };
+  }
+  const supportedParsers = ['babel', 'typescript', 'json', 'jsonc', 'markdown', 'yaml', 'css', 'scss', 'less', 'html', 'xml', 'php', 'python', 'java', 'vue', 'angular', 'graphql', 'markdown', 'mdx', 'yaml', 'toml', 'docker', 'html', 'svg'];
+  if (!supportedParsers.includes(parser)) {
+    return {
+      ok: true,
+      parser: 'unknown',
+      formatted: params.code,
+      changed: false,
+      reason: 'prettier-parser-nao-suportado'
     };
   }
   try {

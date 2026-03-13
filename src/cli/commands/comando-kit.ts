@@ -18,10 +18,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 function resolverRaizKit(): string {
-  // Em dist, usamos dist/kit. Em dev, usamos src/kit.
   const packageRoot = join(__dirname, '..', '..', '..');
-  const distKit = join(packageRoot, 'kit');
+  const distKit = join(packageRoot, 'dist', 'kit');
   if (existsSync(distKit)) return distKit;
+  return join(packageRoot, 'src', 'kit');
+}
+
+function resolverDocsKit(): string {
+  const packageRoot = join(__dirname, '..', '..', '..');
+  const distDocs = join(packageRoot, 'dist', 'kit');
+  if (existsSync(distDocs)) return distDocs;
+  const srcDocs = join(packageRoot, 'docs', 'kit');
+  if (existsSync(srcDocs)) return srcDocs;
   return join(packageRoot, 'src', 'kit');
 }
 
@@ -38,11 +46,12 @@ const SCRIPTS: Record<string, { file: string; descricao: string }> = {
 };
 
 const DOCS: Record<string, { file: string; descricao: string }> = {
-  'kit-versao': { file: 'utils/kit-versao.md', descricao: CliComandoKitMensagens.docs.kitVersao },
-  'git-cheatsheet': { file: 'utils/git-cheatsheet.md', descricao: CliComandoKitMensagens.docs.gitCheatsheet },
-  'linux-commands': { file: 'utils/linux-commands.md', descricao: CliComandoKitMensagens.docs.linuxCommands },
-  'git-init-guide': { file: 'utils/git-init-guide.md', descricao: CliComandoKitMensagens.docs.gitInitGuide },
-  'system-info-guide': { file: 'utils/system-info-guide.md', descricao: CliComandoKitMensagens.docs.systemInfoGuide },
+  'kit-versao': { file: 'kit-versao.md', descricao: CliComandoKitMensagens.docs.kitVersao },
+  'kit-intro': { file: 'kit-intro.md', descricao: CliComandoKitMensagens.docs.kitIntro },
+  'git-cheatsheet': { file: 'git-cheatsheet.md', descricao: CliComandoKitMensagens.docs.gitCheatsheet },
+  'linux-commands': { file: 'linux-commands.md', descricao: CliComandoKitMensagens.docs.linuxCommands },
+  'git-init-guide': { file: 'git-init-guide.md', descricao: CliComandoKitMensagens.docs.gitInitGuide },
+  'system-info-guide': { file: 'system-info-guide.md', descricao: CliComandoKitMensagens.docs.systemInfoGuide },
 };
 
 function quoteArg(value: string): string {
@@ -94,7 +103,7 @@ export function comandoKit(
     .argument('<doc>', CliComandoKitMensagens.opcoes.doc)
     .action(async function (this: Command, doc: string) {
       if (!(await aplicarFlags(this, aplicarFlagsGlobais))) return;
-      const kitRoot = resolverRaizKit();
+      const docsRoot = resolverDocsKit();
       const entry = DOCS[doc];
       if (!entry) {
         log.erro(CliComandoKitMensagens.erros.docInvalido(doc));
@@ -103,7 +112,7 @@ export function comandoKit(
         sair(ExitCode.InvalidUsage);
         return;
       }
-      const docPath = join(kitRoot, entry.file);
+      const docPath = join(docsRoot, entry.file);
       if (!existsSync(docPath)) {
         log.erro(CliComandoKitMensagens.erros.docNaoEncontrado(docPath));
         sair(ExitCode.Failure);

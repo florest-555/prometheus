@@ -39,7 +39,8 @@ export const syntaxMap: Record<string, SyntaxInfo> = {
   '.lock': { parser: 'json', formatavel: true },
   '.ini': { parser: 'ini', formatavel: false },
   '.dockerfile': { parser: 'docker', formatavel: false },
-  '.sh': { parser: 'shell', formatavel: false },
+  '.sh': { parser: 'shell', formatavel: true },
+  '.bash': { parser: 'shell', formatavel: true },
 };
 
 export function getSyntaxInfoForPath(relPath: string): SyntaxInfo | null {

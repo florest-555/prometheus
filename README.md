@@ -366,33 +366,61 @@ PONTUACAO_MODO=conservador prometheus diagnosticar
 | `reverter`     | Reverter mudanças de reestruturação   | `prometheus reverter listar`              |
 | `names`        | Extrair nomes para tradução           | `prometheus names`                        |
 | `rename`       | Aplicar renomeação de variáveis       | `prometheus rename`                       |
-| `agent`        | Sistema de agentes de IA              | `prometheus agent chat`                   |
+| `kit`          | Kit de Sobrevivência (utilitários)    | `prometheus kit list`                     |
 
-## Sistema de Agentes
+## 🛠️ Kit de Sobrevivência
 
-O Prometheus inclui um sistema de agentes de IA que permite criar, gerenciar e executar agentes para diversas tarefas:
+O Prometheus inclui um **Kit de Sobrevivência** com scripts e guias para tarefas comuns do dia a dia de um desenvolvedor.
+
+### Quick Start
 
 ```bash
-# Listar agentes disponíveis
-prometheus agent agents
+# Listar todos os scripts e guias disponíveis
+prometheus kit list
 
-# Iniciar chat interativo
-prometheus agent chat --agent coder
+# Executar um script
+prometheus kit run system-info
+prometheus kit run git-helper
 
-# Executar um prompt
-prometheus agent run "Analise este código" --agent researcher
-
-# Gerenciar memória
-prometheus agent memory set --key projeto --value "App React"
+# Ver um guia
+prometheus kit docs kit-intro
+prometheus kit docs linux-commands
 ```
 
+### Scripts Disponíveis
+
+| Script | Descrição |
+| ------ | ---------- |
+| `system-info` | Informações detalhadas do sistema |
+| `disk-usage` | Uso de disco e maiores diretórios |
+| `network-tools` | Ping e speedtest |
+| `update-system` | Atualiza e limpa pacotes (apt) |
+| `git-helper` | Menu interativo de comandos Git |
+| `init-git-repo` | Assistente para iniciar repositório Git |
+| `setup-github-ssh` | Configura SSH para GitHub |
+| `backup-dotfiles` | Backup de dotfiles |
+
+### Guias Disponíveis
+
+| Guia | Descrição |
+| ---- | ---------- |
+| `kit-intro` | Introdução ao Kit de Sobrevivência |
+| `kit-versao` | Guia rápido de Git |
+| `git-cheatsheet` | Comandos Git avançados |
+| `linux-commands` | Comandos úteis do Linux |
+| `git-init-guide` | Guia de inicialização de repositório Git |
+| `system-info-guide` | Guia de informações do sistema |
+
+> **Nota:** Para executar scripts que requerem permissões de superusuário, defina `PROMETHEUS_ALLOW_EXEC=1`:
+> ```bash
+> PROMETHEUS_ALLOW_EXEC=1 prometheus kit run update-system
+> ```
+
+
 **Funcionalidades:**
-- Agentes especializados (coder, researcher, fast, etc.)
 - Ferramentas de sistema (file read/write, shell exec, git)
 - Gerenciamento de sessões e memória
 - Suporte a múltiplos provedores LLM (OpenAI, Anthropic, Ollama, Gemini)
-
-Veja o [Guia de Agentes](docs/guias/GUIA-AGENTES.md) para mais detalhes.
 
 ---
 

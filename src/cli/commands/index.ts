@@ -28,4 +28,4 @@ export { registrarComandoReverter } from './comando-reverter.js';
 export { comandoNames } from './comando-names.js';
 export { comandoRename } from './comando-rename.js';
 
-// Comandos de agente de IA
+
