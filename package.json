@@ -66,11 +66,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/i-c-l-org/prometheus.git",
+    "url": "git+https://github.com/florest-555/prometheus.git",
     "issues": {
-      "url": "https://github.com/i-c-l-org/prometheus/issues"
+      "url": "https://github.com/florest-555/prometheus/issues"
     },
-    "homepage": "https://github.com/i-c-l-org/prometheus#readme"
+    "homepage": "https://github.com/florest-555/prometheus#readme"
   },
   "files": [
     "dist",
@@ -93,7 +93,6 @@
     "micromatch": "^4.0.8",
     "ora": "^9.3.0",
     "p-limit": "^7.3.0",
-    "prometheus": "file:prometheus-0.4.1.tgz",
     "toml": "^3.0.0",
     "xxhashjs": "^0.2.2"
   },
