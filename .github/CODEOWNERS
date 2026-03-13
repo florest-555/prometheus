@@ -2,7 +2,7 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Maintainers (have final approval on all changes)
-* @florest-555/maintainers
+* @wolf-5-5-5/maintainers
 
 # Core Team (can approve most changes)
 # Add your core team members here
@@ -10,28 +10,28 @@
 # @username2
 
 # Skills - Require review from skills team
-skills/** @florest-555/maintainers
+skills/** @wolf-5-5-5/maintainers
 
 # CI/CD and GitHub Actions
-.github/workflows/* @florest-555/maintainers
-.github/labeler.yml @florest-555/maintainers
-.github/dependabot.yml @florest-555/maintainers
+.github/workflows/* @wolf-5-5-5/maintainers
+.github/labeler.yml @wolf-5-5-5/maintainers
+.github/dependabot.yml @wolf-5-5-5/maintainers
 
 # Documentation
-docs/** @florest-555/maintainers
-README.md @florest-555/maintainers
-CONTRIBUTING.md @florest-555/maintainers
-CHANGELOG.md @florest-555/maintainers
-CODE_OF_CONDUCT.md @florest-555/maintainers
+docs/** @wolf-5-5-5/maintainers
+README.md @wolf-5-5-5/maintainers
+CONTRIBUTING.md @wolf-5-5-5/maintainers
+CHANGELOG.md @wolf-5-5-5/maintainers
+CODE_OF_CONDUCT.md @wolf-5-5-5/maintainers
 
 # Configuration files
-*.config.js @florest-555/maintainers
-*.config.json @florest-555/maintainers
-tsconfig*.json @florest-555/maintainers
-vitest.config.* @florest-555/maintainers
-eslint.config.js @florest-555/maintainers
+*.config.js @wolf-5-5-5/maintainers
+*.config.json @wolf-5-5-5/maintainers
+tsconfig*.json @wolf-5-5-5/maintainers
+vitest.config.* @wolf-5-5-5/maintainers
+eslint.config.js @wolf-5-5-5/maintainers
 
 # Security related
-SECURITY.md @florest-555/maintainers
-.github/workflows/defender-for-devops.yml @florest-555/maintainers
-.github/workflows/codeql.yml @florest-555/maintainers
+SECURITY.md @wolf-5-5-5/maintainers
+.github/workflows/defender-for-devops.yml @wolf-5-5-5/maintainers
+.github/workflows/codeql.yml @wolf-5-5-5/maintainers

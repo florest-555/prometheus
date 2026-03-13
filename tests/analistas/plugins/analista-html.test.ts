@@ -19,8 +19,6 @@ vi.mock('../../../src/shared/helpers/masking', () => ({
   maskTagBlocks: vi.fn((s) => s),
 }));
 
-import { analistaHtml } from '../../../src/analistas/plugins/analista-html';
-
 describe('analistaHtml', () => {
   it('should be defined', () => {
     expect(analistaHtml).toBeDefined();

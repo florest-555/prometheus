@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # GitHub Actions & Repo Setup Guide
 
 This guide explains how to enable the optional automation in `.github/` and keep workflows running smoothly.
@@ -68,3 +76,4 @@ Settings → Branches → Add rule:
 
 - Labeler/auto-approve run only for internal PRs to avoid permission failures on forks.
 - Sponsor workflow does nothing on manual trigger (safe no-op).
+

@@ -1,4 +1,12 @@
 ---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
+---
 name: "[FEAT] Feature Request"
 about: Suggest a new feature or improvement for Prometheus
 title: '[FEATURE] '
@@ -73,3 +81,4 @@ We love well-scoped ideas. If you can, include examples or a short use-case.
 - [ ] Yes, I'd like to implement this feature
 - [ ] Yes, but I need some guidance
 - [ ] No, I'd prefer the maintainers to handle it
+

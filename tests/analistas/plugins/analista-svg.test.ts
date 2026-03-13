@@ -6,8 +6,6 @@ vi.mock('../../../src/shared/impar/svgs', () => ({
   shouldSugerirOtimizacaoSvg: vi.fn(() => false),
 }));
 
-import { analistaSvg } from '../../../src/analistas/plugins/analista-svg';
-
 describe('analistaSvg', () => {
   it('should be defined', () => {
     expect(analistaSvg).toBeDefined();

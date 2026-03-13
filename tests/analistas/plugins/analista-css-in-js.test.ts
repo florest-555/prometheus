@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT-0
 import { analistaCssInJs } from '../../../src/analistas/plugins/analista-css-in-js';
-import { analistaCssInJs } from '../../../src/analistas/plugins/analista-css-in-js';
 
 describe('analistaCssInJs', () => {
   it('should be defined', () => {
