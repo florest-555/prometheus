@@ -19,11 +19,11 @@
 
 ## Status do Projeto
 
-![Clones](https://kitsune-free.vercel.app/api/clones/florest-555/prometheus/badge.svg)
-![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/florest-555/prometheus/badge.svg)
-![Forks](https://kitsune-free.vercel.app/api/forks/florest-555/prometheus/badge.svg)
-![Watchers](https://kitsune-free.vercel.app/api/watch/florest-555/prometheus/badge.svg)
-![Stars](https://kitsune-free.vercel.app/api/stars/florest-555/prometheus/badge.svg)
+![Clones](https://kitsune-free.vercel.app/api/clones/wolf-5-5-5/prometheus/badge.svg)
+![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/wolf-5-5-5/prometheus/badge.svg)
+![Forks](https://kitsune-free.vercel.app/api/forks/wolf-5-5-5/prometheus/badge.svg)
+![Watchers](https://kitsune-free.vercel.app/api/watch/wolf-5-5-5/prometheus/badge.svg)
+![Stars](https://kitsune-free.vercel.app/api/stars/wolf-5-5-5/prometheus/badge.svg)
 
 ![manteined](https://kitsune-free.vercel.app/api/svg/badges/info/badge-maintained.svg)
 ![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
@@ -33,15 +33,15 @@
 ![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
 ![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
 
-[![CI](https://github.com/florest-555/prometheus/actions/workflows/ci.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/florest-555/prometheus/actions/workflows/codeql.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/codeql.yml)
-[![Release](https://github.com/florest-555/prometheus/actions/workflows/release.yml/badge.svg)](https://github.com/florest-555/prometheus/actions/workflows/release.yml)
+[![CI](https://github.com/wolf-5-5-5/prometheus/actions/workflows/ci.yml/badge.svg)](https://github.com/wolf-5-5-5/prometheus/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/wolf-5-5-5/prometheus/actions/workflows/codeql.yml/badge.svg)](https://github.com/wolf-5-5-5/prometheus/actions/workflows/codeql.yml)
+[![Release](https://github.com/wolf-5-5-5/prometheus/actions/workflows/release.yml/badge.svg)](https://github.com/wolf-5-5-5/prometheus/actions/workflows/release.yml)
 
 ## Demo Rapido
 
 ```bash
 # Teste em 30 segundos sem instalar (requer Node.js 24+)
-npx github:florest-555/prometheus diagnosticar --help
+npx github:wolf-5-5-5/prometheus diagnosticar --help
 ```
 
 ## Por que usar o Prometheus?
@@ -70,7 +70,7 @@ Prometheus é uma CLI modular para analisar, diagnosticar e manter projetos (JS/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/florest-555/prometheus.git
+git clone https://github.com/wolf-5-5-5/prometheus.git
 cd prometheus
 
 # Instale dependências e compile
@@ -84,7 +84,7 @@ node dist/bin/index.js diagnosticar --json
 **Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/florest-555/prometheus.git; cd prometheus; npm install; npm run build; node dist/bin/index.js diagnosticar --json
+git clone https://github.com/wolf-5-5-5/prometheus.git; cd prometheus; npm install; npm run build; node dist/bin/index.js diagnosticar --json
 ```
 
 ### Instalação Global (Opcional)
