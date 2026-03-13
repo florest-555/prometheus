@@ -19,19 +19,19 @@
 
 ## Status do Projeto
 
-![Clones](https://kitsune-free.vercel.app/api/clones/wolf-5-5-5/prometheus/badge.svg)
-![Unique Clones](https://kitsune-free.vercel.app/api/unique-clones/wolf-5-5-5/prometheus/badge.svg)
-![Forks](https://kitsune-free.vercel.app/api/forks/wolf-5-5-5/prometheus/badge.svg)
-![Watchers](https://kitsune-free.vercel.app/api/watch/wolf-5-5-5/prometheus/badge.svg)
-![Stars](https://kitsune-free.vercel.app/api/stars/wolf-5-5-5/prometheus/badge.svg)
+![Clones](https://kitsune-gallery.vercel.app/api/clones/wolf-5-5-5/prometheus/badge.svg)
+![Unique Clones](https://kitsune-gallery.vercel.app/api/unique-clones/wolf-5-5-5/prometheus/badge.svg)
+![Forks](https://kitsune-gallery.vercel.app/api/forks/wolf-5-5-5/prometheus/badge.svg)
+![Watchers](https://kitsune-gallery.vercel.app/api/watch/wolf-5-5-5/prometheus/badge.svg)
+![Stars](https://kitsune-gallery.vercel.app/api/stars/wolf-5-5-5/prometheus/badge.svg)
 
-![manteined](https://kitsune-free.vercel.app/api/svg/badges/info/badge-maintained.svg)
-![prs-welcome](https://kitsune-free.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
-![stable](https://kitsune-free.vercel.app/api/svg/badges/info/badge-stable.svg)
-![beta](https://kitsune-free.vercel.app/api/svg/badges/info/badge-beta.svg)
+![manteined](https://kitsune-gallery.vercel.app/api/svg/badges/info/badge-maintained.svg)
+![prs-welcome](https://kitsune-gallery.vercel.app/api/svg/badges/info/badge-prs-welcome.svg)
+![stable](https://kitsune-gallery.vercel.app/api/svg/badges/info/badge-stable.svg)
+![beta](https://kitsune-gallery.vercel.app/api/svg/badges/info/badge-beta.svg)
 
-![analitico](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
-![colaborador](https://kitsune-free.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
+![analitico](https://kitsune-gallery.vercel.app/api/svg/badges/decorativos/badge-analitico.svg)
+![colaborador](https://kitsune-gallery.vercel.app/api/svg/badges/decorativos/badge-colaborador.svg)
 
 [![CI](https://github.com/wolf-5-5-5/prometheus/actions/workflows/ci.yml/badge.svg)](https://github.com/wolf-5-5-5/prometheus/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/wolf-5-5-5/prometheus/actions/workflows/codeql.yml/badge.svg)](https://github.com/wolf-5-5-5/prometheus/actions/workflows/codeql.yml)
@@ -811,7 +811,7 @@ prometheus diagnosticar --json
 
 ## Licenca
 
- ![MIT-0](https://kitsune-free.vercel.app/api/svg/badges/info/badge-license-mit.svg)
+ ![MIT-0](https://kitsune-gallery.vercel.app/api/svg/badges/info/badge-license-mit.svg)
 
  ---
 
