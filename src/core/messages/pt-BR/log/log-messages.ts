@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT-0
-import { createI18nMessages } from '@shared/helpers/i18n.js';
-
 /**
  * Sistema de mensagens de log centralizadas e contextuais
  * Adapta-se automaticamente ao tipo e complexidade do projeto
  */
-import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_COMANDO, ICONES_DIAGNOSTICO, ICONES_FEEDBACK, ICONES_NIVEL, ICONES_RELATORIO, ICONES_STATUS } from '../ui/icons.js';
+import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_COMANDO, ICONES_DIAGNOSTICO, ICONES_FEEDBACK, ICONES_NIVEL, ICONES_RELATORIO, ICONES_STATUS } from '@core/messages/pt-BR/ui/icons.js';
+import { createI18nMessages } from '@shared/helpers/i18n.js';
 
 export const LogMensagens = createI18nMessages({
   sistema: {

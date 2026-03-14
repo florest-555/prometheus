@@ -21,11 +21,10 @@ import { analistaPadroesUso } from '@analistas/js-ts/analista-padroes-uso.js';
 import { analistaTodoComentarios } from '@analistas/js-ts/analista-todo-comments.js';
 import { analistaDocumentacao } from '@analistas/plugins/detector-documentacao.js';
 import { detectorMarkdown } from '@analistas/plugins/detector-markdown.js';
+import { discoverAnalistasPlugins } from '@analistas/registry/autodiscovery.js';
 import { comSupressaoInline } from '@shared/helpers/analista-wrapper.js';
 
 import type { Analista, EntradaRegistry, InfoAnalista, ModuloAnalista, Tecnica } from '@';
-
-import { discoverAnalistasPlugins } from './autodiscovery.js';
 
 let analistaCorrecaoAutomatica: EntradaRegistry = undefined;
 try {

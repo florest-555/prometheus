@@ -5,8 +5,7 @@
  */
 
 import type { Node } from '@babel/types';
-
-import type { ASTNode, PropertyUsage, TypeGuard, UsagePattern, VariableUsage } from '@';
+import type { ASTNode, PropertyUsage, TypeGuard, UsagePattern, VariableUsage } from '@pt-types/index.js';
 
 /**
  * Encontra todos os usos de uma variável no AST

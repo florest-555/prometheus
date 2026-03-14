@@ -22,7 +22,7 @@ export interface OpcoesProcessamentoDiagnostico {
   autoCorrecaoMode?: string;
   autoFixConservative?: boolean;
   fast?: boolean; // Modo rápido: processamento paralelo
-  // 🚀 NOVAS FLAGS INTUITIVAS
+  // [SYS] NOVAS FLAGS INTUITIVAS
   fix?: boolean;
   fixSafe?: boolean;
   showFixes?: boolean;

@@ -122,7 +122,7 @@ export const optionsDiagnosticar: DiagnosticarOption[] = [
     desc: CliComandoDiagnosticarMensagens.opcoes.autoFixConservative,
     defaultValue: false,
   },
-  // 🚀 NOVAS FLAGS INTUITIVAS
+  // [SYS] NOVAS FLAGS INTUITIVAS
   {
     flags: '--fix',
     desc: CliComandoDiagnosticarMensagens.opcoes.fix,

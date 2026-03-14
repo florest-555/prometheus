@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 
+import { CliCommonMensagens } from '@core/messages/pt-BR/cli/cli-common-messages.js';
 import {
   ACOES_SUGERIDAS,
   CATEGORIAS_TIPOS,
@@ -16,8 +17,7 @@ import {
   MENSAGENS_SUCESSO_FIX_TYPES as MENSAGENS_SUCESSO,
   TEMPLATE_RESUMO_FINAL,
   TEXTOS_CATEGORIZACAO_CORRECAO_TIPOS
-} from '../core/index.js';
-import { CliCommonMensagens } from './cli-common-messages.js';
+} from '@core/messages/pt-BR/core/index.js';
 
 export const CliComandoFixTypesMensagens = {
   descricao: 'Detecta e corrige tipos inseguros (any/unknown) no código',

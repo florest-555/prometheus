@@ -105,7 +105,7 @@ function parseComPhp(codigo: string) {
   const classes = Array.from(codigo.matchAll(/\bclass\s+([A-Za-z0-9_]+)/g)).map(m => m[1]);
   const functions = Array.from(codigo.matchAll(/\bfunction\s+([A-Za-z0-9_]+)/g)).map(m => m[1]);
   const namespaces = Array.from(codigo.matchAll(/\bnamespace\s+([A-Za-z0-9_\\]+)/g)).map(m => m[1]);
-  log.debug(`🐘 PHP pseudo-parse: ${classes.length} classes, ${functions.length} funções`);
+  log.debug(`[PHP] PHP pseudo-parse: ${classes.length} classes, ${functions.length} funções`);
   return wrapMinimal('php', {
     classes,
     functions,
@@ -116,7 +116,7 @@ function parseComPython(codigo: string) {
   // Heurística simples para Python: extrai classes e funções (def)
   const classes = Array.from(codigo.matchAll(/^class\s+([A-Za-z0-9_]+)/gm)).map(m => m[1]);
   const functions = Array.from(codigo.matchAll(/^def\s+([A-Za-z0-9_]+)/gm)).map(m => m[1]);
-  log.debug(`🐍 Python pseudo-parse: ${classes.length} classes, ${functions.length} funções`);
+  log.debug(`[PYTHON] Python pseudo-parse: ${classes.length} classes, ${functions.length} funções`);
   return wrapMinimal('python', {
     classes,
     functions
@@ -322,7 +322,7 @@ function initializePluginSystem() {
   const registeredPlugins = registry.getRegisteredPlugins();
   if (registeredPlugins.length === 0) {
     initializeDefaultPlugins();
-    log.debug('🔌 Plugins padrão registrados no sistema');
+    log.debug('[PLUG] Plugins padrão registrados no sistema');
   }
 }
 

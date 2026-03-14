@@ -11,7 +11,7 @@
 
 <div align="center">
 
-# Prometheus CLI 🔥
+# Prometheus CLI [!]
 
 </div>
 
@@ -49,7 +49,7 @@ npx github:wolf-5-5-5/prometheus diagnosticar --help
 - [PERFORMANCE] **Performance**: Pool de workers para analise paralela de projetos grandes
 - [SEGURANCA] **Seguranca**: Guardian verifica integridade de arquivos via hashing
 - [METRICAS] **Metricas Inteligentes**: Pontuacao adaptativa baseada no tamanho do projeto
-- [MULTI] **Multi-linguagem**: JS/TS completo e cobertura heuristica para HTML/CSS/XML/Markdown/YAML
+- [MULTI] **Multi-linguagem**: JS/TS completo e suporte robusto para HTML/CSS/XML/Markdown/YAML
 - [I18N] **Internacionalizacao**: Portugues e Ingles em mensagens, logs e relatorios
 - [MODULAR] **Modular**: Analistas, detectores e plugins com autodiscovery e registro dinâmico
 - [AUTO-FIX] **Correcoes**: Auto-fix (tipos/estrutura/formatacao) com relatórios detalhados
@@ -114,6 +114,9 @@ prometheus diagnosticar --json
 
 # Verificar integridade dos arquivos
 prometheus guardian --diff
+
+# Interagir com o Agente IA (Interativo)
+prometheus agent --interactive
 ```
 
 ## Capacidades
@@ -129,7 +132,7 @@ prometheus guardian --diff
 - Integracao GitHub (CI, CodeQL, Templates)
 - Schema Versioning (compatibilidade backward)
 - Pontuacao Adaptativa (tamanho do projeto)
-- Integracao LLM (OpenAI, Anthropic, Gemini, Ollama)
+- Integracao LLM & Agentes Autônomos (OpenAI, Anthropic, Gemini, Ollama)
 
 ---
 
@@ -348,7 +351,7 @@ WORKER_POOL_MAX_WORKERS=1 prometheus diagnosticar
 PONTUACAO_MODO=conservador prometheus diagnosticar
 ```
 
-## 📚 Comandos Principais
+## [DOC] Comandos Principais
 
 | Comando        | Descrição                             | Uso Comum                                 |
 | -------------- | ------------------------------------- | ----------------------------------------- |
@@ -366,35 +369,85 @@ PONTUACAO_MODO=conservador prometheus diagnosticar
 | `reverter`     | Reverter mudanças de reestruturação   | `prometheus reverter listar`              |
 | `names`        | Extrair nomes para tradução           | `prometheus names`                        |
 | `rename`       | Aplicar renomeação de variáveis       | `prometheus rename`                       |
-| `agent`        | Sistema de agentes de IA              | `prometheus agent chat`                   |
+| `kit`          | Kit de Sobrevivência (utilitários)    | `prometheus kit list`                     |
+| `agent`        | Agente IA e Interação LLM             | `prometheus agent --interactive`          |
 
-## Sistema de Agentes
+## [FIX] Kit de Sobrevivência
 
-O Prometheus inclui um sistema de agentes de IA que permite criar, gerenciar e executar agentes para diversas tarefas:
+O Prometheus inclui um **Kit de Sobrevivência** com scripts e guias para tarefas comuns do dia a dia de um desenvolvedor.
+
+### Quick Start
 
 ```bash
-# Listar agentes disponíveis
-prometheus agent agents
+# Listar todos os scripts e guias disponíveis
+prometheus kit list
+# Ou via npm run (alias conveniente)
+npm run kit -- list
 
+# Executar um script
+prometheus kit run system-info
+prometheus kit run git-helper
+
+# Ver um guia
+prometheus kit docs kit-intro
+prometheus kit docs linux-commands
+```
+
+### Scripts Disponíveis
+
+| Script | Descrição |
+| ------ | ---------- |
+| `system-info` | Informações detalhadas do sistema |
+| `disk-usage` | Uso de disco e maiores diretórios |
+| `network-tools` | Ping e speedtest |
+| `update-system` | Atualiza e limpa pacotes (apt) |
+| `git-helper` | Menu interativo de comandos Git |
+| `init-git-repo` | Assistente para iniciar repositório Git |
+| `setup-github-ssh` | Configura SSH para GitHub |
+| `backup-dotfiles` | Backup de dotfiles |
+| `cleanup` | Limpeza de logs e cache do sistema |
+| `docker-helper` | Gerenciamento de containers Docker |
+| `port-manager` | Gerenciar processos em portas (lsof) |
+
+### Guias Disponíveis
+
+| Guia | Descrição |
+| ---- | ---------- |
+| `kit-intro` | Introdução ao Kit de Sobrevivência |
+| `kit-versao` | Guia rápido de Git |
+| `git-cheatsheet` | Comandos Git avançados |
+| `linux-commands` | Comandos úteis do Linux |
+| `git-init-guide` | Guia de inicialização de repositório Git |
+| `system-info-guide` | Guia de informações do sistema |
+
+> **Nota:** Para executar scripts que requerem permissões de superusuário, defina `PROMETHEUS_ALLOW_EXEC=1`:
+> ```bash
+> PROMETHEUS_ALLOW_EXEC=1 prometheus kit run update-system
+> ```
+
+### Agente IA (Experimental)
+
+O Prometheus agora inclui um agente autônomo capaz de realizar tarefas complexas usando LLMs.
+
+```bash
 # Iniciar chat interativo
-prometheus agent chat --agent coder
+prometheus agent --interactive
 
-# Executar um prompt
-prometheus agent run "Analise este código" --agent researcher
+# Usar um agente específico
+prometheus agent --agent coder
 
-# Gerenciar memória
-prometheus agent memory set --key projeto --value "App React"
+# Sobrescrever provedor/modelo
+prometheus agent --provider openai --model gpt-4
 ```
 
 **Funcionalidades:**
-- Agentes especializados (coder, researcher, fast, etc.)
-- Ferramentas de sistema (file read/write, shell exec, git)
-- Gerenciamento de sessões e memória
-- Suporte a múltiplos provedores LLM (OpenAI, Anthropic, Ollama, Gemini)
-
-Veja o [Guia de Agentes](docs/guias/GUIA-AGENTES.md) para mais detalhes.
+- Ferramentas de sistema integradas (leitura/escrita de arquivos, execução de shell, git)
+- Gerenciamento de contexto e histórico de conversas
+- Suporte a múltiplos provedores (OpenAI, Anthropic, Ollama, Gemini, Groq, DeepSeek)
+- Configuração via TOML em `~/.config/egocentric/config.toml`
 
 ---
+
 
 ## Testes
 
@@ -557,6 +610,7 @@ prometheus diagnosticar --scan-only
 - `licencas` — ferramentas de licenca e disclaimer
 - `names` — extracao de nomes de variaveis para mapeamento
 - `rename` — aplicacao de renomeacoes em massa
+- `agent` — interação com agentes IA e LLMs
 
 ## Flags globais
 
@@ -565,8 +619,8 @@ prometheus diagnosticar --scan-only
 ## Linguagens Suportadas
 
 - **Primário (AST Babel completo)**: `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`
-- **Analisadores Específicos**: `.html`, `.css`, `.xml`, `.svg`, `.md`
-- **Heurístico/Leve**: `.kt`, `.kts`, `.java`, `.gradle`, `.py`, `.php`
+- **Analisadores Específicos**: `.html`, `.css`, `.xml`, `.svg`, `.md` (suporte robusto e nativo)
+- **Heurístico/Leve**: `.kt`, `.kts`, `.java`, `.gradle`, `.py`, `.php`, `.sh`, `.bash`
 
 *Nota: Analistas que dependem de nós Babel atuam apenas em linguagens suportadas pelo Babel; demais arquivos são processados por plugins específicos quando disponíveis.*
 

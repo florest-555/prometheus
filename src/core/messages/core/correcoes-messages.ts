@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT-0
 import { buildTypesRelPathPosix, getTypesDirectoryDisplay } from '@core/config/conventions.js';
+import { ICONES } from '@core/messages/ui/icons.js';
 import { createI18nMessages } from '@shared/helpers/i18n.js';
-
-import { ICONES } from '../ui/icons.js';
 
 /**
  * Mensagens de Quick Fixes - Any/Unknown

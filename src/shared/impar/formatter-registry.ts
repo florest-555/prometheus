@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 
-import type { FormatadorMinimoResult } from './formater.js';
+import type { FormatadorMinimoResult } from '@shared/impar/formater.js';
 
 export type FormatterFn = (
   code: string,

@@ -85,7 +85,7 @@ export async function corrigirEstrutura(mapa: ResultadoEstrutural[], fileEntries
           }
         }
       }
-      log.sucesso(`✅ Movido: ${arquivo} → ${path.relative(baseDir, destino)}`);
+      log.sucesso(`[OK] Movido: ${arquivo} → ${path.relative(baseDir, destino)}`);
     } catch (err) {
       const msg = err && typeof err === 'object' && 'message' in err ? String((err as {
         message: unknown;

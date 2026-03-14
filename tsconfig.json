@@ -2,6 +2,7 @@
 {
   "$schema": "https://www.schemastore.org/tsconfig",
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es2022",
     "lib": [
       "es2022"
@@ -56,29 +57,44 @@
       "@types/*": [
         "./src/types/*"
       ],
-      "@types/types": [
+      "@agent/*": [
+        "./src/agent/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@llm/*": [
+        "./src/llm/*"
+      ],
+      "@pt-types/types": [
         "./src/types/index.ts"
       ],
-      "@types/analistas": [
+      "@pt-types/analistas": [
         "./src/types/analistas/index.ts"
       ],
-      "@types/guardian": [
+      "@pt-types/guardian": [
         "./src/types/guardian/index.ts"
       ],
-      "@types/cli": [
+      "@pt-types/cli": [
         "./src/types/cli/index.ts"
       ],
-      "@types/core": [
+      "@pt-types/core": [
         "./src/types/core/index.ts"
       ],
-      "@types/relatorios": [
+      "@pt-types/relatorios": [
         "./src/types/relatorios/index.ts"
       ],
-      "@types/shared": [
+      "@pt-types/agent": [
+        "./src/types/agent/index.ts"
+      ],
+      "@pt-types/shared": [
         "./src/types/shared/index.ts"
       ],
-      "@types/projeto": [
+      "@pt-types/projeto": [
         "./src/types/projeto/index.ts"
+      ],
+      "@pt-types/*": [
+        "./src/types/*"
       ],
       "@": [
         "./src/types/index.ts"

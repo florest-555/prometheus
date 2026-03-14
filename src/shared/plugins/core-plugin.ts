@@ -245,7 +245,7 @@ export class CorePlugin implements ParserPlugin {
       const isValid = XMLValidator.validate(codigo);
       if (isValid !== true) {
         log.debug(
-          `⚠️ XML inválido: ${typeof isValid === 'object' ? (isValid as { err?: { msg?: string } }).err?.msg : 'desconhecido'}`,
+          `[!]️ XML inválido: ${typeof isValid === 'object' ? (isValid as { err?: { msg?: string } }).err?.msg : 'desconhecido'}`,
         );
         return null;
       }
@@ -277,11 +277,11 @@ export class CorePlugin implements ParserPlugin {
         codigo.matchAll(/\bnamespace\s+([A-Za-z0-9_\\]+)/g),
       ).map((m) => m[1]);
       log.debug(
-        `🐘 PHP pseudo-parse: ${classes.length} classes, ${functions.length} funções`,
+        `[PHP] PHP pseudo-parse: ${classes.length} classes, ${functions.length} funções`,
       );
       return this.wrapMinimal('php', { classes, functions, namespaces });
     } catch (e) {
-      log.debug(`⚠️ Erro ao parsear PHP: ${(e as Error).message}`);
+      log.debug(`[!]️ Erro ao parsear PHP: ${(e as Error).message}`);
       return null;
     }
   }
@@ -299,11 +299,11 @@ export class CorePlugin implements ParserPlugin {
         codigo.matchAll(/^def\s+([A-Za-z0-9_]+)/gm),
       ).map((m) => m[1]);
       log.debug(
-        `🐍 Python pseudo-parse: ${classes.length} classes, ${functions.length} funções`,
+        `[PYTHON] Python pseudo-parse: ${classes.length} classes, ${functions.length} funções`,
       );
       return this.wrapMinimal('python', { classes, functions });
     } catch (e) {
-      log.debug(`⚠️ Erro ao parsear Python: ${(e as Error).message}`);
+      log.debug(`[!]️ Erro ao parsear Python: ${(e as Error).message}`);
       return null;
     }
   }

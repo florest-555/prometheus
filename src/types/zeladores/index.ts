@@ -13,7 +13,7 @@ export type {
   ImportCorrecaoOptions,
   ImportCorrecaoStats,
   ImportCorrecaoTipo,
-} from './imports.js';
+} from '@pt-types/zeladores/imports.js';
 
 // Mapa de reversão (se houver tipos exportados)
 // export type { ... } from './mapa-reversao.js';

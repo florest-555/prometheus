@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT-0
-import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
-
 // @prometheus-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para mensagens de zeladores
-import { ICONES_ACAO, ICONES_STATUS, ICONES_ZELADOR as ICONES_ZELADOR_CENTRAL } from '../ui/icons.js';
+import { ICONES_ACAO, ICONES_STATUS, ICONES_ZELADOR as ICONES_ZELADOR_CENTRAL } from '@core/messages/pt-BR/ui/icons.js';
+import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
 /**
  * Mensagens dos Zeladores
  *

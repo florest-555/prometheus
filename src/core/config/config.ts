@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT-0
 import path from 'node:path';
 
+import { PROMETHEUS_ARQUIVOS, PROMETHEUS_DIRS } from '@core/registry/paths.js';
 import { lerArquivoTexto } from '@shared/persistence/persistencia.js';
 
 import type { IncludeExcludeConfig } from '@';
-
-import { PROMETHEUS_ARQUIVOS,PROMETHEUS_DIRS } from '../registry/paths.js';
 
 // Diretórios internos do Prometheus (agora usando paths centralizados)
 const PROMETHEUS_ESTADO = PROMETHEUS_DIRS.STATE;
@@ -16,7 +15,7 @@ export const configPadrao = {
   VERBOSE: false,
   LOG_LEVEL: 'info' as 'erro' | 'aviso' | 'info' | 'debug',
   LANGUAGE: 'pt-BR' as 'pt-BR' | 'en',
-  // 🌱 Flags gerais
+  // [*] Flags gerais
   DEV_MODE: process.env.NODE_ENV === 'development' || process.env.PROMETHEUS_DEV === 'true',
   AUTOANALISE_CONCURRENCY: 5,
   // Segurança: modo seguro impede ações destrutivas por padrão.
@@ -27,18 +26,18 @@ export const configPadrao = {
   ALLOW_PLUGINS: process.env.PROMETHEUS_ALLOW_PLUGINS === '1' || false,
   ALLOW_EXEC: process.env.PROMETHEUS_ALLOW_EXEC === '1' || false,
   ALLOW_MUTATE_FS: true,
-  // 🛡️ Guardian
+  // [GUARD]️ Guardian
   GUARDIAN_ENABLED: true,
   GUARDIAN_ENFORCE_PROTECTION: true,
   GUARDIAN_BASELINE: PROMETHEUS_ARQUIVOS.GUARDIAN_BASELINE,
   GUARDIAN_ALLOW_ADDS: false,
   GUARDIAN_ALLOW_CHG: false,
   GUARDIAN_ALLOW_DELS: false,
-  // 🛡️ Guardian GPG
+  // [GUARD]️ Guardian GPG
   GUARDIAN_GPG_ENABLED: false,
   GUARDIAN_GPG_KEY_ID: '',
   GUARDIAN_GPG_PASSPHRASE: '',
-  // 📄 Relatórios
+  // [DOC] Relatórios
   REPORT_SILENCE_LOGS: false,
   // Quando true, suprime logs de progresso que incluem a palavra "parcial"
   // (ex.: "Diretórios escaneados (parcial): ..."). Útil para reduzir ruído em CI ou
@@ -58,7 +57,7 @@ export const configPadrao = {
   RELATORIO_SAUDE_TABELA_ENABLED: true,
   // Quando true, em modo VERBOSE a tabela é desativada e exibimos lista detalhada
   RELATORIO_SAUDE_DETALHADO_VERBOSE: true,
-  // 📂 Zelador
+  // [DIR] Zelador
   PROMETHEUS_STATE_DIR: PROMETHEUS_ESTADO,
   ZELADOR_ABANDONED_DIR: ZELADOR_ABANDONED,
   ZELADOR_PENDING_PATH: path.join(PROMETHEUS_ESTADO, 'pendentes.json'),
@@ -89,7 +88,7 @@ export const configPadrao = {
     '**/.git/**']
   } as IncludeExcludeConfig,
   ZELADOR_LINE_THRESHOLD: 20,
-  // 🔍 Analistas
+  // [SCAN] Analistas
   SCANNER_EXTENSOES_COM_AST: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs',
   // Core JS/TS
   '.java',

@@ -4,9 +4,9 @@
  * Verifica compatibilidade e compilação TypeScript
  */
 
-import type { TypeAnalysis, TypeReplacementValidation } from '@';
+import { findExistingType, isSameType } from '@analistas/corrections/type-safety/type-creator.js';
 
-import { findExistingType, isSameType } from './type-creator.js';
+import type { TypeAnalysis, TypeReplacementValidation } from '@';
 
 /**
  * Valida substituição de tipo (any/unknown → specific)

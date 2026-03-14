@@ -7,11 +7,10 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
+import { toKebabCase } from '@analistas/corrections/type-safety/context-analyzer.js';
 import { buildTypesFsPath } from '@core/config/conventions.js';
 
 import type { ExistingType, TypeAnalysis } from '@';
-
-import { toKebabCase } from './context-analyzer.js';
 
 /**
  * Cria definição de tipo no diretório configurado (conventions.typesDirectory)
@@ -25,7 +24,7 @@ export async function createTypeDefinition(analysis: TypeAnalysis, sourceFilePat
   const existing = await findExistingType(analysis.typeName);
   if (existing) {
     // Retornar caminho do alias existente
-    return `@types/types`; // Usar export centralizado
+    return `@pt-types/types`; // Usar export centralizado
   }
 
   // Criar diretório se não existir
@@ -44,7 +43,7 @@ export async function createTypeDefinition(analysis: TypeAnalysis, sourceFilePat
   await addExportToIndex(domain, fileNome);
 
   // Retornar alias de import
-  return `@types/types`;
+  return `@pt-types/types`;
 }
 
 /**

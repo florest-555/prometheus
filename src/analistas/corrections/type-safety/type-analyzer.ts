@@ -4,15 +4,14 @@
  * Integra context-analyzer, usage-analyzer e type-inference
  */
 
+import { extractVariableName, getDomainFromFilePath, isDefinitionFile, isLegacyOrVendorFile, isTypeScriptFile } from '@analistas/corrections/type-safety/context-analyzer.js';
+import { inferTypeFromUsage } from '@analistas/corrections/type-safety/type-inference.js';
+import { analyzeUsagePatterns, findVariableUsages } from '@analistas/corrections/type-safety/usage-analyzer.js';
 import type { Node } from '@babel/types';
 import { getTypesDirectoryDisplay } from '@core/config/conventions.js';
 import { MENSAGENS_CORRECAO_TIPOS } from '@core/messages/index.js';
 
 import type { TypeAnalysis, TypeInferenceContext } from '@';
-
-import { extractVariableName, getDomainFromFilePath, isDefinitionFile, isLegacyOrVendorFile, isTypeScriptFile } from './context-analyzer.js';
-import { inferTypeFromUsage } from './type-inference.js';
-import { analyzeUsagePatterns, findVariableUsages } from './usage-analyzer.js';
 
 /**
  * Analisa uso de any/unknown e infere tipo correto

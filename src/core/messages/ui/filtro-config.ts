@@ -4,13 +4,13 @@
  * Define prioridades, agrupamentos e categorização de problemas
  */
 
-import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
-
 import {
   ICONES_ARQUIVO,
   ICONES_DIAGNOSTICO,
   ICONES_FEEDBACK,
-} from './icons.js';
+} from '@core/messages/ui/icons.js';
+
+import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
 
 // Re-exporta os tipos para compatibilidade
 export type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel };

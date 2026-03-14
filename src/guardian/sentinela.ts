@@ -4,16 +4,15 @@ import path from 'node:path';
 
 import { config } from '@core/config/config.js';
 import { log } from '@core/messages/index.js';
+import { carregarAssinaturaBaseline, carregarBaseline, salvarBaseline } from '@guardian/baseline.js';
+import { LINHA_BASE_CAMINHO } from '@guardian/constantes.js';
+import { diffSnapshots, verificarErros } from '@guardian/diff.js';
+import { assinarConteudo, verificarAssinatura, verificarGpgInstalado } from '@guardian/gpg.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 import micromatch from 'micromatch';
 
 import type { FileEntry, Snapshot } from '@';
 import { GuardianError, IntegridadeStatus } from '@';
-
-import { carregarAssinaturaBaseline, carregarBaseline, salvarBaseline } from './baseline.js';
-import { LINHA_BASE_CAMINHO } from './constantes.js';
-import { diffSnapshots, verificarErros } from './diff.js';
-import { assinarConteudo, verificarAssinatura, verificarGpgInstalado } from './gpg.js';
-import { gerarSnapshotDoConteudo } from './hash.js';
 
 function construirSnapshot(fileEntries: FileEntry[]): Snapshot {
   const snapshot: Snapshot = {};
@@ -49,7 +48,7 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
   try {
     baselineAnterior = await carregarBaseline();
   } catch (err) {
-    log.aviso(`⚠️ Baseline inválido ou corrompido: ${typeof err === 'object' && err && 'message' in err ? (err as {
+    log.aviso(`[!]️ Baseline inválido ou corrompido: ${typeof err === 'object' && err && 'message' in err ? (err as {
       message: string;
     }).message : String(err)}`);
   }
@@ -62,7 +61,7 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
   });
   if (config.DEV_MODE) {
     const removidos = fileEntries.length - filtrados.length;
-    log.info(`⚙️ Guardian filtro aplicado: ${filtrados.length} arquivos considerados (removidos ${removidos}).`);
+    log.info(`[CONF]️ Guardian filtro aplicado: ${filtrados.length} arquivos considerados (removidos ${removidos}).`);
   }
   const snapshotAtual = construirSnapshot(filtrados);
   if (!baselineAnterior) {
@@ -77,7 +76,7 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
     if (gpgHabilitado && config.GUARDIAN_GPG_KEY_ID) {
       const gpgInstalado = await verificarGpgInstalado();
       if (gpgInstalado && !options?.suppressLogs) {
-        log.info(`🛡️ Guardian: GPG habilitado, assinatura será aplicada.`);
+        log.info(`[GUARD]️ Guardian: GPG habilitado, assinatura será aplicada.`);
       }
     }
     if (!options?.suppressLogs) {
@@ -93,7 +92,7 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
   }
   if (process.argv.includes('--aceitar')) {
     if (!options?.suppressLogs) {
-      log.info(`✅ Guardian: baseline aceito manualmente (--aceitar).`);
+      log.info(`[OK] Guardian: baseline aceito manualmente (--aceitar).`);
     }
     const jsonString = JSON.stringify(snapshotAtual);
     const assinatura = await assinarConteudo(jsonString);
@@ -110,9 +109,9 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
       const baselineJson = JSON.stringify(baselineAnterior);
       const verificacao = await verificarAssinatura(baselineJson, assinaturaSalva.assinatura);
       if (verificacao.valido) {
-        log.info(`🛡️ Guardian: assinatura GPG verificada - ${verificacao.assinante || 'OK'}`);
+        log.info(`[GUARD]️ Guardian: assinatura GPG verificada - ${verificacao.assinante || 'OK'}`);
       } else {
-        log.aviso(`🛡️ Guardian: ⚠️ assinatura GPG INVÁLIDA - ${verificacao.mensagem}`);
+        log.aviso(`[GUARD]️ Guardian: [!]️ assinatura GPG INVÁLIDA - ${verificacao.mensagem}`);
         if (!options?.justDiff) {
           const errorDetails: import('@').GuardianErrorDetails[] = [{
             tipo: 'assinatura-invalida',
@@ -122,7 +121,7 @@ export async function scanSystemIntegrity(fileEntries: FileEntry[], options?: {
         }
       }
     } else if (!config.GUARDIAN_GPG_KEY_ID) {
-      log.aviso(`🛡️ Guardian: GPG habilitado mas sem chave configurada, usando apenas hash`);
+      log.aviso(`[GUARD]️ Guardian: GPG habilitado mas sem chave configurada, usando apenas hash`);
     }
   }
   const diffs = diffSnapshots(baselineAnterior, snapshotAtual);

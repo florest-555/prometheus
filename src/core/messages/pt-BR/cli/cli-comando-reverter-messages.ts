@@ -32,7 +32,7 @@ export const CliComandoReverterMensagens = createI18nMessages({
   },
   falhaCarregarMapaFast: (erro: string) => `Falha ao carregar mapa de reversão (fast-mode): ${erro}`,
   mapaLimpoComSucesso: (iconeSucesso: string) => `${iconeSucesso} Mapa de reversão limpo com sucesso!`,
-  ultimoMove: (data: string) => `📋 Último move registrado em: ${data}`
+  ultimoMove: (data: string) => `[LIST] Último move registrado em: ${data}`
 }, {
   descricao: 'Manages reversal map for applied moves',
   opcoes: {
@@ -64,5 +64,5 @@ export const CliComandoReverterMensagens = createI18nMessages({
   },
   falhaCarregarMapaFast: (erro: string) => `Failed to load reversal map (fast-mode): ${erro}`,
   mapaLimpoComSucesso: (iconeSucesso: string) => `${iconeSucesso} Reversal map cleared successfully!`,
-  ultimoMove: (data: string) => `📋 Last move registered at: ${data}`
+  ultimoMove: (data: string) => `[LIST] Last move registered at: ${data}`
 });

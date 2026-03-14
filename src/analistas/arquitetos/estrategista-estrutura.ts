@@ -49,7 +49,7 @@ export async function gerarPlanoEstrategico(contexto: Pick<ContextoExecucao, 'ar
     const alreadyInTarget = currentDir === res.destinoDir || currentDir.startsWith(`${res.destinoDir}/`);
     if (alreadyInTarget) continue;
 
-    // 🚀 INTELIGÊNCIA CONTEXTUAL: Ajustar destino baseado em sinais avançados
+    // [SYS] INTELIGÊNCIA CONTEXTUAL: Ajustar destino baseado em sinais avançados
     let destinoDirAjustado = res.destinoDir;
     const motivoAjustado = res.motivo || 'Reorganização padrão';
     if (sinaisAvancados) {

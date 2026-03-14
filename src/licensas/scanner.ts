@@ -5,9 +5,9 @@ import {
   existsAsync,
   findLicenseFileAsync,
   readPackageJson
-} from './fs-utils.js';
-import type { LicenseScanOptions, ScanResult } from './licensas.js';
-import { normalizeLicense } from './normalizer.js';
+} from '@licensas/fs-utils.js';
+import type { LicenseScanOptions, ScanResult } from '@licensas/licensas.js';
+import { normalizeLicense } from '@licensas/normalizer.js';
 
 export async function scan({
   root = process.cwd(),

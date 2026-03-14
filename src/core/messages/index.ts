@@ -38,7 +38,7 @@ export {
   logRelatorio,
   logSistema,
   logVarredor
-} from './pt-BR/log/index.js';
+} from '@core/messages/pt-BR/log/index.js';
 
 // Relatorios exports
 export {
@@ -59,7 +59,7 @@ export {
   RelatorioMensagens,
   separator,
   wrapComMetadados
-} from './pt-BR/relatorios/index.js';
+} from '@core/messages/pt-BR/relatorios/index.js';
 
 // UI exports (sem ICONES_DIAGNOSTICO e ICONES_ZELADOR que vêm de core)
 export {
@@ -106,7 +106,7 @@ export {
   SUGESTOES_TIPOS,
   SUGESTOES_ZELADOR,
   suportaCores
-} from './pt-BR/ui/index.js';
+} from '@core/messages/pt-BR/ui/index.js';
 
 // Core exports (inclui ICONES_DIAGNOSTICO e ICONES_ZELADOR)
 export {
@@ -159,7 +159,7 @@ export {
   SeverityNiveis,
   TailwindMensagens,
   TEMPLATE_RESUMO_FINAL,
-  TEXTOS_CATEGORIZACAO_CORRECAO_TIPOS} from './pt-BR/core/index.js';
+  TEXTOS_CATEGORIZACAO_CORRECAO_TIPOS} from '@core/messages/pt-BR/core/index.js';
 
 // Zeladores exports
 export {
@@ -177,7 +177,7 @@ export {
   MODELOS_SAIDA,
   PROGRESSO_IMPORTS,
   SAIDA_CODIGOS
-} from './pt-BR/zeladores/index.js';
+} from '@core/messages/pt-BR/zeladores/index.js';
 
 // CLI exports
 export {
@@ -189,6 +189,7 @@ export {
   CliComandoFixTypesMensagens,
   CliComandoFormatarMensagens,
   CliComandoGuardianMensagens,
+  CliComandoKitMensagens,
   CliComandoLicensasMensagens,
   CliComandoMetricasMensagens,
   CliComandoNamesMensagens,
@@ -201,7 +202,7 @@ export {
   CliExibirMolduraMensagens,
   CliExportersMensagens,
   CliProcessamentoDiagnosticoMensagens
-} from './pt-BR/cli/index.js';
+} from '@core/messages/pt-BR/cli/index.js';
 
 // Analistas exports
 export {
@@ -219,4 +220,4 @@ export {
   DetectorSegurancaMensagens,
   PadroesUsoMensagens,
   TodoComentariosMensagens
-} from './pt-BR/analistas/index.js';
+} from '@core/messages/pt-BR/analistas/index.js';

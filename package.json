@@ -1,6 +1,6 @@
 {
   "name": "prometheus",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "type": "module",
   "description": "CLI modular para análise, diagnóstico e manutenção de projetos JavaScript/TypeScript",
   "author": "Italo C Lopes",
@@ -12,7 +12,7 @@
     ".": "./dist/bin/index.js"
   },
   "engines": {
-    "node": ">=24.12.0"
+    "node": ">=24.14.0"
   },
   "scripts": {
     "prebuild": "rimraf dist bin",
@@ -24,10 +24,23 @@
     "postbuild": "node scripts/copy-artifacts.mjs",
     "prepare": "npm run build",
     "start": "prometheus",
-    "agent": "prometheus agent",
     "diagnosticar": "prometheus diagnosticar",
     "diagnosticar:json": "prometheus diagnosticar --json",
     "formatar": "prometheus formatar --write",
+    "p:kit": "prometheus kit",
+    "kit": "prometheus kit",
+    "kit:list": "prometheus kit list",
+    "kit:update": "prometheus kit run update-system",
+    "kit:disk": "prometheus kit run disk-usage",
+    "kit:network": "prometheus kit run network-tools",
+    "kit:backup": "prometheus kit run backup-dotfiles",
+    "kit:git": "prometheus kit run git-helper",
+    "kit:init": "prometheus kit run init-git-repo",
+    "kit:ssh": "prometheus kit run setup-github-ssh",
+    "kit:info": "prometheus kit run system-info",
+    "kit:cleanup": "prometheus kit run cleanup",
+    "kit:docker": "prometheus kit run docker-helper",
+    "kit:port": "prometheus kit run port-manager",
     "reestruturar": "prometheus reestruturar",
     "podar": "prometheus podar",
     "fix-types": "prometheus fix-types",
@@ -38,6 +51,7 @@
     "notices": "prometheus licencas notices generate",
     "adn": "prometheus licencas disclaimer add",
     "verify": "prometheus licencas disclaimer verify",
+    "agent": "prometheus agent",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage --passWithNoTests",
@@ -65,11 +79,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/florest-555/prometheus.git",
+    "url": "git+https://github.com/wolf-5-5-5/prometheus.git",
     "issues": {
-      "url": "https://github.com/florest-555/prometheus/issues"
+      "url": "https://github.com/wolf-5-5-5/prometheus/issues"
     },
-    "homepage": "https://github.com/florest-555/prometheus#readme"
+    "homepage": "https://github.com/wolf-5-5-5/prometheus#readme"
   },
   "files": [
     "dist",
@@ -92,7 +106,7 @@
     "micromatch": "^4.0.8",
     "ora": "^9.3.0",
     "p-limit": "^7.3.0",
-    "prometheus": "file:prometheus-0.4.1.tgz",
+    "prometheus": "file:prometheus-0.4.2.tgz",
     "toml": "^3.0.0",
     "xxhashjs": "^0.2.2"
   },

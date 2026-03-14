@@ -6,13 +6,12 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import type { FormatterFn } from '@shared/impar/formatter-registry.js';
+import { getFormatterForPath, registerFormatter } from '@shared/impar/formatter-registry.js';
+import { getSyntaxInfoForPath } from '@shared/impar/syntax-map.js';
 import { XMLValidator } from 'fast-xml-parser';
 
 import type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
-
-import type { FormatterFn } from './formatter-registry.js';
-import { getFormatterForPath, registerFormatter } from './formatter-registry.js';
-import { getSyntaxInfoForPath } from './syntax-map.js';
 
 // Re-exportar para compatibilidade com código existente
 export type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
@@ -854,6 +853,7 @@ function prettyPrintXmlIfSafe(xml: string): {
     changed
   };
 }
+
 function formatarXmlMinimo(code: string): FormatadorMinimoResult {
   const normalized = normalizarFimDeLinha(removerBom(code));
   const semEspacosFinais = removerEspacosFinaisPorLinha(normalized);
@@ -890,6 +890,224 @@ function formatarXmlMinimo(code: string): FormatadorMinimoResult {
     reason: changedPretty ? 'xml-pretty' : changedTokens ? 'xml-normalizacao-tags' : 'normalizacao-basica'
   };
 }
+
+function formatarHtmlMinimo(code: string): FormatadorMinimoResult {
+  const normalized = normalizarFimDeLinha(removerBom(code));
+  const semEspacosFinais = removerEspacosFinaisPorLinha(normalized);
+
+  // void elements according to HTML5
+  const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+
+  const tokens = tokenizeXml(semEspacosFinais);
+  if (hasXmlMixedContent(tokens)) {
+    return {
+      ok: true,
+      parser: 'html',
+      formatted: normalizarNewlinesFinais(semEspacosFinais),
+      changed: false
+    };
+  }
+
+  let indent = 0;
+  const indentStr = (n: number) => '  '.repeat(Math.max(0, n));
+  const outLines: string[] = [];
+
+  for (const tok of tokens) {
+    if (tok.kind === 'text') continue;
+    const raw = tok.value.trim();
+    if (!raw) continue;
+
+    const isClosing = /^<\//.test(raw);
+    const tagNameMatch = raw.match(/^<\/?([a-zA-Z0-9-]+)/);
+    const tagName = tagNameMatch ? tagNameMatch[1].toLowerCase() : '';
+    const isVoid = voidElements.has(tagName);
+    const isSelfClosing = /\/>$/.test(raw) || isVoid;
+    const isSpecial = /^<(!|\?)/.test(raw);
+
+    if (isClosing) indent = Math.max(0, indent - 1);
+    outLines.push(`${indentStr(indent)}${raw}`);
+    if (!isClosing && !isSelfClosing && !isSpecial) {
+      indent += 1;
+    }
+  }
+
+  const formatted = normalizarNewlinesFinais(outLines.join('\n'));
+  const baseline = normalizarNewlinesFinais(normalized);
+  return {
+    ok: true,
+    parser: 'html',
+    formatted,
+    changed: formatted !== baseline
+  };
+}
+
+function formatarCssMinimo(params: { code: string, relPath?: string }): FormatadorMinimoResult {
+  const normalized = normalizarFimDeLinha(removerBom(params.code));
+  const lines = normalized.split('\n');
+  const out: string[] = [];
+  let indent = 0;
+  const indentStr = (n: number) => '  '.repeat(Math.max(0, n));
+
+  for (const line of lines) {
+    let trimmed = line.trim();
+    if (!trimmed) {
+      if (out.length > 0 && out[out.length - 1] !== '') out.push('');
+      continue;
+    }
+
+    // Simple robust indenter for CSS
+    const openBraces = (trimmed.match(/\{/g) || []).length;
+    const closeBraces = (trimmed.match(/\}/g) || []).length;
+
+    if (trimmed.startsWith('}')) indent = Math.max(0, indent - 1);
+
+    // Auto-spacing for selectors and properties
+    if (trimmed.includes('{') && !trimmed.startsWith('@')) {
+      trimmed = trimmed.replace(/\s*\{\s*/g, ' {');
+    }
+    if (trimmed.includes(':') && !trimmed.startsWith('@') && !trimmed.includes('{')) {
+      trimmed = trimmed.replace(/\s*:\s*/g, ': ');
+    }
+    if (trimmed.endsWith(';') && !trimmed.includes('{')) {
+       trimmed = trimmed.replace(/\s*;\s*$/g, ';');
+    }
+
+    out.push(`${indentStr(indent)}${trimmed}`);
+
+    indent += openBraces;
+    indent -= closeBraces;
+    if (trimmed.startsWith('}')) {
+       // already handled decrement above for start-of-line closing brace
+    } else {
+       // if it didn't start with }, we might have already decremented if there were more } than {
+    }
+    // Correcting indent logic for multi-brace lines
+    const net = openBraces - closeBraces;
+    if (trimmed.startsWith('}')) {
+       // we already decremented once.
+       indent = indent + (net + 1);
+    } else {
+       // reset to what it should be after the line
+       // (this is getting complex, let's simplify)
+    }
+  }
+
+  // Simplified robust indenter
+  let currentIndent = 0;
+  const finalOut: string[] = [];
+  for (const line of out) {
+      const trimmed = line.trim();
+      const open = (trimmed.match(/\{/g) || []).length;
+      const close = (trimmed.match(/\}/g) || []).length;
+
+      let lineIndent = currentIndent;
+      if (trimmed.startsWith('}')) {
+          lineIndent = Math.max(0, currentIndent - 1);
+      }
+
+      finalOut.push(`${indentStr(lineIndent)}${trimmed}`);
+      currentIndent += (open - close);
+  }
+
+  const formatted = normalizarNewlinesFinais(limitarLinhasEmBranco(finalOut.join('\n')).code);
+  const baseline = normalizarNewlinesFinais(normalized);
+
+  return {
+    ok: true,
+    parser: 'css',
+    formatted,
+    changed: formatted !== baseline
+  };
+}
+
+function formatarShellMinimo(code: string): FormatadorMinimoResult {
+  const normalized = normalizarFimDeLinha(removerBom(code));
+  const lines = normalized.split('\n');
+  const out: string[] = [];
+  let indent = 0;
+  const indentStr = (n: number) => '  '.repeat(Math.max(0, n));
+
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      if (out.length > 0 && out[out.length - 1] !== '') out.push('');
+      continue;
+    }
+
+    // Comment handling
+    if (trimmed.startsWith('#')) {
+      out.push(`${indentStr(indent)}${trimmed}`);
+      continue;
+    }
+
+    let lineIndent = indent;
+
+    // Decrement rules
+    if (trimmed.match(/^fi\b/) || trimmed.match(/^done\b/) || trimmed.match(/^esac\b/) || trimmed.startsWith('}') || trimmed.startsWith(')')) {
+      lineIndent = Math.max(0, indent - 1);
+    } else if (trimmed.match(/^elif\b/) || trimmed.match(/^else\b/)) {
+      lineIndent = Math.max(0, indent - 1);
+    }
+
+    out.push(`${indentStr(lineIndent)}${trimmed}`);
+
+    // Update state for next line
+    const opens = (trimmed.match(/\b(if|for|while|until|case|select|function)\b/g) || []).length;
+    const dos = (trimmed.match(/\bdo\b/g) || []).length;
+    const thens = (trimmed.match(/\bthen\b/g) || []).length;
+    const bracesOpen = (trimmed.match(/\{/g) || []).length;
+
+    const clos = (trimmed.match(/\b(fi|done|esac)\b/g) || []).length;
+    const bracesClose = (trimmed.match(/\}/g) || []).length;
+
+    indent += (opens + dos + thens + bracesOpen) - (clos + bracesClose);
+
+    // Special handling for keywords that are both open/close in context or shouldn't accumulate
+    // This is a simplified indenter.
+  }
+
+  // Refined Shell Indenter State Machine
+  let curr = 0;
+  const resLines: string[] = [];
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t) {
+      resLines.push('');
+      continue;
+    }
+    if (t.startsWith('#')) {
+      resLines.push(`${indentStr(curr)}${t}`);
+      continue;
+    }
+
+    // Keywords that should be indented RELATIVE to previous line but don't increase depth for next (unless specialized)
+    const isDecrement = /^(fi|done|esac|}|elif|else|then|do)(\b|$)/.test(t);
+    const useIndent = isDecrement ? Math.max(0, curr - 1) : curr;
+
+    resLines.push(`${indentStr(useIndent)}${t}`);
+
+    // Updates
+    if (/^(if|for|while|until|case|select|function)(\b|$)/.test(t)) curr++;
+    if (/^then(\b|$)/.test(t)) { /* already handled by if or will handle if then is separate line */ }
+    if (/^do(\b|$)/.test(t)) { /* similar */ }
+    if (t.endsWith('{')) curr++;
+
+    if (/^(fi|done|esac)(\b|$)/.test(t)) curr = Math.max(0, curr - 1);
+    if (t.startsWith('}')) curr = Math.max(0, curr - 1);
+  }
+
+  const formatted = normalizarNewlinesFinais(limitarLinhasEmBranco(resLines.join('\n')).code);
+  const baseline = normalizarNewlinesFinais(normalized);
+
+  return {
+    ok: true,
+    parser: 'bash',
+    formatted,
+    changed: formatted !== baseline
+  };
+}
+
 export function formatarPrettierMinimo(params: {
   code: string;
   relPath?: string;
@@ -901,8 +1119,6 @@ export function formatarPrettierMinimo(params: {
     return /(^|\n)\s*\/\//.test(normalized) || /(^|\n)\s*\/\*/.test(normalized);
   };
   if (relPath.endsWith('.json')) {
-    // Alguns arquivos .json do ecossistema TS usam comentários (JSONC), ex.: tsconfig*.json.
-    // Nesses casos, não tentamos parsear como JSON; apenas normalizamos whitespace.
     if (temComentariosJsonc(code)) {
       return formatarCodeMinimo(code, {
         normalizarSeparadoresDeSecao: false,
@@ -918,26 +1134,19 @@ export function formatarPrettierMinimo(params: {
     return formatarYamlMinimo(code);
   }
   if (relPath.endsWith('.ts') || relPath.endsWith('.tsx') || relPath.endsWith('.cts') || relPath.endsWith('.mts') || relPath.endsWith('.js') || relPath.endsWith('.jsx') || relPath.endsWith('.mjs') || relPath.endsWith('.cjs')) {
-    // Para JS/TS, normalizamos separadores de seção (inclui formatos legados).
     return formatarCodeMinimo(code, {
       normalizarSeparadoresDeSecao: true,
       relPath
     });
   }
   if (relPath.endsWith('.html') || relPath.endsWith('.htm')) {
-    return formatarCodeMinimo(code, {
-      normalizarSeparadoresDeSecao: false,
-      parser: 'html'
-    });
+    return formatarHtmlMinimo(code);
   }
   if (relPath.endsWith('.xml')) {
     return formatarXmlMinimo(code);
   }
   if (relPath.endsWith('.css')) {
-    return formatarCodeMinimo(code, {
-      normalizarSeparadoresDeSecao: true,
-      parser: 'css'
-    });
+    return formatarCssMinimo({ code, relPath });
   }
   if (relPath.endsWith('.py')) {
     return formatarCodeMinimo(code, {
@@ -950,6 +1159,9 @@ export function formatarPrettierMinimo(params: {
       normalizarSeparadoresDeSecao: false,
       parser: 'php'
     });
+  }
+  if (relPath.endsWith('.sh') || relPath.endsWith('.bash')) {
+    return formatarShellMinimo(code);
   }
   return {
     ok: true,
@@ -1066,6 +1278,16 @@ export async function formatarComPrettierProjeto(params: {
       reason: 'prettier-parser-desconhecido'
     };
   }
+  const supportedParsers = ['babel', 'typescript', 'json', 'jsonc', 'markdown', 'yaml', 'css', 'scss', 'less', 'html', 'xml', 'php', 'python', 'java', 'vue', 'angular', 'graphql', 'markdown', 'mdx', 'yaml', 'toml', 'docker', 'html', 'svg'];
+  if (!supportedParsers.includes(parser)) {
+    return {
+      ok: true,
+      parser: 'unknown',
+      formatted: params.code,
+      changed: false,
+      reason: 'prettier-parser-nao-suportado'
+    };
+  }
   try {
     const resolvedConfiguracao = await prettier.resolveConfig(absCaminho, {
       editorconfig: true
@@ -1124,18 +1346,9 @@ registerFormatter('.markdown', (code, _relPath) => formatarMarkdownMinimo(code))
 registerFormatter('.yml', (code, _relPath) => formatarYamlMinimo(code));
 registerFormatter('.yaml', (code, _relPath) => formatarYamlMinimo(code));
 registerFormatter('.xml', (code, _relPath) => formatarXmlMinimo(code));
-registerFormatter('.html', (code, _relPath) => formatarCodeMinimo(code, {
-  normalizarSeparadoresDeSecao: false,
-  parser: 'html'
-}));
-registerFormatter('.htm', (code, _relPath) => formatarCodeMinimo(code, {
-  normalizarSeparadoresDeSecao: false,
-  parser: 'html'
-}));
-registerFormatter('.css', (code, _relPath) => formatarCodeMinimo(code, {
-  normalizarSeparadoresDeSecao: true,
-  parser: 'css'
-}));
+registerFormatter('.html', (code, _relPath) => formatarHtmlMinimo(code));
+registerFormatter('.htm', (code, _relPath) => formatarHtmlMinimo(code));
+registerFormatter('.css', (code, _relPath) => formatarCssMinimo({ code, relPath: _relPath }));
 registerFormatter('.py', (code, _relPath) => formatarCodeMinimo(code, {
   normalizarSeparadoresDeSecao: false,
   parser: 'python'
@@ -1149,6 +1362,17 @@ registerFormatter('.java', (code, _relPath) => formatarCodeMinimo(code, {
   normalizarSeparadoresDeSecao: true,
   parser: 'code'
 }));
+registerFormatter('.sh', (code, _relPath) => formatarShellMinimo(code));
+registerFormatter('.bash', (code, _relPath) => formatarShellMinimo(code));
+
+// extensões JS/TS
+const jsTsExts = ['.ts', '.tsx', '.cts', '.mts', '.js', '.jsx', '.mjs', '.cjs'];
+for (const ext of jsTsExts) {
+  registerFormatter(ext, (code, relPath) => formatarCodeMinimo(code, {
+    normalizarSeparadoresDeSecao: true,
+    relPath
+  }));
+}
 
 // Antes de delegar ao Prettier no fluxo "auto/prettier", verificamos se existe
 // um formatador registrado. Essa função auxilia o comando `formatar`.

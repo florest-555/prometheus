@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
-import corePlugin from './core-plugin.js';
-import { getGlobalRegistry } from './registry.js';
+import corePlugin from '@shared/plugins/core-plugin.js';
+import { getGlobalRegistry } from '@shared/plugins/registry.js';
 
 /**
  * Inicializa plugins padr�o do Or�culo

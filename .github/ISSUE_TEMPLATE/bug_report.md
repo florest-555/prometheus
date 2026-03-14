@@ -7,14 +7,14 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 
 
 ---
-name: 🐛 Bug Report
+name:  Bug Report
 about: Help us reproduce and fix a problem in Prometheus
 title: '[BUG] '
 labels: bug, needs triage
 assignees: ''
 ---
 
-## 🐛 Bug Description
+##  Bug Description
 
 <!-- A clear and concise description of what the bug is -->
 

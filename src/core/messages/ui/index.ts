@@ -13,7 +13,7 @@ export {
   ordenarPorPrioridade,
   type PrioridadeNivel,
   PRIORIDADES,
-} from './filtro-config.js';
+} from '@core/messages/ui/filtro-config.js';
 export {
   getIcone,
   type IconeAcao,
@@ -38,7 +38,7 @@ export {
   type IconeTipo,
   type IconeZelador,
   suportaCores,
-} from './icons.js';
+} from '@core/messages/ui/icons.js';
 export {
   formatarSugestoes,
   gerarSugestoesContextuais,
@@ -53,5 +53,5 @@ export {
   SUGESTOES_REESTRUTURAR,
   SUGESTOES_TIPOS,
   SUGESTOES_ZELADOR,
-} from './sugestoes.js';
-export * from './sugestoes-contextuais-messages.js';
+} from '@core/messages/ui/sugestoes.js';
+export * from '@core/messages/ui/sugestoes-contextuais-messages.js';

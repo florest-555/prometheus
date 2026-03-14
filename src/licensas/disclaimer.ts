@@ -3,7 +3,7 @@ import { execFile as _execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
-import type { DisclaimerOptions } from '../types/licensas.js';
+import type { DisclaimerOptions } from '@pt-types/licensas.js';
 
 function execFileAsync(cmd: string, args: string[], opts: Record<string, unknown> = {}): Promise<{
   stdout: string;
@@ -39,8 +39,8 @@ async function listMarkdown(root: string): Promise<string[]> {
     async function walk(dir: string): Promise<string[]> {
       const out: string[] = [];
       const entries = await fs.readdir(dir).catch(() => []);
-      for (const e of (entries as any)) {
-        const name = typeof e === 'string' ? e : e.name;
+      for (const e of entries) {
+        const name = e;
         const p = path.join(dir, name);
         const stat = await fs.stat(p).catch(() => null);
         if (!stat) continue;

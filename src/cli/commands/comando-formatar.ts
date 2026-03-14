@@ -18,7 +18,7 @@ import micromatch from 'micromatch';
 import type { FormatarCommandOpts, FormatResult } from '@';
 
 function isFormatavel(relPath: string): boolean {
-  return /\.(json|md|markdown|ya?ml|ts|tsx|js|jsx|mjs|cjs|html?|css|py|xml|php)$/i.test(
+  return /\.(json|md|markdown|ya?ml|ts|tsx|js|jsx|mjs|cjs|html?|css|py|xml|php|sh|bash)$/i.test(
     relPath,
   );
 }

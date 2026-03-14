@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT-0
 import { createHash, getHashes } from 'node:crypto';
 
-import type { SnapshotArquivo } from '@';
+import { ALGORITMO_HASH } from '@guardian/constantes.js';
 
-import { ALGORITMO_HASH } from './constantes.js';
+import type { SnapshotArquivo } from '@';
 
 /**
  * Gera um hash hexadecimal a partir do conte�do fornecido.

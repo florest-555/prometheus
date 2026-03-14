@@ -43,7 +43,7 @@ export const analistaQuickFixes: Analista = {
         const fixedLine = previewCorrecao.split('\n')[linha - 1] || '';
 
         // Criar sugestão com preview mais detalhado
-        const sugestao = [fixResultado.description, '', `🔧 Correção sugerida:`, `❌ Antes: ${originalLine.trim()}`, `✅ Depois: ${fixedLine.trim()}`, '', `Confiança: ${fixResultado.confidence}%`, `Categoria: ${fixResultado.category}`, `ID do Fix: ${fixResultado.id}`].join('\n');
+        const sugestao = [fixResultado.description, '', `[CONF] Correção sugerida:`, `[ERR] Antes: ${originalLine.trim()}`, `[OK] Depois: ${fixedLine.trim()}`, '', `Confiança: ${fixResultado.confidence}%`, `Categoria: ${fixResultado.category}`, `ID do Fix: ${fixResultado.id}`].join('\n');
 
         // Mapear categoria para nível
         const nivel = mapearCategoriaNivel(fixResultado.category);

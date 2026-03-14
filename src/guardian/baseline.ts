@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT-0
 import path from 'node:path';
 
+import { LINHA_BASE_CAMINHO } from '@guardian/constantes.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { BaselineComAssinatura, GpgSignature,SnapshotBaseline  } from '@';
-
-import { LINHA_BASE_CAMINHO } from './constantes.js';
 
 export const CURRENT_BASELINE_VERSION = 2;
 

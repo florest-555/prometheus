@@ -3,7 +3,7 @@
  * Exportações centralizadas de tipos do shared
  */
 
-export * from './config.types.js';
-export * from './domain.types.js';
-export * from './system.types.js';
-export * from './utility.types.js';
+export * from '@pt-types/shared/config.types.js';
+export * from '@pt-types/shared/domain.types.js';
+export * from '@pt-types/shared/system.types.js';
+export * from '@pt-types/shared/utility.types.js';

@@ -243,7 +243,7 @@ export const analistaQuickFixes: Analista = {
         const previewCorrecao = fixResultado.fix(match, src);
         const originalLine = src.split('\n')[linha - 1] || '';
         const fixedLine = previewCorrecao.split('\n')[linha - 1] || '';
-        const sugestao = [fixResultado.description, '', `🔧 Correção sugerida:`, `❌ Antes: ${originalLine.trim()}`, `✅ Depois: ${fixedLine.trim()}`, '', `Confiança: ${fixResultado.confidence}%`, `Categoria: ${fixResultado.category}`, `ID do Fix: ${fixResultado.id}`].join('\n');
+        const sugestao = [fixResultado.description, '', `[CONF] Correção sugerida:`, `[ERR] Antes: ${originalLine.trim()}`, `[OK] Depois: ${fixedLine.trim()}`, '', `Confiança: ${fixResultado.confidence}%`, `Categoria: ${fixResultado.category}`, `ID do Fix: ${fixResultado.id}`].join('\n');
         const nivel = mapearCategoriaNivel(fixResultado.category);
         const ocorrencia = criarOcorrencia({
           tipo: 'auto-fix-disponivel',

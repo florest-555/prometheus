@@ -1,6 +1,7 @@
-import type { AgentContext, AgentEvent, AgentResponse,AgentRuntimeConfig, CompletionRequest, Content, ContentPart, LlmDriver, Message, MessageRole, StreamEvent, ToolCall } from '../types/agent/index.js';
-import { DEFAULT_RUNTIME } from '../types/agent/index.js';
-import type { ToolRegistry } from './tools/registry.js';
+import type { ToolRegistry } from '@agent/tools/registry.js';
+
+import type { AgentContext, AgentEvent, AgentResponse,AgentRuntimeConfig, CompletionRequest, Content, ContentPart, LlmDriver, Message, MessageRole, StreamEvent, ToolCall } from '@';
+import { DEFAULT_RUNTIME } from '@';
 
 export type { AgentContext, AgentEvent, AgentResponse,AgentRuntimeConfig };
 export { DEFAULT_RUNTIME };

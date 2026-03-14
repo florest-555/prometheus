@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 
-import type { FormatoSaida, ModoAutoFix, ModoOperacao, NivelLog } from './modo.js';
+import type { FormatoSaida, ModoAutoFix, ModoOperacao, NivelLog } from '@pt-types/cli/options/modo.js';
 
 export interface FlagsNormalizadas {
   mode: ModoOperacao;

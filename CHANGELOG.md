@@ -12,6 +12,30 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-03-14
+
+### Adicionado
+
+- **Integração do Sistema Agent**:
+  - Novo comando `agent` no CLI para orquestração e interação com agentes de IA.
+  - Implementação de drivers para Anthropic, Gemini, OpenAI e Ollama.
+- **Sistema Kit (Sobrevivência)**:
+  - Integração do CLI `kit` para ferramentas de sistema, rede, backup e utilitários.
+  - Documentação completa em `docs/kit/`.
+- **Migração de Path Aliases**: Refatoração completa para uso de aliases padronizados (`@core`, `@shared`, `@agent`, `@utils`, `@llm`, `@cli`, `@pt-types`), melhorando a manutenibilidade.
+- **Padronização de Ícones (ASCII)**: Migração de emojis hardcoded para equivalentes em texto ASCII, garantindo compatibilidade universal em todos os terminais e logs.
+
+### Alterado
+
+- **Compatibilidade Node.js 24**: Refatoração do bootstrap do CLI (`src/bin/index.ts`) para suportar o novo sistema de registro de loaders (`node:module.register`) via imports dinâmicos.
+- **Refinamento de Formatadores**: Melhoria significativa na detecção de sintaxe e regras de formatação para HTML, CSS e scripts Shell.
+- **Excelência em Tipagem**: Refinamento de tipos `any` para `unknown` e obrigatoriedade de tipos de retorno em getters e handlers críticos.
+
+### Corrigido
+
+- **Resolução de Módulos**: Correção de problemas de resolução de aliases no ambiente de produção/distribuição.
+- **Integridade do Linter**: Limpeza total de avisos e erros de lint em todo o repositório.
+
 ## [0.4.1] - 2026-03-03
 
 ### Adicionado

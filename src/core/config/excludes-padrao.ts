@@ -12,9 +12,9 @@
  * 4. Fallback hardcoded (mais baixa prioridade)
  */
 
-import type { ConfigExcludesPadrao } from '@';
+import { config } from '@core/config/config.js';
 
-import { config } from './config.js';
+import type { ConfigExcludesPadrao } from '@';
 
 // Re-exporta o tipo para compatibilidade
 export type { ConfigExcludesPadrao };
@@ -317,7 +317,7 @@ export function mesclarConfigExcludes(
       if (config.DEV_MODE) {
         // prometheus-ignore: console-in-production - apenas em modo DEV
         console.warn(
-          `⚠️ Alguns padrões de exclusão foram considerados inseguros e foram ignorados: ${configUsuario
+          `[!]️ Alguns padrões de exclusão foram considerados inseguros e foram ignorados: ${configUsuario
             .filter((p) => !isPadraoExclusaoSeguro(p))
             .join(', ')}`,
         );

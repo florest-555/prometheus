@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 /**
- * 🔌 Plugins do Prometheus
+ * [PLUG] Plugins do Prometheus
  *
  * Analistas e detectores especializados que podem ser habilitados/desabilitados.
  * São opcionais e carregados dinamicamente pelo registry.
@@ -27,21 +27,21 @@
  */
 
 // Analistas de linguagem/framework
-export { analistaCss } from './analista-css.js';
-export { analistaCssInJs } from './analista-css-in-js.js';
-export { analistaFormatador } from './analista-formater.js';
-export { analistaGithubActions } from './analista-github-actions.js';
-export { analistaHtml } from './analista-html.js';
-export { analistaPython } from './analista-python.js';
-export { analistaReact } from './analista-react.js';
-export { analistaReactHooks } from './analista-react-hooks.js';
-export { analistaSvg } from './analista-svg.js';
-export { analistaTailwind } from './analista-tailwind.js';
-export { analistaXml } from './analista-xml.js';
+export { analistaCss } from '@analistas/plugins/analista-css.js';
+export { analistaCssInJs } from '@analistas/plugins/analista-css-in-js.js';
+export { analistaFormatador } from '@analistas/plugins/analista-formater.js';
+export { analistaGithubActions } from '@analistas/plugins/analista-github-actions.js';
+export { analistaHtml } from '@analistas/plugins/analista-html.js';
+export { analistaPython } from '@analistas/plugins/analista-python.js';
+export { analistaReact } from '@analistas/plugins/analista-react.js';
+export { analistaReactHooks } from '@analistas/plugins/analista-react-hooks.js';
+export { analistaSvg } from '@analistas/plugins/analista-svg.js';
+export { analistaTailwind } from '@analistas/plugins/analista-tailwind.js';
+export { analistaXml } from '@analistas/plugins/analista-xml.js';
 
 // Detectores especializados
-export { analistaDocumentacao } from './detector-documentacao.js';
-export { detectorMarkdown } from './detector-markdown.js';
-export { detectarArquetipoNode } from './detector-node.js';
-export { analistaQualidadeTestes } from './detector-qualidade-testes.js';
-export { detectarArquetipoXML } from './detector-xml.js';
+export { analistaDocumentacao } from '@analistas/plugins/detector-documentacao.js';
+export { detectorMarkdown } from '@analistas/plugins/detector-markdown.js';
+export { detectarArquetipoNode } from '@analistas/plugins/detector-node.js';
+export { analistaQualidadeTestes } from '@analistas/plugins/detector-qualidade-testes.js';
+export { detectarArquetipoXML } from '@analistas/plugins/detector-xml.js';

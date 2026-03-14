@@ -1,9 +1,9 @@
-# 🔒 Sistema de Type Safety do Prometheus
+# [LOCK] Sistema de Type Safety do Prometheus
 
 > Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
 > Documentação atualizada em: 29 de novembro de 2025
 
-## 📋 Visão Geral
+## [LIST] Visão Geral
 
 O Prometheus possui um sistema inteligente de detecção e correção de tipos inseguros (`any`, `unknown`) que:
 
@@ -12,7 +12,7 @@ O Prometheus possui um sistema inteligente de detecção e correção de tipos i
 3. **Sugere** alternativas específicas baseadas no contexto
 4. **Corrige** automaticamente quando solicitado (comando `fix-types`)
 
-## 🎯 Arquitetura
+## [*] Arquitetura
 
 ### Componentes Principais
 
@@ -54,7 +54,7 @@ src/analistas/
    └─→ Aplicação de quick-fix
 ```
 
-## 🔍 Tipos de Detecção
+## [SCAN] Tipos de Detecção
 
 ### 1. Tipo Inseguro: `any`
 
@@ -78,11 +78,11 @@ src/analistas/
 ```typescript
 // Genérico
 "Tipo 'any' em 'varName' desabilita verificação de tipos";
-"💡 Analise uso da variável e defina tipo específico ou use unknown com type guards";
+"[DICA] Analise uso da variável e defina tipo específico ou use unknown com type guards";
 
 // Catch block
 "'any' em catch block 'error' - TypeScript recomenda 'unknown'";
-"💡 Substitua por: catch (error: unknown) { ... }";
+"[DICA] Substitua por: catch (error: unknown) { ... }";
 ```
 
 ### 2. Type Assertions: `as any`
@@ -110,8 +110,8 @@ someFunction(param as any);
 
 ```
 "Type assertion 'as any' desabilita verificação de tipos completamente"
-"💡 Substitua por tipo específico ou use unknown com validação runtime"
-"🚨 CRÍTICO: Type safety completamente desabilitado"
+"[DICA] Substitua por tipo específico ou use unknown com validação runtime"
+"[!] CRÍTICO: Type safety completamente desabilitado"
 ```
 
 ### 3. Angle Bracket Casting: `<any>`
@@ -126,8 +126,8 @@ someFunction(param as any);
 
 ```
 "Type casting '<any>' (sintaxe legada) desabilita type safety"
-"💡 Use sintaxe 'as' moderna e tipo específico"
-"🚨 CRÍTICO: Migrar para sintaxe moderna e tipo correto"
+"[DICA] Use sintaxe 'as' moderna e tipo específico"
+"[!] CRÍTICO: Migrar para sintaxe moderna e tipo correto"
 ```
 
 ### 4. Tipo Inseguro: `unknown`
@@ -216,21 +216,21 @@ Geram avisos com sugestões contextuais:
 ```typescript
 // AST/Babel nodes (80%)
 function parseFile(ast: unknown) {}
-// 💡 import type { Node } from "@babel/types"
+// [DICA] import type { Node } from "@babel/types"
 
 // Callbacks genéricos (70%)
 function onChange(opts: unknown) {}
-// 💡 Definir interface específica: OnChangeOptions
+// [DICA] Definir interface específica: OnChangeOptions
 
 // Filter/Map (75%)
 const filtered = items.filter((item: unknown) => {});
-// 💡 Tipar array pai: items: Item[]
+// [DICA] Tipar array pai: items: Item[]
 
 // Relatórios (70%)
 interface Relatorio {
   data: unknown; // Melhorável
 }
-// 💡 Criar interface específica: RelatorioData
+// [DICA] Criar interface específica: RelatorioData
 ```
 
 #### Casos a Corrigir (<60%)
@@ -240,18 +240,18 @@ Geram erros e devem ser corrigidos:
 ```typescript
 // Guardian error details (90% confiança de ser erro)
 interface GuardianResult {
-  guardian: unknown; // ❌ Estrutura conhecida
+  guardian: unknown; // [ERR] Estrutura conhecida
 }
-// ✏️ Criar interface GuardianErrorDetails
+// [EDIT] Criar interface GuardianErrorDetails
 
 // Contextos genéricos sem validação (60%)
 function processData(input: unknown) {
   // Sem validação = perigoso
 }
-// ✏️ Adicionar type guard ou validação runtime
+// [EDIT] Adicionar type guard ou validação runtime
 ```
 
-## 🛠️ Comandos e Uso
+## [FIX] Comandos e Uso
 
 ### 1. Diagnóstico Simples
 
@@ -307,7 +307,7 @@ prometheus fix-types --show-diff
 prometheus fix-types --validate-only
 ```
 
-## 📊 Métricas e Estatísticas
+## [STATS] Métricas e Estatísticas
 
 ### Redução de Falsos Positivos
 
@@ -318,7 +318,7 @@ prometheus fix-types --validate-only
 
 **Depois da otimização:**
 
-- `tipo-inseguro-unknown`: 7 ocorrências (53% de redução ✨)
+- `tipo-inseguro-unknown`: 7 ocorrências (53% de redução [*])
 - Apenas casos que realmente precisam de análise
 
 ### Padrões Detectados
@@ -332,7 +332,7 @@ prometheus fix-types --validate-only
 | CLI Callbacks | Legítimo (95%)  | ~1 caso         |
 | Melhoráveis   | Aviso (60-94%)  | ~7 casos        |
 
-## 🔧 Configuração
+## [CONF] Configuração
 
 ### prometheus.config.json
 
@@ -376,7 +376,7 @@ export TYPE_SAFETY_CONFIDENCE_THRESHOLD=95
 export DEBUG_TYPE_SAFETY=true
 ```
 
-## 📚 API e Extensibilidade
+## [DOC] API e Extensibilidade
 
 ### Importar Funções
 
@@ -425,7 +425,7 @@ const meuQuickFix: QuickFix = {
 };
 ```
 
-## 🧪 Testes
+## [TEST] Testes
 
 ### Executar Testes do Sistema
 
@@ -471,7 +471,7 @@ describe("categorizarUnknown", () => {
 });
 ```
 
-## 🐛 Debug e Troubleshooting
+##  Debug e Troubleshooting
 
 ### Logs Detalhados
 
@@ -529,7 +529,7 @@ prometheus diagnosticar --include "src/**/*.ts" --exclude "**/*.test.ts"
 export TYPE_SAFETY_DEEP_ANALYSIS=false
 ```
 
-## 📖 Referências e Leituras Adicionais
+##  Referências e Leituras Adicionais
 
 ### Documentação Relacionada
 
@@ -552,7 +552,7 @@ export TYPE_SAFETY_DEEP_ANALYSIS=false
 - Em catch blocks, sempre use `unknown` (padrão TypeScript 4.4+)
 - Para objetos genéricos, use `Record<string, unknown>`
 
-## 🎯 Roadmap e Melhorias Futuras
+## [*] Roadmap e Melhorias Futuras
 
 ### Próximas Funcionalidades
 

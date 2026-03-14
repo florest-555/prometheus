@@ -5,6 +5,8 @@ import { promises as fs } from 'node:fs';
 
 import { config } from '@core/config/config.js';
 import { isMetaPath } from '@core/config/paths.js';
+import { executarInquisicao as executarExecucao, registrarUltimasMetricas } from '@core/execution/executor.js';
+import { scanRepository } from '@core/execution/scanner.js';
 import { InquisidorMensagens } from '@core/messages/core/inquisidor-messages.js';
 import { log } from '@core/messages/index.js';
 import { lerEstado } from '@shared/persistence/persistencia.js';
@@ -12,9 +14,6 @@ import * as path from 'path';
 
 import type { CacheValor, EstadoIncArquivo, ExecutorEventEmitter, FileEntry, FileEntryWithAst, InquisicaoOptions, MetricasGlobais, OcorrenciaParseErro, ReporterFn,ResultadoInquisicaoCompleto, SimbolosLog, Tecnica } from '@';
 import { ocorrenciaParseErro } from '@';
-
-import { executarInquisicao as executarExecucao, registrarUltimasMetricas } from './executor.js';
-import { scanRepository } from './scanner.js';
 // Fallback de símbolos para cenários de teste onde o mock de log não inclui `simbolos`.
 const SIMBOLOS_ALTERNATIVA: SimbolosLog = {
   info: '[i]',
@@ -245,7 +244,7 @@ export async function iniciarInquisicao(
         }
       } catch {
         // fallback para logs antigos
-        if (msg && msg.includes('⚠️')) log.aviso(msg);
+        if (msg && msg.includes('[!]️')) log.aviso(msg);
       }
     }
   });
@@ -364,7 +363,7 @@ export async function iniciarInquisicao(
       }));
     } else {
       // Em modo simples, não emite resumo redundante
-      // A mensagem "✅ Varredura concluída: X arquivos em Y diretórios" já cobre isso
+      // A mensagem "[OK] Varredura concluída: X arquivos em Y diretórios" já cobre isso
     }
   } catch {
     /* ignore */

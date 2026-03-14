@@ -6,6 +6,7 @@ import {
   comandoDiagnosticar,
   comandoFormatar,
   comandoGuardian,
+  comandoKit,
   comandoLicencas,
   comandoMetricas,
   comandoNames,
@@ -30,9 +31,11 @@ export function registrarComandos(
   program.addCommand(comandoReestruturar(aplicarFlagsGlobais));
   program.addCommand(comandoAtualizar(aplicarFlagsGlobais));
   program.addCommand(comandoAnalistas());
+  program.addCommand(comandoAgent(aplicarFlagsGlobais));
   program.addCommand(comandoMetricas());
   program.addCommand(criarComandoFixTypes());
   program.addCommand(comandoLicencas());
+  program.addCommand(comandoKit(aplicarFlagsGlobais));
 
   // Comandos de manutenção de nomes
   program.addCommand(comandoNames(aplicarFlagsGlobais));
@@ -41,6 +44,5 @@ export function registrarComandos(
   // Registra comando de reversão
   registrarComandoReverter(program);
 
-  // Registra comando de agente de IA
-  program.addCommand(comandoAgent());
+
 }

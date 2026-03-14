@@ -15,7 +15,7 @@ import { lerArquivoTexto } from '@shared/persistence/persistencia.js';
 import type { CommanderError } from 'commander';
 import { Command } from 'commander';
 
-// 🌐 Flags globais aplicáveis em todos os comandos
+// [ALL] Flags globais aplicáveis em todos os comandos
 import type { ErrorLike,PrometheusGlobalFlags } from '@';
 import { extrairMensagemErro } from '@';
 
@@ -23,7 +23,7 @@ import { extrairMensagemErro } from '@';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// 📦 Ler versão dinamicamente do package.json
+// [PKG] Ler versão dinamicamente do package.json
 
 async function getVersion(): Promise<string> {
   try {
@@ -39,7 +39,7 @@ async function getVersion(): Promise<string> {
   }
 }
 
-// 🛠️ Configuração principal do CLI
+// [FIX]️ Configuração principal do CLI
 const program = new Command();
 
 // �️ Função para aplicar flags globais
@@ -73,11 +73,11 @@ async function aplicarFlagsGlobais(opts: unknown) {
   if (Object.keys(overrides).length) aplicarConfigParcial(overrides);
 }
 
-// 🔗 Registro de todos os comandos
+// [LINK] Registro de todos os comandos
 registrarComandos(program, o => aplicarFlagsGlobais(o));
 program.addCommand(comandoPerf());
 
-// 🚀 Execução do CLI
+// [SYS] Execução do CLI
 // Carrega config de arquivo/env explicitamente no processo do CLI, mesmo sob VITEST (e2e spawn)
 // NOTE: a execução principal foi extraída para `mainCli` para permitir testes que importam este
 // módulo sem disparar automaticamente a execução (reduz falsos-positivos do analisador).
@@ -168,7 +168,7 @@ export async function mainCli(): Promise<void> {
   if (argv.includes('--historico')) {
     if (memoria) {
       const resumo = memoria.getSummary();
-      console.log(chalk.cyan('\n📊 RESUMO DA CONVERSA'));
+      console.log(chalk.cyan('\n[STATS] RESUMO DA CONVERSA'));
       console.log(`Total: ${resumo.totalMessages}`);
       console.log(`Usuário: ${resumo.userMessages}`);
       console.log(`Prometheus: ${resumo.assistantMessages}`);

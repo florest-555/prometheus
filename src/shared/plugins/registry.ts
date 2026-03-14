@@ -42,11 +42,11 @@ export class PluginRegistry {
     for (const ext of plugin.extensions) {
       if (this.extensionMap.has(ext)) {
         const existing = this.extensionMap.get(ext);
-        log.debug(`⚠️ Extensão ${ext} já mapeada para plugin ${existing}, sobrescrevendo com ${plugin.name}`);
+        log.debug(`[!]️ Extensão ${ext} já mapeada para plugin ${existing}, sobrescrevendo com ${plugin.name}`);
       }
       this.extensionMap.set(ext, plugin.name);
     }
-    log.debug(`✅ Plugin ${plugin.name} registrado com extensões: ${plugin.extensions.join(', ')}`);
+    log.debug(`[OK] Plugin ${plugin.name} registrado com extensões: ${plugin.extensions.join(', ')}`);
   }
 
   /**
@@ -91,7 +91,7 @@ export class PluginRegistry {
    * Implementação real do loading do plugin
    */
   private async doLoadPlugin(name: string): Promise<ParserPlugin> {
-    log.debug(`📦 Carregando plugin: ${name}`);
+    log.debug(`[PKG] Carregando plugin: ${name}`);
     try {
       // Tenta carregar do registry configurado
       const pluginCaminho = `${this.config.registry}/${name}-plugin`;
@@ -135,7 +135,7 @@ export class PluginRegistry {
     // Regra: se o usuário NÃO configurou a lista 'enabled', tratamos todos os plugins registrados como habilitados por padrão.
     // Só aplicamos o gate includes() quando houve configuração explícita de 'enabled'.
     if (this.userConfiguredEnabled && !this.config.enabled.includes(pluginNome)) {
-      log.debug(`🚫 Plugin ${pluginNome} está desabilitado para extensão ${extension}`);
+      log.debug(`[NO] Plugin ${pluginNome} está desabilitado para extensão ${extension}`);
       return null;
     }
 
@@ -143,7 +143,7 @@ export class PluginRegistry {
     const langChave = extension.substring(1); // remove o ponto
     const langSuporte = this.languageSupport[langChave];
     if (langSuporte && !langSuporte.enabled) {
-      log.debug(`🚫 Suporte à linguagem ${langChave} está desabilitado`);
+      log.debug(`[NO] Suporte à linguagem ${langChave} está desabilitado`);
       return null;
     }
     return await this.loadPlugin(pluginNome);
@@ -234,7 +234,7 @@ export class PluginRegistry {
     if (Object.prototype.hasOwnProperty.call(newConfig, 'enabled')) {
       this.userConfiguredEnabled = true;
     }
-    log.debug(`🔧 Configuração do registry atualizada`);
+    log.debug(`[CONF] Configuração do registry atualizada`);
   }
 
   /**
@@ -245,7 +245,7 @@ export class PluginRegistry {
       ...this.languageSupport,
       ...newSupport
     };
-    log.debug(`🌐 Suporte a linguagens atualizado`);
+    log.debug(`[ALL] Suporte a linguagens atualizado`);
   }
 
   /**
@@ -255,7 +255,7 @@ export class PluginRegistry {
     this.plugins.clear();
     this.extensionMap.clear();
     this.loadingPromises.clear();
-    log.debug(`🧹 Cache do registry limpo`);
+    log.debug(`[CLEAN] Cache do registry limpo`);
   }
 }
 

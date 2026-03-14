@@ -123,14 +123,14 @@ function collapseRepeatedPunct(s: string): {
     const matchStr = match[0];
     const ch = matchStr[0];
 
-    // 🛡️ PROTEÇÃO 1: Não modificar strings ou comentários
+    // [GUARD]️ PROTEÇÃO 1: Não modificar strings ou comentários
     if (isInStringOrComment(s, matchIndex)) {
       parts.push(s.substring(lastIndex, matchIndex + matchStr.length));
       lastIndex = matchIndex + matchStr.length;
       continue;
     }
 
-    // 🛡️ PROTEÇÃO 2: Verificar contexto TypeScript antes de colapsar ':'
+    // [GUARD]️ PROTEÇÃO 2: Verificar contexto TypeScript antes de colapsar ':'
     if (ch === ':' && isTypeScriptContext(s, matchIndex)) {
       parts.push(s.substring(lastIndex, matchIndex + matchStr.length));
       lastIndex = matchIndex + matchStr.length;

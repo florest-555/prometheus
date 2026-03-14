@@ -70,10 +70,10 @@ export const PROMETHEUS_ARQUIVOS = {
  * Padrões de nomenclatura para relatórios dinâmicos
  */
 export const REPORT_PADROES = {
-  /** Relatório de diagnóstico (prometheus-diagnostico-{timestamp}.md) */
-  DIAGNOSTICO: (timestamp: string) => path.join(PROMETHEUS_DIRS.REPORTS, `prometheus-diagnostico-${timestamp}.md`),
-  /** Relatório JSON resumo (prometheus-relatorio-summary-{timestamp}.json) */
-  SUMMARY_JSON: (timestamp: string) => path.join(PROMETHEUS_DIRS.REPORTS, `prometheus-relatorio-summary-${timestamp}.json`),
+  /** Relatório de diagnóstico (relatorio-{timestamp}.md) */
+  DIAGNOSTICO: (timestamp: string) => path.join(PROMETHEUS_DIRS.REPORTS, `relatorio-${timestamp}.md`),
+  /** Relatório JSON resumo (relatorio-{timestamp}.json) */
+  SUMMARY_JSON: (timestamp: string) => path.join(PROMETHEUS_DIRS.REPORTS, `relatorio-${timestamp}.json`),
   /** Relatório de análise async (async-analysis-report.json) */
   ASYNC_ANALYSIS: path.join(PROMETHEUS_DIRS.REPORTS, 'async-analysis-report.json'),
   /** Baseline de performance (docs/perf/baseline-{timestamp}.json) */

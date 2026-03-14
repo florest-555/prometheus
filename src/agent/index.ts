@@ -1,3 +1,3 @@
-export type { AgentContext, AgentEvent, AgentResponse,AgentRuntimeConfig } from '../types/agent/index.js';
-export { DEFAULT_RUNTIME } from '../types/agent/index.js';
-export { AgentError,AgentLoop } from './loop_mgr.js';
+export { AgentError, AgentLoop } from '@agent/loop_mgr.js';
+export type { AgentContext, AgentEvent, AgentResponse, AgentRuntimeConfig } from '@pt-types/agent';
+export { DEFAULT_RUNTIME } from '@pt-types/agent';

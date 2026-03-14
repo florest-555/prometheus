@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT-0
 import { log } from '@core/messages/index.js';
+import { REGISTRO_VIGIA_CAMINHO_PADRAO } from '@guardian/constantes.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
+import { carregarRegistros, salvarRegistros } from '@guardian/registros.js';
 
 import type { FileEntry } from '@';
-
-import { REGISTRO_VIGIA_CAMINHO_PADRAO } from './constantes.js';
-import { gerarSnapshotDoConteudo } from './hash.js';
-import { carregarRegistros, salvarRegistros } from './registros.js';
 
 export async function vigiaOculta(
   arquivos: FileEntry[],
@@ -29,7 +28,7 @@ export async function vigiaOculta(
 
   if (corrompidos.length > 0) {
     log.aviso(
-      `🔐 [VigiaOculta] Alterações detectadas em ${corrompidos.length} arquivo(s):`,
+      `[LOCK] [VigiaOculta] Alterações detectadas em ${corrompidos.length} arquivo(s):`,
     );
     for (const arq of corrompidos) {
       log.info(`  - ${arq}`);
@@ -38,7 +37,7 @@ export async function vigiaOculta(
     if (autoReset) {
       await salvarRegistros(arquivos, caminhoRegistro);
       log.sucesso(
-        '🌀 Registros recalibrados automaticamente pela Vigia Oculta.\\n',
+        '[SYNC] Registros recalibrados automaticamente pela Vigia Oculta.\\n',
       );
     }
   }

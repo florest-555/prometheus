@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT-0
+import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_FEEDBACK, ICONES_STATUS } from '@core/messages/ui/icons.js';
 import { createI18nMessages } from '@shared/helpers/i18n.js';
-
-import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_FEEDBACK, ICONES_STATUS } from '../ui/icons.js';
 
 export const CliProcessamentoDiagnosticoMensagens = createI18nMessages({
   linhaEmBranco: '',

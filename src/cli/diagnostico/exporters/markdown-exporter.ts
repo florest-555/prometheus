@@ -9,15 +9,15 @@
  * @see docs/REFACTOR-CLI-DIAGNOSTICAR.md - Sprint 2
  */
 
+import type { ArquetipoResult } from '@cli/diagnostico/handlers/arquetipo-handler.js';
+import type { AutoFixResult } from '@cli/diagnostico/handlers/auto-fix-handler.js';
+import type { GuardianResult } from '@cli/diagnostico/handlers/guardian-handler.js';
+
 import type {
   DadosRelatorioMarkdown,
   MarkdownExportOptions,
   Ocorrencia,
 } from '@';
-
-import type { ArquetipoResult } from '../handlers/arquetipo-handler.js';
-import type { AutoFixResult } from '../handlers/auto-fix-handler.js';
-import type { GuardianResult } from '../handlers/guardian-handler.js';
 
 // Re-export para compatibilidade
 export type { DadosRelatorioMarkdown, MarkdownExportOptions };
@@ -131,16 +131,16 @@ function gerarIndice(
   const itens: string[] = [];
 
   if (opts.includeStats && dados.stats) {
-    itens.push('- [📊 Estatísticas](#-estatísticas)');
+    itens.push('- [[STATS] Estatísticas](#-estatísticas)');
   }
   if (opts.includeGuardian && dados.guardian?.executado) {
-    itens.push('- [🛡️ Guardian](#️-guardian)');
+    itens.push('- [[GUARD]️ Guardian](#️-guardian)');
   }
   if (opts.includeArquetipos && dados.arquetipos?.executado) {
-    itens.push('- [🏗️ Arquetipos](#️-arquetipos)');
+    itens.push('- [[ARQ] Arquetipos](#️-arquetipos)');
   }
   if (opts.includeAutoFix && dados.autoFix?.executado) {
-    itens.push('- [🔧 Auto-fix](#-auto-fix)');
+    itens.push('- [[CONF] Auto-fix](#-auto-fix)');
   }
   if (
     opts.includeOcorrencias &&
@@ -178,9 +178,9 @@ function gerarSecaoStats(
   md += '\n### Por Nível\n\n';
   md += '| Nível | Quantidade |\n';
   md += '|-------|------------|\n';
-  md += `| ❌ Erro | ${stats.porNivel.erro} |\n`;
-  md += `| ⚠️ Aviso | ${stats.porNivel.aviso} |\n`;
-  md += `| ℹ️ Info | ${stats.porNivel.info} |\n`;
+  md += `| [ERR] Erro | ${stats.porNivel.erro} |\n`;
+  md += `| [!]️ Aviso | ${stats.porNivel.aviso} |\n`;
+  md += `| [INFO] Info | ${stats.porNivel.info} |\n`;
 
   // Breakdown por categoria
   if (Object.keys(stats.porCategoria).length > 0) {
@@ -216,10 +216,10 @@ function gerarSecaoStats(
 }
 
 function gerarSecaoGuardian(guardian: GuardianResult): string {
-  let md = '## 🛡️ Guardian\n\n';
+  let md = '## [GUARD]️ Guardian\n\n';
 
   md += `**Status**: ${guardian.status ?? 'desconhecido'}\n`;
-  md += `**Problemas**: ${guardian.temProblemas ? '❌ Detectados' : '✅ Nenhum'}\n\n`;
+  md += `**Problemas**: ${guardian.temProblemas ? '[ERR] Detectados' : '[OK] Nenhum'}\n\n`;
 
   if (guardian.resultado?.detalhes && guardian.resultado.detalhes.length > 0) {
     md += `### Detalhes\n\n`;
@@ -238,7 +238,7 @@ function gerarSecaoGuardian(guardian: GuardianResult): string {
 }
 
 function gerarSecaoArquetipos(arquetipos: ArquetipoResult): string {
-  let md = '## 🏗️ Arquetipos\n\n';
+  let md = '## [ARQ] Arquetipos\n\n';
 
   if (arquetipos.principal) {
     md += `**Arquétipo Principal**: ${arquetipos.principal.tipo}\n`;
@@ -257,14 +257,14 @@ function gerarSecaoArquetipos(arquetipos: ArquetipoResult): string {
   }
 
   if (arquetipos.salvo) {
-    md += '\n✅ Arquétipo salvo em `prometheus.repo.arquetipo.json`\n';
+    md += '\n[OK] Arquétipo salvo em `prometheus.repo.arquetipo.json`\n';
   }
 
   return md;
 }
 
 function gerarSecaoAutoFix(autoFix: AutoFixResult): string {
-  let md = '## 🔧 Auto-fix\n\n';
+  let md = '## [CONF] Auto-fix\n\n';
 
   md += `**Modo**: ${autoFix.mode}\n`;
   md += `**Dry-run**: ${autoFix.dryRun ? 'Sim' : 'Não'}\n\n`;
@@ -354,7 +354,7 @@ function gerarOcorrenciasPorArquivo(ocorrencias: Ocorrencia[]): string {
   let md = '';
 
   for (const [arquivo, lista] of porArquivo) {
-    md += `### 📄 ${arquivo}\n\n`;
+    md += `### [DOC] ${arquivo}\n\n`;
 
     for (const ocorrencia of lista) {
       const nivel = getNivelIcon(ocorrencia.nivel || 'info');
@@ -369,7 +369,7 @@ function gerarOcorrenciasPorArquivo(ocorrencias: Ocorrencia[]): string {
 }
 
 function gerarSecaoSugestoes(sugestoes: string[]): string {
-  let md = '## 💡 Sugestões\n\n';
+  let md = '## [DICA] Sugestões\n\n';
 
   for (const sugestao of sugestoes) {
     md += `- ${sugestao}\n`;
@@ -387,11 +387,11 @@ function gerarRodape(): string {
 function getNivelIcon(nivel: string): string {
   switch (nivel) {
     case 'erro':
-      return '❌';
+      return '[ERR]';
     case 'aviso':
-      return '⚠️';
+      return '[!]️';
     case 'info':
-      return 'ℹ️';
+      return '[INFO]';
     default:
       return '•';
   }

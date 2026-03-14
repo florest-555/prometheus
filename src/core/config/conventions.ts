@@ -7,7 +7,7 @@
 
 import path from 'node:path';
 
-import { config } from './config.js';
+import { config } from '@core/config/config.js';
 
 function toPosix(p: string): string {
   return p.replace(/\\/g, '/');

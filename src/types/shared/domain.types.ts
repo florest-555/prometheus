@@ -8,7 +8,7 @@ import type { ContextoExecucao } from '@';
 
 
 // PROMETHEUS: Revisar ocorrências 'unhandled-async' (1). Ver relatorio:
-// relatorios/prometheus-relatorio-summary-2026-02-24T22-21-50-731Z.json
+// relatorios/relatorio-2026-02-24T22-21-50-731Z.json
 
 
 /**

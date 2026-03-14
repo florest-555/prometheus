@@ -67,7 +67,7 @@ export async function detectarArquetipos(contexto: Pick<ContextoExecucao, 'arqui
   arquetipoPersonalizado?: ArquetipoPersonalizado | null; // Para compatibilidade futura
 }> {
   if (!options?.quiet && config.VERBOSE) {
-    console.log('🔍 detectarArquetipos chamado com', contexto.arquivos.length, 'arquivos');
+    console.log('[SCAN] detectarArquetipos chamado com', contexto.arquivos.length, 'arquivos');
   }
   const arquivos = contexto.arquivos.map(f => f.relPath);
 
@@ -98,9 +98,9 @@ export async function detectarArquetipos(contexto: Pick<ContextoExecucao, 'arqui
   // Pontua todos os arquétipos disponíveis usando sinais avançados
   let candidatos: ResultadoDeteccaoArquetipo[] = arquetiposParaAvaliar.map((def: ArquetipoEstruturaDef) => scoreArquetipoAvancado(def, arquivos, sinaisAvancados));
 
-  // 🚀 INTEGRAÇÃO SISTEMA INTELIGENTE: Aplicar boost contextual
+  // [SYS] INTEGRAÇÃO SISTEMA INTELIGENTE: Aplicar boost contextual
   if (!options?.quiet && config.VERBOSE) {
-    console.log('🔍 Tentando chamar detector contextual...');
+    console.log('[SCAN] Tentando chamar detector contextual...');
   }
   try {
     const {

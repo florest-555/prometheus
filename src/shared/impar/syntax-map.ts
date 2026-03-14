@@ -28,9 +28,9 @@ export const syntaxMap: Record<string, SyntaxInfo> = {
   '.xml': { parser: 'xml', formatavel: true },
   // Linguagens que o projeto formata internamente, mas que normalmente
   // o formatador não deve ser aplicado (ex.: Python). Marcar formatavel:false
-  '.py': { parser: 'python', formatavel: false },
+  '.py': { parser: 'python', formatavel: true },
   // Outras extensões encontradas em projetos variados
-  '.java': { parser: 'java', formatavel: false },
+  '.java': { parser: 'java', formatavel: true },
   '.svg': { parser: 'xml', formatavel: true },
   '.sql': { parser: 'sql', formatavel: false },
   '.properties': { parser: 'properties', formatavel: false },
@@ -39,7 +39,8 @@ export const syntaxMap: Record<string, SyntaxInfo> = {
   '.lock': { parser: 'json', formatavel: true },
   '.ini': { parser: 'ini', formatavel: false },
   '.dockerfile': { parser: 'docker', formatavel: false },
-  '.sh': { parser: 'shell', formatavel: false },
+  '.sh': { parser: 'shell', formatavel: true },
+  '.bash': { parser: 'shell', formatavel: true },
 };
 
 export function getSyntaxInfoForPath(relPath: string): SyntaxInfo | null {

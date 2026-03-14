@@ -4,16 +4,19 @@
  * Define prioridades, agrupamentos e categorização de problemas
  */
 
-import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
-
 import {
   ICONES_ARQUIVO,
   ICONES_DIAGNOSTICO,
   ICONES_FEEDBACK,
-} from './icons.js';
+} from '@core/messages/pt-BR/ui/icons.js';
+import { i18n } from '@shared/helpers/i18n.js';
+
+import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
 
 // Re-exporta os tipos para compatibilidade
 export type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel };
+
+const t = (pt: string, en: string): string => i18n({ 'pt-BR': pt, en });
 
   /* -------------------------- PRIORIDADES POR TIPO DE PROBLEMA -------------------------- */
 
@@ -145,61 +148,60 @@ export const AGRUPAMENTOS_MENSAGEM: AgrupamentoConfig[] = [
     padrao:
       /token hardcoded|senha hardcoded|chave hardcoded|api.*key.*hardcoded/i,
     categoria: 'SEGURANCA_HARDCODED',
-    titulo: 'Credenciais Hardcoded Detectadas',
+    get titulo(): string { return t('Credenciais Hardcoded Detectadas', 'Hardcoded Credentials Detected'); },
     prioridade: 'critica',
     icone: ICONES_ARQUIVO.lock,
-    acaoSugerida: 'Mover credenciais para variáveis de ambiente (.env)',
+    get acaoSugerida(): string { return t('Mover credenciais para variáveis de ambiente (.env)', 'Move credentials to environment variables (.env)'); },
   },
   {
     padrao: /sql.*injection|xss|csrf|path.*traversal|command.*injection/i,
     categoria: 'VULNERABILIDADES_WEB',
-    titulo: 'Vulnerabilidades Web Detectadas',
+    get titulo(): string { return t('Vulnerabilidades Web Detectadas', 'Web Vulnerabilities Detected'); },
     prioridade: 'critica',
     icone: '[ERRO]',
-    acaoSugerida: 'Aplicar sanitização e validação de entrada',
+    get acaoSugerida(): string { return t('Aplicar sanitização e validação de entrada', 'Apply input sanitization and validation'); },
   },
 
   // Código Frágil (Alta)
   {
     padrao: /tipo.*inseguro.*any|any.*inseguro|unsafe.*any/i,
     categoria: 'TIPOS_ANY_INSEGUROS',
-    titulo: 'Tipos Any Inseguros Detectados',
+    get titulo(): string { return t('Tipos Any Inseguros Detectados', 'Unsafe Any Types Detected'); },
     prioridade: 'alta',
     icone: '[HIGH]',
-    acaoSugerida:
-      'Substituir any por tipos específicos para melhorar type safety',
+    get acaoSugerida(): string { return t('Substituir any por tipos específicos para melhorar type safety', 'Replace any with specific types to improve type safety'); },
   },
   {
     padrao: /tipo.*inseguro.*unknown|unknown.*inseguro|unsafe.*unknown/i,
     categoria: 'TIPOS_UNKNOWN_GENERICOS',
-    titulo: 'Tipos Unknown Genéricos',
+    get titulo(): string { return t('Tipos Unknown Genéricos', 'Generic Unknown Types'); },
     prioridade: 'media',
     icone: '[WARN]',
-    acaoSugerida: 'Adicionar type guards ou substituir por tipos específicos',
+    get acaoSugerida(): string { return t('Adicionar type guards ou substituir por tipos específicos', 'Add type guards or replace with specific types'); },
   },
   {
     padrao: /missing-tests|missing tests|sem testes|no.*tests/i,
     categoria: 'TESTES_AUSENTES',
-    titulo: 'Arquivos Sem Testes',
+    get titulo(): string { return t('Arquivos Sem Testes', 'Files Without Tests'); },
     prioridade: 'alta',
     icone: '[TEST]',
-    acaoSugerida: 'Implementar testes unitários para melhorar cobertura',
+    get acaoSugerida(): string { return t('Implementar testes unitários para melhorar cobertura', 'Implement unit tests to improve coverage'); },
   },
   {
     padrao: /complexidade.*alta|complex.*high|cyclomatic.*complexity/i,
     categoria: 'COMPLEXIDADE_ALTA',
-    titulo: 'Código com Alta Complexidade',
+    get titulo(): string { return t('Código with Alta Complexidade', 'High Complexity Code'); },
     prioridade: 'alta',
     icone: '[STATS]',
-    acaoSugerida: 'Refatorar em funções menores para melhorar legibilidade',
+    get acaoSugerida(): string { return t('Refatorar em funções menores para melhorar legibilidade', 'Refactor into smaller functions to improve readability'); },
   },
   {
     padrao: /acoplamento.*alto|coupling.*high|tight.*coupling/i,
     categoria: 'ACOPLAMENTO_ALTO',
-    titulo: 'Alto Acoplamento Entre Módulos',
+    get titulo(): string { return t('Alto Acoplamento Entre Módulos', 'High Coupling Between Modules'); },
     prioridade: 'alta',
     icone: '[LINK]',
-    acaoSugerida: 'Revisar dependências e aplicar padrões de desacoplamento',
+    get acaoSugerida(): string { return t('Revisar dependências e aplicar padrões de desacoplamento', 'Review dependencies and apply decoupling patterns'); },
   },
 
   // Manutenibilidade (Média)
@@ -207,52 +209,52 @@ export const AGRUPAMENTOS_MENSAGEM: AgrupamentoConfig[] = [
     padrao:
       /missing-jsdoc|missing documentation|sem documentação|no.*documentation/i,
     categoria: 'DOCUMENTACAO_AUSENTE',
-    titulo: 'Documentação Ausente',
+    get titulo(): string { return t('Documentação Ausente', 'Missing Documentation'); },
     prioridade: 'media',
     icone: '[DOC]',
-    acaoSugerida: 'Adicionar JSDoc/comentários para melhorar manutenibilidade',
+    get acaoSugerida(): string { return t('Adicionar JSDoc/comentários para melhorar manutenibilidade', 'Add JSDoc/comments to improve maintainability'); },
   },
   {
     padrao: /console\.log|console-log|debug.*statement/i,
     categoria: 'CONSOLE_LOGS',
-    titulo: 'Console.log em Código de Produção',
+    get titulo(): string { return t('Console.log em Código de Produção', 'Console.log in Production Code'); },
     prioridade: 'media',
     icone: '[LOG]',
-    acaoSugerida: 'Remover ou substituir por sistema de logging adequado',
+    get acaoSugerida(): string { return t('Remover ou substituir por sistema de logging adequado', 'Remove or replace with a proper logging system'); },
   },
   {
     padrao: /código.*duplicado|duplicate.*code|copy.*paste/i,
     categoria: 'DUPLICACAO_CODIGO',
-    titulo: 'Código Duplicado Detectado',
+    get titulo(): string { return t('Código Duplicado Detectado', 'Duplicate Code Detected'); },
     prioridade: 'media',
     icone: '[COPY]',
-    acaoSugerida: 'Extrair para funções/módulos reutilizáveis',
+    get acaoSugerida(): string { return t('Extrair para funções/módulos reutilizáveis', 'Extract into reusable functions/modules'); },
   },
   {
     padrao: /função.*longa|long.*function|function.*too.*large/i,
     categoria: 'FUNCOES_LONGAS',
-    titulo: 'Funções Muito Longas',
+    get titulo(): string { return t('Funções Muito Longas', 'Very Long Functions'); },
     prioridade: 'media',
     icone: '[SIZE]',
-    acaoSugerida: 'Dividir em funções menores e mais coesas',
+    get acaoSugerida(): string { return t('Dividir em funções menores e mais coesas', 'Split into smaller, cohesive functions'); },
   },
 
   // Baixa prioridade
   {
     padrao: /todo|fixme|hack|workaround/i,
     categoria: 'TAREFAS_PENDENTES',
-    titulo: 'Tarefas Pendentes no Código',
+    get titulo(): string { return t('Tarefas Pendentes no Código', 'Pending Tasks in Code'); },
     prioridade: 'baixa',
     icone: ICONES_FEEDBACK.dica,
-    acaoSugerida: 'Revisar e resolver TODOs/FIXMEs pendentes',
+    get acaoSugerida(): string { return t('Revisar e resolver TODOs/FIXMEs pendentes', 'Review and resolve pending TODOs/FIXMEs'); },
   },
   {
     padrao: /magic.*number|número.*mágico/i,
     categoria: 'NUMEROS_MAGICOS',
-    titulo: 'Números Mágicos no Código',
+    get titulo(): string { return t('Números Mágicos no Código', 'Magic Numbers in Code'); },
     prioridade: 'baixa',
     icone: ICONES_DIAGNOSTICO.stats,
-    acaoSugerida: 'Substituir por constantes nomeadas',
+    get acaoSugerida(): string { return t('Substituir por constantes nomeadas', 'Replace with named constants'); },
   },
 ];
 
@@ -266,7 +268,7 @@ export function getPrioridade(tipo: string): ConfigPrioridade {
     PRIORIDADES[tipo] || {
       prioridade: 'baixa',
       icone: ICONES_ARQUIVO.arquivo,
-      descricao: 'Problema não categorizado',
+      descricao: t('Problema não categorizado', 'Uncategorized issue'),
     }
   );
 }

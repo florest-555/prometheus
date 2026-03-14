@@ -43,7 +43,7 @@ async function updateTsConfig(path) {
     const updatedContent = JSON.stringify(config, null, 2);
     await fs.writeFile(path, '// ARQUIVO GERADO AUTOMATICAMENTE\n' + updatedContent, 'utf-8');
   } catch (error) {
-    console.error(`❌ Erro ao atualizar ${path}:`, error);
+    console.error(`[ERR] Erro ao atualizar ${path}:`, error);
   }
 }
 
@@ -198,25 +198,25 @@ async function generateAliasDocumentation() {
     '## Como Usar\n\n' +
     '### Em Arquivos TypeScript\n' +
     '```typescript\n' +
-    '// ✅ Correto - usar aliases\n' +
+    '// [OK] Correto - usar aliases\n' +
     'import { executar } from \'@nucleo/executor\';\n' +
     'import { analisarPadroes } from \'@analistas/javascript-typescript/analista-padroes-uso\';\n' +
     'import { salvarEstado } from \'@shared/persistence/persistencia\';\n\n' +
-    '// ❌ Incorreto - imports relativos longos\n' +
+    '// [ERR] Incorreto - imports relativos longos\n' +
     'import { executar } from \'../../../nucleo/executor\';\n' +
     '```\n\n' +
     '### Em Testes\n' +
     '```typescript\n' +
-    '// ✅ Correto - mesmos aliases funcionam nos testes\n' +
+    '// [OK] Correto - mesmos aliases funcionam nos testes\n' +
     'import { describe, it, expect } from \'vitest\';\n' +
     'import { JavaPlugin } from \'@shared/plugins/java/java-plugin\';\n' +
     '```\n\n' +
     '## Configuração Automática\n\n' +
     'O sistema sincroniza automaticamente:\n\n' +
-    '- ✅ `tsconfig.json` - Paths para desenvolvimento\n' +
-    '- ✅ `tsconfig.eslint.json` - Paths para ESLint\n' +
-    '- ✅ `src/node.loader.mjs` - Loader ESM para src/\n' +
-    '- ✅ `tests/node.loader.mjs` - Loader ESM para testes\n';
+    '- [OK] `tsconfig.json` - Paths para desenvolvimento\n' +
+    '- [OK] `tsconfig.eslint.json` - Paths para ESLint\n' +
+    '- [OK] `src/node.loader.mjs` - Loader ESM para src/\n' +
+    '- [OK] `tests/node.loader.mjs` - Loader ESM para testes\n';
 
   await fs.writeFile(docPath, docContent, 'utf-8');
 }
@@ -229,7 +229,7 @@ async function main() {
     updateTestsLoader(),
     generateAliasDocumentation()
   ]);
-  console.log('✅ Sincronização concluída!');
+  console.log('[OK] Sincronização concluída!');
 }
 
 main().catch(console.error);

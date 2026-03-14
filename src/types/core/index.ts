@@ -4,7 +4,7 @@
  */
 
 // Auto-Fix (Corrections)
-export type { QuickFix } from './corrections/auto-fix.js';
+export type { QuickFix } from '@pt-types/core/corrections/auto-fix.js';
 
 // Configuração
 export type {
@@ -13,7 +13,7 @@ export type {
   ConfiguracaoPontuacao,
   PatternBasedQuickFix,
   ValidationResult,
-} from './config/config.js';
+} from '@pt-types/core/config/config.js';
 
 // Mensagens
 export type {
@@ -22,7 +22,7 @@ export type {
   FiltrosConfig,
   MetadadosRelatorioEstendido,
   PrioridadeNivel,
-} from './messages.js';
+} from '@pt-types/core/messages.js';
 
 // Execution
 export type {
@@ -31,16 +31,16 @@ export type {
   EstadoIncrementalExecutor,
   ExecutorEventEmitter,
   RegistroHistorico,
-} from './execution/executor.js';
+} from '@pt-types/core/execution/executor.js';
 export type {
   EstadoIncArquivo,
   MetricasGlobais,
   SimbolosLog,
-} from './execution/inquisidor.js';
-export type { MigrationResult } from './execution/registry.js';
-export type { RelatorioComVersao, SchemaMetadata } from './execution/schema.js';
+} from '@pt-types/core/execution/inquisidor.js';
+export type { MigrationResult } from '@pt-types/core/execution/registry.js';
+export type { RelatorioComVersao, SchemaMetadata } from '@pt-types/core/execution/schema.js';
 export type {
   WorkerPoolOptions,
   WorkerResult,
   WorkerTask,
-} from './execution/workers.js';
+} from '@pt-types/core/execution/workers.js';

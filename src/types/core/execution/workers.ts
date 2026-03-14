@@ -3,9 +3,9 @@
  * Tipos para sistema de Worker Pool
  */
 
-import type { MetricaAnalista } from '../../analistas/metricas.js';
-import type { FileEntryWithAst, Ocorrencia, Tecnica } from '../../shared/index.js';
-import type { ContextoExecucao } from './ambiente.js';
+import type { MetricaAnalista } from '@pt-types/analistas/metricas.js';
+import type { ContextoExecucao } from '@pt-types/core/execution/ambiente.js';
+import type { FileEntryWithAst, Ocorrencia, Tecnica } from '@pt-types/shared/index.js';
 
 /**
  * Opções de configuração do Worker Pool

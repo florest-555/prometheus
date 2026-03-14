@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 
-import type { GpgSignature } from './gpg.js';
+import type { GpgSignature } from '@pt-types/guardian/gpg.js';
 
 export interface BaselineComAssinatura {
   snapshot: Record<string, string>;

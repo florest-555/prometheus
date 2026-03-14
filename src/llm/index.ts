@@ -1,11 +1,12 @@
-import type { FallbackProvider,LlmDriver } from '../types/agent/index.js';
-import { LlmError } from '../types/agent/index.js';
-import { AnthropicDriver } from './anthropic.js';
-import { GeminiDriver } from './gemini.js';
-import { OllamaDriver } from './ollama.js';
-import { OpenAiDriver } from './openai.js';
+import { AnthropicDriver } from '@llm/anthropic.js';
+import { GeminiDriver } from '@llm/gemini.js';
+import { OllamaDriver } from '@llm/ollama.js';
+import { OpenAiDriver } from '@llm/openai.js';
 
-export * from '../types/agent/index.js';
+import type { FallbackProvider,LlmDriver } from '@';
+import { LlmError } from '@';
+
+export * from '@';
 export { AnthropicDriver, GeminiDriver,OllamaDriver, OpenAiDriver };
 
 export function createDriver(provider: string, apiKey?: string, baseUrl?: string): LlmDriver {

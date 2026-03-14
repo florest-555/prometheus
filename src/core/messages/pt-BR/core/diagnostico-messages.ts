@@ -121,7 +121,7 @@ export const MENSAGENS_GUARDIAN = {
     habilitado: 'GPG habilitado para assinatura',
     desabilitado: 'GPG desabilitado, usando apenas hash',
     assinaturaValida: (assinante: string) => `Assinatura GPG válida: ${assinante}`,
-    assinaturaInvalida: '⚠️ Assinatura GPG inválida!',
+    assinaturaInvalida: '[!]️ Assinatura GPG inválida!',
     erro: (msg: string) => `Erro na verificação GPG: ${msg}`,
     chaveNaoEncontrada: 'Nenhuma chave GPG configurada',
     instalacaoNaoEncontrada: 'GPG não está instalado no sistema'

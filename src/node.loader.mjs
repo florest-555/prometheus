@@ -4,7 +4,7 @@ import { join, resolve as resolvePath, isAbsolute } from 'node:path';
 import { existsSync } from 'node:fs';
 
 const aliases = {
-  '@types/types.js': 'types/types.ts',
+  '@pt-types/types.js': 'types/types.ts',
   '@core/': 'core/',
   '@shared/': 'shared/',
   '@analistas/': 'analistas/',
@@ -13,7 +13,7 @@ const aliases = {
   '@relatorios/': 'relatorios/',
   '@guardian/': 'guardian/',
   '@cli/': 'cli/',
-  '@types/': 'types/',
+  '@pt-types/': 'types/',
   '@src/': '',
   '@/': '',
 };
