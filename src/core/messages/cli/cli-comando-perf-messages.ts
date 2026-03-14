@@ -19,7 +19,7 @@ export const CliComandoDesempMensagens = createI18nMessages({
       erroMenosDeDois: 'Menos de dois snapshots para comparar'
     }
   },
-  tituloComparacaoSnapshots: '\n📸 Comparação de snapshots de performance:\n',
+  tituloComparacaoSnapshots: '\n[PERF] Comparação de snapshots de performance:\n',
   tituloComparacaoSnapshotsComIcone: (icone: string) => `${icone} Comparação entre snapshots:`
 }, {
   descricao: 'Baseline operations and synthetic performance comparison',
@@ -39,6 +39,6 @@ export const CliComandoDesempMensagens = createI18nMessages({
       erroMenosDeDois: 'Less than two snapshots to compare'
     }
   },
-  tituloComparacaoSnapshots: '\n📸 Performance snapshot comparison:\n',
+  tituloComparacaoSnapshots: '\n[PERF] Performance snapshot comparison:\n',
   tituloComparacaoSnapshotsComIcone: (icone: string) => `${icone} Snapshot comparison:`
 });

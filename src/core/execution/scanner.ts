@@ -33,7 +33,7 @@ export async function scanRepository(baseDir: string, options: ScanOptions = {})
   const efetivoIncluirConteudo = includeContent && !config.SCAN_ONLY;
   const fileMap: FileMap = {};
   const statCache = new Map<string, Stats>();
-  // 🔥 CONFIGURAÇÃO SIMPLIFICADA - Apenas CLI e exclude global
+  // [!] CONFIGURAÇÃO SIMPLIFICADA - Apenas CLI e exclude global
   const gruposRaw = (config as unknown as {
     CLI_INCLUDE_GROUPS?: string[][];
   }).CLI_INCLUDE_GROUPS || [];
@@ -43,7 +43,7 @@ export async function scanRepository(baseDir: string, options: ScanOptions = {})
   const includePadroesNorm = includePadroes.map(p => toPosix(trimDotSlash(String(p || ''))));
   const excludePadroesNorm = (Array.isArray(config.CLI_EXCLUDE_PATTERNS) ? config.CLI_EXCLUDE_PATTERNS as string[] : []).map(p => toPosix(String(p || '')));
 
-  // 📌 ÚNICO PONTO DE EXCLUDE: globalExcludeGlob da configuração legacy ou campo simplificado
+  // [*] ÚNICO PONTO DE EXCLUDE: globalExcludeGlob da configuração legacy ou campo simplificado
   const legacyExcludes = config.INCLUDE_EXCLUDE_RULES?.globalExcludeGlob || [];
   const ignorePadroesNorm = (legacyExcludes as string[]).map((p: string) => toPosix(String(p || '')));
   const hasIncluir = includeGroupsNorm.length > 0 || includePadroesNorm.length > 0;

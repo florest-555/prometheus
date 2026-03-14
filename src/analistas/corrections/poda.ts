@@ -79,11 +79,11 @@ const {
 export async function executarPodaCiclica(
   executarRealmente = false,
 ): Promise<void> {
-  log.info('\n🌿 Iniciando poda automática...\n');
+  log.info('\n[CLEAN] Iniciando poda automática...\n');
 
   if (!executarRealmente) {
     log.aviso(
-      '🧪 Modo de simulação ativado (SIMULADO). Nenhum arquivo será movido.\n',
+      '[TEST] Modo de simulação ativado (SIMULADO). Nenhum arquivo será movido.\n',
     );
   }
 
@@ -120,7 +120,7 @@ export async function executarPodaCiclica(
     await moverArquivos(aPodar, base, historico);
     await salvarEstado(PATH_PENDENTES, aManter);
     await salvarEstado(PATH_HISTORICO, historico);
-    log.sucesso('🧹 Podagem concluída.');
+    log.sucesso('[CLEAN] Podagem concluída.');
   } else {
     // Mesmo em simulação, mostramos contagem para cobrir mensagem esperada
     logAuto.podaPodandoSimulado(aPodar.length);
@@ -163,7 +163,7 @@ async function moverArquivos(
           logAuto.podaArquivoMovido(pend.arquivo);
         } catch (err) {
           log.erro(
-            `❌ Falha ao mover ${pend.arquivo}: ${typeof err === 'object' && err && 'message' in err ? (err as { message: string }).message : String(err)}`,
+            `[ERR] Falha ao mover ${pend.arquivo}: ${typeof err === 'object' && err && 'message' in err ? (err as { message: string }).message : String(err)}`,
           );
         }
       }),

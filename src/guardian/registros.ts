@@ -3,11 +3,10 @@ import path from 'node:path';
 
 import { config } from '@core/config/config.js';
 import { log } from '@core/messages/index.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { FileEntry, RegistroIntegridade } from '@';
-
-import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 
 const DESTINO_PADRAO = path.join(config.STATE_DIR, 'integridade.json');
 

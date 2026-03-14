@@ -1,6 +1,4 @@
 // SPDX-License-Identifier: MIT-0
-import { createI18nMessages } from '@shared/helpers/i18n.js';
-
 /**
  * Mensagens centralizadas para relatórios (Markdown e JSON)
  * Todas as strings de títulos, cabeçalhos, descrições e textos explicativos
@@ -13,7 +11,8 @@ import {
   ICONES_DIAGNOSTICO,
   ICONES_FEEDBACK,
   ICONES_RELATORIO
-} from '../ui/icons.js';
+} from '@core/messages/pt-BR/ui/icons.js';
+import { createI18nMessages } from '@shared/helpers/i18n.js';
 
 export const RelatorioMensagens = createI18nMessages({
   /* -------------------------- RELATÓRIO PRINCIPAL (gerador-relatorio.ts) -------------------------- */

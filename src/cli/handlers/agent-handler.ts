@@ -1,15 +1,15 @@
 import { AgentLoop } from '@agent/loop_mgr.js';
 import { ToolRegistry } from '@agent/tools/registry.js';
+import { CliComandoAgentMensagens } from '@core/messages/cli/cli-comando-agent-messages.js';
+import { log } from '@core/messages/index.js';
 import { AnthropicDriver } from '@llm/anthropic.js';
 import { GeminiDriver } from '@llm/gemini.js';
 import { OllamaDriver } from '@llm/ollama.js';
 import { OpenAiDriver } from '@llm/openai.js';
 import { loadConfig } from '@utils/agent/config.js';
-import { CliComandoAgentMensagens } from '@core/messages/cli/cli-comando-agent-messages.js';
-import { log } from '@core/messages/index.js';
-import type { LlmDriver } from '@';
-
 import readline from 'readline';
+
+import type { LlmDriver } from '@';
 
 export async function processarAgent(opts: {
   interactive?: boolean;
@@ -62,8 +62,8 @@ export async function processarAgent(opts: {
   const context = {
     name: agentConfig.name,
     systemPrompt: agentConfig.system_prompt,
-    model: model,
-    provider: provider,
+    model,
+    provider,
     runtime: {
       maxIterations: config.performance.max_iterations,
       maxRetries: config.performance.max_retries,

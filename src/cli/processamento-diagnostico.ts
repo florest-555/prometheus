@@ -452,7 +452,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
             const tipo = String(item.tipo || '');
             if (tipo.startsWith('tipo-inseguro')) {
               item.nivel = 'aviso';
-              item.mensagem = `${item.mensagem} | 🤝 Conciliação: inferência e tipagem explícita em conflito; revisar caso`;
+              item.mensagem = `${item.mensagem} | [OK] Conciliação: inferência e tipagem explícita em conflito; revisar caso`;
             }
           }
         }
@@ -462,7 +462,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
     ocorrenciasFiltradas = aplicarSupressaoOcorrencias(ocorrenciasFiltradas, config as unknown as FiltrosConfig || undefined);
     const totalOcorrenciasProcessadas = ocorrenciasFiltradas.length;
 
-    // 🚀 PROCESSAMENTO DE FLAGS INTUITIVAS
+    // [SYS] PROCESSAMENTO DE FLAGS INTUITIVAS
     // Mapear flags intuitivas para as flags internas
     if (opts.fix && !opts.autoFix) {
       opts.autoFix = true;
@@ -580,7 +580,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
                 }
               }
             } catch (err) {
-              log.erro(`❌ Erro ao corrigir ${arquivo}: ${err instanceof Error ? err.message : String(err)}`);
+              log.erro(`[ERR] Erro ao corrigir ${arquivo}: ${err instanceof Error ? err.message : String(err)}`);
             }
           }
           if (arquivosCorrigidos > 0) {
@@ -639,7 +639,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
                   });
                 }
               } catch (err) {
-                log.aviso(`⚠️  Validação ESLint não executada: ${err instanceof Error ? err.message : String(err)}`);
+                log.aviso(`[!]️  Validação ESLint não executada: ${err instanceof Error ? err.message : String(err)}`);
               }
             }
           } else {
@@ -653,7 +653,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           totalOcorrencias = ocorrenciasSemQuickFixes.length;
         }
       } catch (err) {
-        log.erro(`❌ Falha ao executar auto-fix: ${err instanceof Error ? err.message : String(err)}`);
+        log.erro(`[ERR] Falha ao executar auto-fix: ${err instanceof Error ? err.message : String(err)}`);
       }
     } else {
       // CRÍTICO: Definir totalOcorrencias no fluxo normal (sem auto-fix)
@@ -781,7 +781,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
         // Mostrar por nível de severidade
         log.info(CliProcessamentoDiagnosticoMensagens.porSeveridadeTitulo);
         Array.from(nivelOcorrencias.entries()).sort((a, b) => b[1] - a[1]).forEach(([nivel, count]) => {
-          const emoji = nivel === 'erro' ? '🔴' : nivel === 'aviso' ? '🟡' : '🔵';
+          const emoji = nivel === 'erro' ? '[ERR]' : nivel === 'aviso' ? '[!]' : '[INFO]';
           log.info(CliProcessamentoDiagnosticoMensagens.porSeveridadeLinha(emoji, nivel, count));
         });
 

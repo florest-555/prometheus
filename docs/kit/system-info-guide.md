@@ -6,7 +6,7 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 ---
 
 
-# 📊 Guia de Informações do Sistema
+# [STATS] Guia de Informações do Sistema
 
 Este guia explica como usar o script `system-info.sh` para obter informações detalhadas sobre seu sistema Linux.
 
@@ -73,7 +73,7 @@ Você pode adaptar o script para suas necessidades específicas:
 ```bash
 # Adicione esta seção após a seção de hardware
 echo ""
-echo "🌡️ Temperatura:"
+echo "️ Temperatura:"
 if command -v sensors &>/dev/null; then
     sensors | grep -E 'Core|temp' | head -5
 else
@@ -86,7 +86,7 @@ fi
 ```bash
 # Adicione esta seção após a seção de uptime
 echo ""
-echo "🔋 Bateria:"
+echo " Bateria:"
 if [ -d /sys/class/power_supply/BAT0 ]; then
     cat /sys/class/power_supply/BAT0/capacity
     echo "%"

@@ -3,4 +3,4 @@
  * Tipos para o scanner de repositório
  */
 
-export type { ScanOptions } from './scan.js';
+export type { ScanOptions } from '@pt-types/core/execution/scan.js';

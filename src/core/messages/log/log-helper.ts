@@ -8,9 +8,8 @@
  */
 
 import { config } from '@core/config/config.js';
-
-import { logEngine } from './log-engine.js';
-import { LogMensagens } from './log-messages.js';
+import { logEngine } from '@core/messages/log/log-engine.js';
+import { LogMensagens } from '@core/messages/log/log-messages.js';
 
 /**
  * Sistema de logs para analistas com controle de spam unificado
@@ -37,7 +36,7 @@ export const logAnalistas = {
   },
   /** Log de inicio de analista (agora apenas registra) */
   iniciandoAnalista(nomeAnalista: string, arquivo: string, tamanho: number): void {
-    // 🔕 ANTI-SPAM: Só loga analistas individuais em contextos específicos
+    // [MUTE] ANTI-SPAM: Só loga analistas individuais em contextos específicos
     const deveLogarIndividual = logEngine.contexto === 'complexo' || config.DEV_MODE || process.env.VERBOSE === 'true';
     if (deveLogarIndividual) {
       logEngine.log('debug', LogMensagens.analistas.execucao.inicio_detalhado, {

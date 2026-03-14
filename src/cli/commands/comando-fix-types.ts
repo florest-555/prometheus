@@ -439,7 +439,7 @@ async function executarFixTypes(options: FixTypesOptions): Promise<void> {
     }
   }
 
-  // ✨ APLICAR CORREÇÕES AUTOMÁTICAS
+  // [*] APLICAR CORREÇÕES AUTOMÁTICAS
   if (!isDryRun && altaPrioridade.length > 0) {
     console.log();
     log.fase?.(MENSAGENS_CLI_CORRECAO_TIPOS.aplicandoCorrecoesAuto);

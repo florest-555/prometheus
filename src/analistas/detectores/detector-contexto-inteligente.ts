@@ -219,7 +219,7 @@ function analisarDependencias(packageJson?: PackageJson): EvidenciaContexto[] {
     ...(packageJson.devDependencies as Record<string, string> || {})
   };
   if (config.VERBOSE) {
-    console.log('🔍 Analisando dependências:', Object.keys(deps));
+    console.log('[SCAN] Analisando dependências:', Object.keys(deps));
   }
   for (const [tecnologia, padroes] of Object.entries(PADROES_TECNOLOGIA)) {
     for (const dep of padroes.dependencias) {
@@ -397,46 +397,46 @@ function gerarSugestoesMelhoria(tecnologia: string, evidencias: EvidenciaContext
   switch (tecnologia) {
     case 'discord-bot':
       if (!evidencias.some(e => e.valor.includes('intents'))) {
-        sugestoes.push('🔧 Configurar intents específicos no Discord Client para melhor performance');
+        sugestoes.push('[CONF] Configurar intents específicos no Discord Client para melhor performance');
       }
       if (!evidencias.some(e => e.valor.includes('command'))) {
-        sugestoes.push('📁 Estruturar commands em pasta dedicada para organização');
+        sugestoes.push('[DIR] Estruturar commands em pasta dedicada para organização');
       }
       if (!evidencias.some(e => e.valor.includes('rate'))) {
-        sugestoes.push('⚡ Implementar rate limiting para evitar banimento por spam');
+        sugestoes.push('[FAST] Implementar rate limiting para evitar banimento por spam');
       }
       break;
     case 'express-api':
       if (!evidencias.some(e => e.valor.includes('helmet'))) {
-        sugestoes.push('🛡️ Adicionar helmet para headers de segurança');
+        sugestoes.push('[GUARD]️ Adicionar helmet para headers de segurança');
       }
       if (!evidencias.some(e => e.valor.includes('cors'))) {
-        sugestoes.push('🌐 Configurar CORS adequadamente para APIs');
+        sugestoes.push('[ALL] Configurar CORS adequadamente para APIs');
       }
       if (!evidencias.some(e => e.valor.includes('joi') && e.valor.includes('swagger'))) {
-        sugestoes.push('📋 Implementar validação com Joi e documentação Swagger');
+        sugestoes.push('[LIST] Implementar validação com Joi e documentação Swagger');
       }
       break;
     case 'cli-modular':
       if (!evidencias.some(e => e.valor.includes('help'))) {
-        sugestoes.push('❓ Implementar comando --help abrangente');
+        sugestoes.push('[?] Implementar comando --help abrangente');
       }
       if (!evidencias.some(e => e.valor.includes('version'))) {
-        sugestoes.push('📦 Adicionar comando --version');
+        sugestoes.push('[PKG] Adicionar comando --version');
       }
       if (!evidencias.some(e => e.valor.includes('config'))) {
-        sugestoes.push('⚙️ Considerar arquivo de configuração para usuários');
+        sugestoes.push('[CONF]️ Considerar arquivo de configuração para usuários');
       }
       break;
     case 'electron-app':
       if (!evidencias.some(e => e.valor.includes('preload'))) {
-        sugestoes.push('🔒 Implementar preload script para comunicação segura');
+        sugestoes.push('[LOCK] Implementar preload script para comunicação segura');
       }
       if (!evidencias.some(e => e.valor.includes('contextIsolation'))) {
-        sugestoes.push('🛡️ Habilitar context isolation para segurança');
+        sugestoes.push('[GUARD]️ Habilitar context isolation para segurança');
       }
       if (!evidencias.some(e => e.valor.includes('updater'))) {
-        sugestoes.push('🔄 Implementar auto-updater para atualizações automáticas');
+        sugestoes.push('[SYNC] Implementar auto-updater para atualizações automáticas');
       }
       break;
   }
@@ -449,7 +449,7 @@ function detectarProblemas(tecnologia: string, evidencias: EvidenciaContexto[], 
       // Verifica se token está hardcoded
       for (const arquivo of arquivos) {
         if (arquivo.content?.includes('token') && !arquivo.content.includes('process.env')) {
-          problemas.push(`🚨 Possível token hardcoded em ${arquivo.relPath}`);
+          problemas.push(`[!] Possível token hardcoded em ${arquivo.relPath}`);
         }
       }
       break;
@@ -458,20 +458,20 @@ function detectarProblemas(tecnologia: string, evidencias: EvidenciaContexto[], 
       const temHelmet = evidencias.some(e => e.valor.includes('helmet'));
       const temCors = evidencias.some(e => e.valor.includes('cors'));
       if (!temHelmet) {
-        problemas.push('⚠️ API sem helmet - vulnerável a ataques de header');
+        problemas.push('[!]️ API sem helmet - vulnerável a ataques de header');
       }
       if (!temCors) {
-        problemas.push('⚠️ API sem CORS configurado - possíveis problemas de origem');
+        problemas.push('[!]️ API sem CORS configurado - possíveis problemas de origem');
       }
       break;
     case 'electron-app':
       // Verifica configurações de segurança
       for (const arquivo of arquivos) {
         if (arquivo.content?.includes('nodeIntegration: true')) {
-          problemas.push(`🚨 nodeIntegration habilitado em ${arquivo.relPath} - risco de segurança`);
+          problemas.push(`[!] nodeIntegration habilitado em ${arquivo.relPath} - risco de segurança`);
         }
         if (arquivo.content?.includes('contextIsolation: false')) {
-          problemas.push(`🚨 contextIsolation desabilitado em ${arquivo.relPath} - vulnerabilidade`);
+          problemas.push(`[!] contextIsolation desabilitado em ${arquivo.relPath} - vulnerabilidade`);
         }
       }
       break;
@@ -504,7 +504,7 @@ export function detectarContextoInteligente(estruturaDetectada: string[], arquiv
 }): ResultadoDeteccaoContextual[] {
   // DEBUG: Log simples para verificar se está sendo chamado
   if (!options?.quiet && config.VERBOSE) {
-    const mensagem = `🔍 Package.json completo:${JSON.stringify(packageJson, null, 2)}`;
+    const mensagem = `[SCAN] Package.json completo:${JSON.stringify(packageJson, null, 2)}`;
     const ev: ReportEvent = {
       tipo: 'detector-contexto-inteligente-debug-package',
       nivel: 'info',
@@ -517,7 +517,7 @@ export function detectarContextoInteligente(estruturaDetectada: string[], arquiv
       console.debug(mensagem);
     }
     if (packageJson?.dependencies?.vue) {
-      const m2 = `🔍 Package.json tem Vue: ${packageJson.dependencies.vue}`;
+      const m2 = `[SCAN] Package.json tem Vue: ${packageJson.dependencies.vue}`;
       const ev2: ReportEvent = { tipo: 'detector-contexto-inteligente-debug-vue', nivel: 'info', mensagem: m2, relPath: '' };
       if (options?.contexto && typeof options.contexto.report === 'function') {
         try { options.contexto.report(ev2); } catch { /* ignore */ }
@@ -557,7 +557,7 @@ export function detectarContextoInteligente(estruturaDetectada: string[], arquiv
       }
     }
 
-    // 🚨 VERIFICAÇÃO DE ANTI-PATTERNS: Se anti-patterns estão presentes, ELIMINAR detecção
+    // [!] VERIFICAÇÃO DE ANTI-PATTERNS: Se anti-patterns estão presentes, ELIMINAR detecção
     const temAntiPadrao = verificarAntiPatterns(arquivos, tecnologia);
     if (temAntiPadrao) {
       // Anti-pattern detectado = detecção FALSA, eliminar confiança

@@ -19,7 +19,7 @@ export const CliComandoFormatarMensagens = createI18nMessages({
     scanOnlyAviso: 'SCAN_ONLY ativo; o comando formatar precisa ler conteúdo.'
   },
   status: {
-    titulo: '🧽 FORMATAR',
+    titulo: '[CLEAN] FORMATAR',
     precisamFormatacao: (n: number) => `Encontrados ${n} arquivo(s) que precisam de formatação. Use --write para aplicar.`,
     tudoFormatado: 'Tudo formatado.',
     concluidoWrite: (n: number) => `Formatados ${n} arquivo(s).`,
@@ -43,7 +43,7 @@ export const CliComandoFormatarMensagens = createI18nMessages({
     scanOnlyAviso: 'SCAN_ONLY active; format command needs to read content.'
   },
   status: {
-    titulo: '🧽 FORMAT',
+    titulo: '[CLEAN] FORMAT',
     precisamFormatacao: (n: number) => `Found ${n} file(s) that need formatting. Use --write to apply.`,
     tudoFormatado: 'All formatted.',
     concluidoWrite: (n: number) => `Formatted ${n} file(s).`,

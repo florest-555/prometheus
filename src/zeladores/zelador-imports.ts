@@ -293,9 +293,9 @@ export async function corrigirImports(dirs: string[] = ['src', 'tests'], options
   for (const linha of resumo) {
     if (linha === '') {
       console.log();
-    } else if (linha.includes('✅')) {
+    } else if (linha.includes('[OK]')) {
       log.sucesso(linha);
-    } else if (linha.includes('⚠️')) {
+    } else if (linha.includes('[!]️')) {
       log.aviso(linha);
     } else {
       log.info(linha);

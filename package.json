@@ -12,7 +12,7 @@
     ".": "./dist/bin/index.js"
   },
   "engines": {
-    "node": ">=24.12.0"
+    "node": ">=24.14.0"
   },
   "scripts": {
     "prebuild": "rimraf dist bin",
@@ -106,7 +106,6 @@
     "micromatch": "^4.0.8",
     "ora": "^9.3.0",
     "p-limit": "^7.3.0",
-    "prometheus": "file:prometheus-0.4.2.tgz",
     "toml": "^3.0.0",
     "xxhashjs": "^0.2.2"
   },

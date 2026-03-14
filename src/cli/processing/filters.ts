@@ -119,6 +119,6 @@ export function configurarFiltros(includeGroupsRaw: string[][], includeListFlat:
 // Função auxiliar para sincronizar arrays de exclusão
 
 function sincronizarArraysExclusao(_exclFiltered: string[]): void {
-  // 🔥 SIMPLIFICADO: Não há mais arrays obsoletos para sincronizar
+  // [!] SIMPLIFICADO: Não há mais arrays obsoletos para sincronizar
   // CLI flags dominam automaticamente via scanner.ts
 }

@@ -39,7 +39,7 @@ Comando principal para análise completa do projeto.
 prometheus diagnosticar
 ```
 
-Durante a execução, o Prometheus exibe um indicador visual “🔎 Diagnóstico em execução...” para sinalizar processamento.
+Durante a execução, o Prometheus exibe um indicador visual “ Diagnóstico em execução...” para sinalizar processamento.
 
 ### Opções Principais
 

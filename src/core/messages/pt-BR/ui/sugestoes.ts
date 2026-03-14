@@ -1,6 +1,4 @@
 // SPDX-License-Identifier: MIT-0
-import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
-
 // @prometheus-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para sistema de sugestões
 /**
@@ -12,7 +10,8 @@ import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
  * - Mensagens de ajuda rápida
  * - Call-to-action para diferentes cenários
  */
-import { ICONES } from './icons.js';
+import { ICONES } from '@core/messages/pt-BR/ui/icons.js';
+import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
 
 /**
  * Sugestões gerais de comandos

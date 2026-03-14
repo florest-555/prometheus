@@ -52,7 +52,7 @@ export async function carregarArquetipoPersonalizado(baseDir: string = process.c
         verbose?: boolean;
       }).verbose || false;
       if (!isTest && isVerbose) {
-        log.aviso(`⚠️ Arquétipo personalizado não encontrado em ${novoCaminho} nem ${caminhoLegado}`);
+        log.aviso(`[!]️ Arquétipo personalizado não encontrado em ${novoCaminho} nem ${caminhoLegado}`);
       }
       return null;
     }
@@ -89,7 +89,7 @@ export async function salvarArquetipoPersonalizado(arquetipo: Omit<ArquetipoPers
     // Diretório já existe
   }
   await salvarEstado(novoCaminho, arquetipoCompleto);
-  log.sucesso(`✅ Arquétipo personalizado salvo em ${novoCaminho}`);
+  log.sucesso(`[OK] Arquétipo personalizado salvo em ${novoCaminho}`);
 }
 
 /**
@@ -132,19 +132,19 @@ export function gerarSugestaoArquetipoPersonalizado(projetoDesconhecido: {
   arquivosRaiz: string[];
 }): string {
   const sugestao = `
-🌟 Projeto personalizado detectado: "${projetoDesconhecido.nome}"
+[*] Projeto personalizado detectado: "${projetoDesconhecido.nome}"
 
 O Prometheus identificou uma estrutura de projeto que não corresponde a arquétipos oficiais,
 mas você pode criar um arquétipo personalizado para receber sugestões otimizadas!
 
-📁 Estrutura detectada:
+[DIR] Estrutura detectada:
 ${projetoDesconhecido.estruturaDetectada.map(dir => `  • ${dir}`).join('\n')}
 
-📄 Arquivos na raiz:
+[DOC] Arquivos na raiz:
 ${projetoDesconhecido.arquivosRaiz.slice(0, 5).map(file => `  • ${file}`).join('\n')}
 ${projetoDesconhecido.arquivosRaiz.length > 5 ? `  • ... e mais ${projetoDesconhecido.arquivosRaiz.length - 5} arquivos` : ''}
 
-💡 Para criar seu arquétipo personalizado, execute:
+[DICA] Para criar seu arquétipo personalizado, execute:
    prometheus diagnosticar --criar-arquetipo
 
 Isso criará um arquivo 'prometheus.repo.arquetipo.json' com base na estrutura atual,

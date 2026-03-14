@@ -4,15 +4,14 @@
  * Define prioridades, agrupamentos e categorização de problemas
  */
 
-import { i18n } from '@shared/helpers/i18n.js';
-
-import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
-
 import {
   ICONES_ARQUIVO,
   ICONES_DIAGNOSTICO,
   ICONES_FEEDBACK,
-} from './icons.js';
+} from '@core/messages/pt-BR/ui/icons.js';
+import { i18n } from '@shared/helpers/i18n.js';
+
+import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
 
 // Re-exporta os tipos para compatibilidade
 export type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel };

@@ -8,9 +8,8 @@
  * que detecta e categoriza tipos inseguros (any/unknown) no código TypeScript.
  */
 
+import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_COMANDO, ICONES_DIAGNOSTICO, ICONES_FEEDBACK, ICONES_RELATORIO, ICONES_STATUS, ICONES_TIPOS } from '@core/messages/ui/icons.js';
 import { createI18nMessages, i18n } from '@shared/helpers/i18n.js';
-
-import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_COMANDO, ICONES_DIAGNOSTICO, ICONES_FEEDBACK, ICONES_RELATORIO, ICONES_STATUS, ICONES_TIPOS } from '../ui/icons.js';
 
 /**
  * Configuração de categorias de tipos inseguros

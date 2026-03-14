@@ -16,11 +16,10 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
-
-import type { MigrationResult } from '@';
-
 import { log } from '@core/messages/log/log.js';
 import { MIGRACAO_MAPA, PROMETHEUS_ARQUIVOS, PROMETHEUS_DIRS, type PrometheusFilePath } from '@core/registry/paths.js';
+
+import type { MigrationResult } from '@';
 
 /**
  * Opções para operações de leitura

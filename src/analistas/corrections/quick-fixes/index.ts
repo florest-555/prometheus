@@ -3,5 +3,5 @@
  * Quick Fixes para Type Safety
  */
 
-export { fixAnyToProperTipo, fixAnyToProperTypeAsync } from './fix-any-to-proper-type.js';
-export { fixUnknownToSpecificTipo, fixUnknownToSpecificTypeAsync } from './fix-unknown-to-specific-type.js';
+export { fixAnyToProperTipo, fixAnyToProperTypeAsync } from '@analistas/corrections/quick-fixes/fix-any-to-proper-type.js';
+export { fixUnknownToSpecificTipo, fixUnknownToSpecificTypeAsync } from '@analistas/corrections/quick-fixes/fix-unknown-to-specific-type.js';

@@ -8,9 +8,9 @@ export BLUE='\033[0;34m'
 export NC='\033[0m' # No Color
 
 # ── UI Helpers ───────────────────────────────────────
-info()    { echo -e "${GREEN}[✔]${NC} $1"; }
+info()    { echo -e "${GREEN}[[OK]]${NC} $1"; }
 warn()    { echo -e "${YELLOW}[!]${NC} $1"; }
-error()   { echo -e "${RED}[✘]${NC} $1"; }
+error()   { echo -e "${RED}[[FALHA]]${NC} $1"; }
 header()  {
   echo -e "\n${BLUE}══════════════════════════════════════════════════════${NC}"
   echo -e "  ${BLUE}$1${NC}"

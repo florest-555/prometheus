@@ -19,4 +19,4 @@ export { ACOES_SUGERIDAS, CATEGORIAS_TIPOS, DEPURACAO, DICAS, formatarComContext
 export { InquisidorMensagens } from '@core/messages/core/inquisidor-messages.js';
 
 // Plugin (mensagens de analistas de plugins)
-export { AnalystOrigens, AnalystTipos, CssMensagens, HtmlMensagens, PythonMensagens, ReactHooksMensagens, ReactMensagens, SeverityNiveis, TailwindMensagens } from './plugin-messages.js';
+export { AnalystOrigens, AnalystTipos, CssMensagens, HtmlMensagens, PythonMensagens, ReactHooksMensagens, ReactMensagens, SeverityNiveis, TailwindMensagens } from '@core/messages/core/plugin-messages.js';

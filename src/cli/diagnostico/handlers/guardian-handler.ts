@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 /**
- * 🛡️ Guardian Handler
+ * [GUARD]️ Guardian Handler
  *
  * Gerencia verificação de integridade do Guardian
  * - Executa scan de integridade

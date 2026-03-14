@@ -21,19 +21,19 @@ O i-c-l-org utiliza um sistema centralizado de aliases TypeScript para simplific
 ### Em Arquivos TypeScript
 
 ```typescript
-// ✅ Correto - usar aliases
+// [OK] Correto - usar aliases
 import { executar } from '@nucleo/executor';
 import { analisarPadroes } from '@analistas/javascript-typescript/analista-padroes-uso';
 import { salvarEstado } from '@shared/persistence/persistencia';
 
-// ❌ Incorreto - imports relativos longos
+// [ERR] Incorreto - imports relativos longos
 import { executar } from '../../../nucleo/executor';
 ```
 
 ### Em Testes
 
 ```typescript
-// ✅ Correto - mesmos aliases funcionam nos testes
+// [OK] Correto - mesmos aliases funcionam nos testes
 import { describe, it, expect } from 'vitest';
 import { JavaPlugin } from '@shared/plugins/java/java-plugin';
 ```
@@ -42,7 +42,7 @@ import { JavaPlugin } from '@shared/plugins/java/java-plugin';
 
 O sistema sincroniza automaticamente:
 
-- ✅ `tsconfig.json` - Paths para desenvolvimento
-- ✅ `tsconfig.eslint.json` - Paths para ESLint
-- ✅ `src/node.loader.mjs` - Loader ESM para src/
-- ✅ `tests/node.loader.mjs` - Loader ESM para testes
+- [OK] `tsconfig.json` - Paths para desenvolvimento
+- [OK] `tsconfig.eslint.json` - Paths para ESLint
+- [OK] `src/node.loader.mjs` - Loader ESM para src/
+- [OK] `tests/node.loader.mjs` - Loader ESM para testes

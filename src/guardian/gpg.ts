@@ -92,13 +92,13 @@ export async function assinarConteudo(conteudo: string, keyId?: string): Promise
 
   const instalado = await verificarGpgInstalado();
   if (!instalado) {
-    log.aviso('🛡️ GPG não instalado. Assinatura desabilitada.');
+    log.aviso('[GUARD]️ GPG não instalado. Assinatura desabilitada.');
     return null;
   }
 
   const keyIdReal = keyId || await obterKeyIdPadrao();
   if (!keyIdReal) {
-    log.aviso('🛡️ Nenhuma chave GPG encontrada. Assinatura desabilitada.');
+    log.aviso('[GUARD]️ Nenhuma chave GPG encontrada. Assinatura desabilitada.');
     return null;
   }
 
@@ -144,7 +144,7 @@ export async function assinarConteudo(conteudo: string, keyId?: string): Promise
       timestamp: new Date().toISOString()
     };
   } catch (err) {
-    log.aviso(`🛡️ Erro ao assinar com GPG: ${err}`);
+    log.aviso(`[GUARD]️ Erro ao assinar com GPG: ${err}`);
     return null;
   } finally {
     await unlink(tempInput).catch(() => {});

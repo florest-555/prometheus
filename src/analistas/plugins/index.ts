@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 /**
- * 🔌 Plugins do Prometheus
+ * [PLUG] Plugins do Prometheus
  *
  * Analistas e detectores especializados que podem ser habilitados/desabilitados.
  * São opcionais e carregados dinamicamente pelo registry.

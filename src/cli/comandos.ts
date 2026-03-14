@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT-0
 import {
-  comandoAnalistas,
   comandoAgent,
+  comandoAnalistas,
   comandoAtualizar,
   comandoDiagnosticar,
   comandoFormatar,

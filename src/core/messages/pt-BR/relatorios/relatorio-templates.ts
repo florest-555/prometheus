@@ -4,11 +4,10 @@
  * Funções que geram seções completas de MD com formatação consistente
  */
 import { formatMs } from '@core/config/format.js';
+import { RelatorioMensagens } from '@core/messages/pt-BR/relatorios/relatorio-messages.js';
 import { i18n } from '@shared/helpers/i18n.js';
 
 import type { GuardianInfo, MetadadosRelatorioEstendido, ProblemaAgrupado } from '@';
-
-import { RelatorioMensagens } from './relatorio-messages.js';
 
 // Re-exporta o tipo para compatibilidade
 export type { MetadadosRelatorioEstendido };

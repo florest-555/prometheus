@@ -12,11 +12,10 @@
 import path from 'node:path';
 
 import { log, MENSAGENS_RELATORIOS_ANALISE } from '@core/messages/index.js';
+import type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncIssuesArquivo } from '@pt-types/relatorios/async-analysis.js';
 import { salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { Ocorrencia } from '@';
-
-import type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncIssuesArquivo } from '@pt-types/relatorios/async-analysis.js';
 
 /**
  * Categoriza arquivo baseado no path
@@ -90,14 +89,14 @@ export async function analisarAsyncPatterns(ocorrencias: Ocorrencia[], options: 
   })).sort((a, b) => b.total - a.total);
 
   // Top arquivos
-  log.info(`\n🔴 TOP ${Math.min(topN, arquivosOrdenados.length)} Arquivos com Mais Promises Não Tratadas:\n`);
+  log.info(`\n[ERR] TOP ${Math.min(topN, arquivosOrdenados.length)} Arquivos com Mais Promises Não Tratadas:\n`);
   for (let i = 0; i < Math.min(topN, arquivosOrdenados.length); i++) {
     const {
       arquivo,
       total,
       nivel
     } = arquivosOrdenados[i];
-    const nivelIcon = nivel === 'erro' ? '🔴' : nivel === 'aviso' ? '⚠️' : 'ℹ️';
+    const nivelIcon = nivel === 'erro' ? '[ERR]' : nivel === 'aviso' ? '[!]️' : '[INFO]';
     log.info(`${i + 1}. ${nivelIcon} ${arquivo}`);
     log.info(`   └─ ${total} promise(s) sem tratamento de erro`);
     log.info(`   └─ Prioridade: ${nivel.toUpperCase()}\n`);
@@ -138,7 +137,7 @@ export async function analisarAsyncPatterns(ocorrencias: Ocorrencia[], options: 
     categorias[categoria].totalArquivos++;
     categorias[categoria].totalPromises += total;
   }
-  log.info(`\n📂 Distribuição por Categoria:\n`);
+  log.info(`\n[DIR] Distribuição por Categoria:\n`);
   for (const [cat, stats] of Object.entries(categorias)) {
     if (stats.totalArquivos > 0) {
       log.info(`  ${cat.toUpperCase()}: ${stats.totalArquivos} arquivos, ${stats.totalPromises} promises`);
@@ -166,7 +165,7 @@ export async function analisarAsyncPatterns(ocorrencias: Ocorrencia[], options: 
         log.info(`   - ${arquivo}`);
       }
     }
-    log.info(`\n📋 Próximos Passos:\n`);
+    log.info(`\n[LIST] Próximos Passos:\n`);
     log.info('1. Revisar arquivos CRÍTICOS e adicionar .catch() ou try/catch');
     log.info('2. Para arquivos com muitas ocorrências, considerar refatoração');
     log.info('3. Validar se promises têm tratamento em nível superior');

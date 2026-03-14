@@ -2,11 +2,10 @@
 // @prometheus-disable PROBLEMA_PERFORMANCE
 // Justificativa: config de fix que processa padrões - loops são esperados
 
+import { hasMinimumConfidence, isCategoryAllowed, shouldExcludeFile } from '@core/config/auto/auto-fix-config.js';
 import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
 
 import type { AutoFixConfig, PatternBasedQuickFix } from '@';
-
-import { hasMinimumConfidence, isCategoryAllowed, shouldExcludeFile } from '@core/config/auto/auto-fix-config.js';
 
 // Re-exporta os tipos para compatibilidade
 export type { PatternBasedQuickFix };
@@ -51,9 +50,9 @@ function _isCriticalSystemFile(fullCode: string): boolean {
   return criticalIndicators.some(i => fullCode.includes(i));
 }
 
-// 🚨 REGISTRY SEGURO - APENAS QUICK FIXES QUE NÃO QUEBRAM CÓDIGO
+// [!] REGISTRY SEGURO - APENAS QUICK FIXES QUE NÃO QUEBRAM CÓDIGO
 export const quickCorrecaoRegistro: PatternBasedQuickFix[] = [
-// ✅ Quick fixes reintroduzidos de forma conservadora:
+// [OK] Quick fixes reintroduzidos de forma conservadora:
 // Começamos por SVGs, pois a transformação é determinística e segura.
 {
   id: 'svg-optimize-svgo-like',

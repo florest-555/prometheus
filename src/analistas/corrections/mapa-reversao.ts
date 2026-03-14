@@ -83,7 +83,7 @@ export class GerenciadorMapaReversao {
         recursive: true
       });
       await salvarEstado(this.mapaPath, this.mapa);
-      log.info(`💾 Mapa de reversão salvo: ${this.mapa.moves.length} moves`);
+      log.info(`[SAVE] Mapa de reversão salvo: ${this.mapa.moves.length} moves`);
     } catch (error) {
       logAuto.mapaReversaoErroSalvar((error as Error).message);
     }
@@ -117,7 +117,7 @@ export class GerenciadorMapaReversao {
       if (!skipSalvar) {
         await this.salvar();
       }
-      log.info(`📝 Move registrado: ${origem} → ${destino} (${motivo})`);
+      log.info(`[EDIT] Move registrado: ${origem} → ${destino} (${motivo})`);
       return id;
     } catch (err) {
       logAuto.mapaReversaoErroSalvar((err as Error).message);
@@ -264,9 +264,9 @@ export class GerenciadorMapaReversao {
    */
   listarMoves(): string {
     if (this.mapa.moves.length === 0) {
-      return '📋 Nenhum move registrado no mapa de reversão.';
+      return '[LIST] Nenhum move registrado no mapa de reversão.';
     }
-    let resultado = `📋 Mapa de Reversão (${this.mapa.moves.length} moves):\n\n`;
+    let resultado = `[LIST] Mapa de Reversão (${this.mapa.moves.length} moves):\n\n`;
 
     // Ordena por timestamp (mais recente primeiro)
     const movesOrdenados = [...this.mapa.moves].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
@@ -274,9 +274,9 @@ export class GerenciadorMapaReversao {
       const dataFormatada = new Date(move.timestamp).toLocaleString('pt-BR');
       const reescritos = move.importsReescritos ? ' (imports reescritos)' : '';
       resultado += `${move.id}:\n`;
-      resultado += `  📅 ${dataFormatada}\n`;
-      resultado += `  📁 ${move.origem} → ${move.destino}\n`;
-      resultado += `  💬 ${move.motivo}${reescritos}\n\n`;
+      resultado += `  [DATE] ${dataFormatada}\n`;
+      resultado += `  [DIR] ${move.origem} → ${move.destino}\n`;
+      resultado += `  [MSG] ${move.motivo}${reescritos}\n\n`;
     }
     return resultado;
   }
@@ -290,7 +290,7 @@ export class GerenciadorMapaReversao {
       this.mapa.metadata.totalMoves = 0;
       this.mapa.metadata.ultimoMove = '';
       await this.salvar();
-      log.info('🧹 Mapa de reversão limpo');
+      log.info('[CLEAN] Mapa de reversão limpo');
     } catch (err) {
       logAuto.mapaReversaoErroSalvar((err as Error).message);
     }

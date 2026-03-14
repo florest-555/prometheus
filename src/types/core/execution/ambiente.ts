@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT-0
 
+import type { GuardianResult } from '@pt-types/guardian/resultado.js';
+
 import type { FileEntryWithAst, Ocorrencia } from '@';
 
-import type { GuardianResult } from '../../guardian/resultado.js';
-
-export type { ScanOptions } from './scan.js';
+export type { ScanOptions } from '@pt-types/core/execution/scan.js';
 
 export interface AmbienteExecucao {
   arquivosValidosSet: Set<string>;

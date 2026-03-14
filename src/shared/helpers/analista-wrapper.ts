@@ -3,9 +3,9 @@
  * Wrapper para analistas que adiciona suporte automático a supressões inline
  */
 
-import type { Analista, Ocorrencia } from '@';
-
 import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
+
+import type { Analista, Ocorrencia } from '@';
 
 /**
  * Envolve um analista para adicionar suporte a supressões inline

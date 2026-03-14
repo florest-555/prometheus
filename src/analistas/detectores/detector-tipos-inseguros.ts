@@ -273,7 +273,7 @@ const ANALISTA: Analista = {
 
         // Se tem sugestão, adicionar
         if (categorizacao.sugestao) {
-          mensagem += ` | 💡 ${categorizacao.sugestao}`;
+          mensagem += ` | [DICA] ${categorizacao.sugestao}`;
         }
       } else if (categorizacao.categoria === 'melhoravel') {
         // Melhorável - aviso com sugestão
@@ -281,18 +281,18 @@ const ANALISTA: Analista = {
         mensagem = varNome ? `Tipo 'unknown' em '${varNome}' pode ser melhorado (${categorizacao.confianca}% confiança)` : `Tipo 'unknown' pode ser melhorado (${categorizacao.confianca}% confiança)`;
         mensagem += ` | ${categorizacao.motivo}`;
         if (categorizacao.sugestao) {
-          mensagem += ` | 💡 ${categorizacao.sugestao}`;
+          mensagem += ` | [DICA] ${categorizacao.sugestao}`;
         } else {
-          mensagem += ` | 💡 Revisar uso para inferir tipo mais específico`;
+          mensagem += ` | [DICA] Revisar uso para inferir tipo mais específico`;
         }
-        mensagem += ` | ⚠️  Revisão manual recomendada`;
+        mensagem += ` | [!]️  Revisão manual recomendada`;
       } else {
         // Corrigir - erro que deve ser tratado
         nivel = 'erro';
         mensagem = varNome ? `Tipo 'unknown' em '${varNome}' deve ser corrigido (${categorizacao.confianca}% confiança)` : `Tipo 'unknown' deve ser corrigido (${categorizacao.confianca}% confiança)`;
         mensagem += ` | ${categorizacao.motivo}`;
         if (categorizacao.sugestao) {
-          mensagem += ` | ✏️  ${categorizacao.sugestao}`;
+          mensagem += ` | [EDIT]️  ${categorizacao.sugestao}`;
         }
         mensagem += ` | [REVISAO] Revisao manual obrigatoria`;
       }

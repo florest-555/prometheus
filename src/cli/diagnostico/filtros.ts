@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT-0
 /**
- * 🎯 Sistema de Filtros para Diagnóstico
+ * [*] Sistema de Filtros para Diagnóstico
  *
  * Gerencia inclusão/exclusão de arquivos para análise
  * - Processa padrões glob

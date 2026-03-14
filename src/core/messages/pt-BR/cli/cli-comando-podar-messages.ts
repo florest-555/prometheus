@@ -8,7 +8,7 @@ export const CliComandoPodarMensagens = createI18nMessages({
     include: 'Glob pattern a INCLUIR (pode repetir a flag ou usar vírgulas / espaços para múltiplos)',
     exclude: 'Glob pattern a EXCLUIR adicionalmente (pode repetir a flag ou usar vírgulas / espaços)'
   },
-  inicio: '\n✂️ Starting pruning process...\n',
+  inicio: '\n[CLEAN]️ Starting pruning process...\n',
   nenhumaSujeira: (iconeSucesso: string) => `${iconeSucesso} Nenhuma sujeira detectada. Repositório limpo!`,
   orfaosDetectados: (qtd: number) => `\n${qtd} arquivos órfãos detectados:`,
   linhaArquivoOrfao: (arquivo: string) => `- ${arquivo}`,
@@ -21,7 +21,7 @@ export const CliComandoPodarMensagens = createI18nMessages({
     include: 'Glob pattern to INCLUDE (can repeat the flag or use commas/spaces for multiple)',
     exclude: 'Glob pattern to EXCLUDE additionally (can repeat the flag or use commas/spaces)'
   },
-  inicio: '\n✂️ Iniciando processo de poda...\n',
+  inicio: '\n[CLEAN]️ Iniciando processo de poda...\n',
   nenhumaSujeira: (iconeSucesso: string) => `${iconeSucesso} No dirt detected. Repository clean!`,
   orfaosDetectados: (qtd: number) => `\n${qtd} orphan files detected:`,
   linhaArquivoOrfao: (arquivo: string) => `- ${arquivo}`,

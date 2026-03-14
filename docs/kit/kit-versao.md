@@ -6,7 +6,7 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 ---
 
 
-# 🔑 Guia rápido de Git (versão simplificada)
+#  Guia rápido de Git (versão simplificada)
 
 Este arquivo reúne os comandos mais usados para começar a trabalhar com Git e configurar
 uma identidade. É uma versão enxuta; para um cheatsheet mais completo veja

@@ -6,13 +6,12 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import { XMLValidator } from 'fast-xml-parser';
-
-import type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
-
 import type { FormatterFn } from '@shared/impar/formatter-registry.js';
 import { getFormatterForPath, registerFormatter } from '@shared/impar/formatter-registry.js';
 import { getSyntaxInfoForPath } from '@shared/impar/syntax-map.js';
+import { XMLValidator } from 'fast-xml-parser';
+
+import type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
 
 // Re-exportar para compatibilidade com código existente
 export type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
@@ -1028,9 +1027,6 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
   let indent = 0;
   const indentStr = (n: number) => '  '.repeat(Math.max(0, n));
 
-  const incKeywords = /\b(if|for|while|until|case|select|do|then|function)\b|\{|^\s*\(/;
-  const decKeywords = /\b(fi|done|esac)\b|\}|^\s*\)/;
-  const midKeywords = /\b(else|elif)\b/;
 
   for (const line of lines) {
     const trimmed = line.trim();

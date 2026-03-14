@@ -6,7 +6,7 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 ---
 
 
-# 🚀 Guia de Inicialização de Repositório Git
+# [SYS] Guia de Inicialização de Repositório Git
 
 Este guia explica como usar o script `init-git-repo.sh` para configurar rapidamente um repositório Git com identidade e remote opcional.
 

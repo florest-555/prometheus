@@ -50,7 +50,7 @@ export function comandoPodar(aplicarFlagsGlobais: (opts: Record<string, unknown>
       if (includeList.length) config.CLI_INCLUDE_PATTERNS = includeList;
       if (excludeList.length) config.CLI_EXCLUDE_PATTERNS = excludeList;
 
-      // 🔥 SIMPLIFICADO: sem sync de padrões obsoletos
+      // [!] SIMPLIFICADO: sem sync de padrões obsoletos
       // CLI flags dominam globalExcludeGlob automaticamente
 
       // Carrega registro de analistas na camada CLI (injeção de dependências)

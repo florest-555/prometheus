@@ -271,7 +271,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
   const detalharPorArquivo = (opts?.verbose ?? false) && totalArquivos <= LIMIAR_DETALHE_TOTAL;
   const permitirArquivoXY = (opts?.verbose ?? false) && totalArquivos <= LIMIAR_DETALHE_LIMITADO_MAX;
 
-  // 🎯 Inicializa sistema de logs inteligente
+  // [*] Inicializa sistema de logs inteligente
   logAnalistas.iniciarBatch(totalArquivos);
   for (const entry of fileEntriesComAst) {
     arquivoAtual++;
@@ -447,7 +447,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
       }
     }
 
-    // 🎯 NOVO: Atualiza progresso por arquivo (não por analista)
+    // [*] NOVO: Atualiza progresso por arquivo (não por analista)
     logAnalistas.arquivoProcessado();
     if (emitter) {
       const ocorrArquivo = ocorrencias.filter(o => o.relPath === entry.relPath);
@@ -457,7 +457,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
   const fimExecucao = performance.now();
   const duracaoMs = Math.round(fimExecucao - inicioExecucao);
 
-  // 🎯 Finaliza sistema de logs inteligente
+  // [*] Finaliza sistema de logs inteligente
   logAnalistas.finalizarBatch(ocorrencias.length, duracaoMs);
 
   // Agregação de métricas

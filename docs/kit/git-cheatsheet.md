@@ -6,7 +6,7 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 ---
 
 
-# 🧠 Git Cheat Sheet
+#  Git Cheat Sheet
 
 Um guia rápido com comandos úteis para versionamento Git.
 

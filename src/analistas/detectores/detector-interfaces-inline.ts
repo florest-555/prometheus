@@ -16,10 +16,9 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { getTypesDirectoryDisplay, isInsideTypesDirectory } from '@core/config/conventions.js';
 import { DetectorInterfacesInlineMensagens } from '@core/messages/analistas/detector-interfaces-inline-messages.js';
+import type { DuplicateEntry, InlineTypeOccurrence } from '@pt-types/analistas/detectores.js';
 
 import type { Analista, InterfaceInlineDetection, Ocorrencia } from '@';
-
-import type { DuplicateEntry, InlineTypeOccurrence } from '@pt-types/analistas/detectores.js';
 
 const COMPLEXIDADE_MINIMA_PARA_EXTRAIR = 5;
 const MAX_CARACTERES_CONTEXTO = 100;

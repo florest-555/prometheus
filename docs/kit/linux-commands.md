@@ -6,7 +6,7 @@ Referências a materiais externos devem ser linkadas e reescritas com palavras p
 ---
 
 
-# 🖥️ Comandos Linux Úteis
+# ️ Comandos Linux Úteis
 
 Pequeno manual com tarefas comuns no dia a dia de um usuário Debian/Ubuntu.
 

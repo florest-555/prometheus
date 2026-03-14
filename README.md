@@ -11,7 +11,7 @@
 
 <div align="center">
 
-# Prometheus CLI 🔥
+# Prometheus CLI [!]
 
 </div>
 
@@ -351,7 +351,7 @@ WORKER_POOL_MAX_WORKERS=1 prometheus diagnosticar
 PONTUACAO_MODO=conservador prometheus diagnosticar
 ```
 
-## 📚 Comandos Principais
+## [DOC] Comandos Principais
 
 | Comando        | Descrição                             | Uso Comum                                 |
 | -------------- | ------------------------------------- | ----------------------------------------- |
@@ -372,7 +372,7 @@ PONTUACAO_MODO=conservador prometheus diagnosticar
 | `kit`          | Kit de Sobrevivência (utilitários)    | `prometheus kit list`                     |
 | `agent`        | Agente IA e Interação LLM             | `prometheus agent --interactive`          |
 
-## 🛠️ Kit de Sobrevivência
+## [FIX] Kit de Sobrevivência
 
 O Prometheus inclui um **Kit de Sobrevivência** com scripts e guias para tarefas comuns do dia a dia de um desenvolvedor.
 

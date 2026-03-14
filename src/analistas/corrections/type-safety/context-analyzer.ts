@@ -44,9 +44,9 @@ export function isInString(code: string, position: number): boolean {
  *    Depois: verifica se posInLine >= commentStart
  *
  * Casos de teste:
- * - "// comentário\nconst x = 5;" → linha 2 NÃO está em comentário ✅
- * - "const x = 5; // comentário" → "const x = 5" NÃO está em comentário ✅
- * - "const x = 5; // comentário" → "// comentário" ESTÁ em comentário ✅
+ * - "// comentário\nconst x = 5;" → linha 2 NÃO está em comentário [OK]
+ * - "const x = 5; // comentário" → "const x = 5" NÃO está em comentário [OK]
+ * - "const x = 5; // comentário" → "// comentário" ESTÁ em comentário [OK]
  *
  * Ver: docs/reports/DEBUG-TYPE-SAFETY-DETECTOR-2025-11-03.md
  */

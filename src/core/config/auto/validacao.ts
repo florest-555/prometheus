@@ -179,7 +179,7 @@ export function isSafeToApplyFix(code: string, fixId: string, match: RegExpMatch
     }
     return true;
   } catch (error) {
-    log.aviso(`⚠️ Erro ao validar segurança da correção ${fixId}: ${error instanceof Error ? error.message : String(error)}`);
+    log.aviso(`[!]️ Erro ao validar segurança da correção ${fixId}: ${error instanceof Error ? error.message : String(error)}`);
     return false;
   }
 }

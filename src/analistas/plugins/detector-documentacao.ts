@@ -70,7 +70,7 @@ export const analistaDocumentacao: Analista = {
 function detectarPadroesDocumentacao(src: string, problemas: ProblemaDocumentacao[], relPath: string): void {
   const linhas = src.split('\n');
 
-  // 🎯 FILOSOFIA: Documentação é importante mas não deve poluir
+  // [*] FILOSOFIA: Documentação é importante mas não deve poluir
   // - Detectar apenas problemas reais, não ausência de JSDoc em código interno
   // - Priorizar qualidade do código sobre quantidade de comentários
   // - Arquivos de biblioteca pública precisam mais documentação que utils internos
@@ -187,7 +187,7 @@ function detectarPadroesDocumentacao(src: string, problemas: ProblemaDocumentaca
     }
   });
 
-  // 📚 DETECÇÃO INTELIGENTE DE FALTA DE DOCUMENTAÇÃO
+  // [DOC] DETECÇÃO INTELIGENTE DE FALTA DE DOCUMENTAÇÃO
   // Apenas reportar se:
   // 1. É arquivo de biblioteca pública (shared/, core/, lib/) E
   // 2. Tem exportações públicas E
@@ -210,7 +210,7 @@ function detectarPadroesDocumentacao(src: string, problemas: ProblemaDocumentaca
 function detectarProblemasDocumentacaoAST(ast: NodePath<Node>, problemas: ProblemaDocumentacao[]): void {
   try {
     ast.traverse({
-      // 🎯 FILOSOFIA: Detectar apenas exports DEFAULT sem JSDoc
+      // [*] FILOSOFIA: Detectar apenas exports DEFAULT sem JSDoc
       // Exports nomeados podem ser auto-explicativos pelo nome
       ExportDefaultDeclaration(path) {
         if ((path.node.declaration.type === 'FunctionDeclaration' || path.node.declaration.type === 'ClassDeclaration') && !path.node.leadingComments?.some(c => c.value.startsWith('*'))) {
@@ -249,7 +249,7 @@ function detectarProblemasDocumentacaoAST(ast: NodePath<Node>, problemas: Proble
         }
       }
 
-      // 🚫 REMOVIDO: Detecção de funções com muitos parâmetros
+      // [NO] REMOVIDO: Detecção de funções com muitos parâmetros
       // Motivo: Gera muito ruído em código interno/utils
       // Alternativa: Revisar code review manual ou usar linter específico
     });

@@ -11,9 +11,9 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-info()    { echo -e "${GREEN}[✔]${NC} $1"; }
+info()    { echo -e "${GREEN}[[OK]]${NC} $1"; }
 warn()    { echo -e "${YELLOW}[!]${NC} $1"; }
-error()   { echo -e "${RED}[✘]${NC} $1"; exit 1; }
+error()   { echo -e "${RED}[[FALHA]]${NC} $1"; exit 1; }
 section() { echo -e "\n${YELLOW}══════════════════════════════════════${NC}"; echo -e "  $1"; echo -e "${YELLOW}══════════════════════════════════════${NC}"; }
 
 # ── Parse argumentos ─────────────────────────────────
