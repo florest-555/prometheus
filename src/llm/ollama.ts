@@ -3,8 +3,8 @@ import axios from 'axios';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
-import type { CompletionRequest, CompletionResponse, Content, ContentPart, LlmDriver, MessageRole, StopReason, StreamEvent, ToolCall,Usage } from '../types/agent/index.js';
-import { LlmError } from '../types/agent/index.js';
+import type { CompletionRequest, CompletionResponse, Content, ContentPart, LlmDriver, MessageRole, StopReason, StreamEvent, ToolCall,Usage } from '@';
+import { LlmError } from '@';
 
 const execAsync = promisify(exec);
 

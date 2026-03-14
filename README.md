@@ -114,6 +114,9 @@ prometheus diagnosticar --json
 
 # Verificar integridade dos arquivos
 prometheus guardian --diff
+
+# Interagir com o Agente IA (Interativo)
+prometheus agent --interactive
 ```
 
 ## Capacidades
@@ -129,7 +132,7 @@ prometheus guardian --diff
 - Integracao GitHub (CI, CodeQL, Templates)
 - Schema Versioning (compatibilidade backward)
 - Pontuacao Adaptativa (tamanho do projeto)
-- Integracao LLM (OpenAI, Anthropic, Gemini, Ollama)
+- Integracao LLM & Agentes Autônomos (OpenAI, Anthropic, Gemini, Ollama)
 
 ---
 
@@ -367,6 +370,7 @@ PONTUACAO_MODO=conservador prometheus diagnosticar
 | `names`        | Extrair nomes para tradução           | `prometheus names`                        |
 | `rename`       | Aplicar renomeação de variáveis       | `prometheus rename`                       |
 | `kit`          | Kit de Sobrevivência (utilitários)    | `prometheus kit list`                     |
+| `agent`        | Agente IA e Interação LLM             | `prometheus agent --interactive`          |
 
 ## 🛠️ Kit de Sobrevivência
 
@@ -421,13 +425,29 @@ prometheus kit docs linux-commands
 > PROMETHEUS_ALLOW_EXEC=1 prometheus kit run update-system
 > ```
 
+### Agente IA (Experimental)
+
+O Prometheus agora inclui um agente autônomo capaz de realizar tarefas complexas usando LLMs.
+
+```bash
+# Iniciar chat interativo
+prometheus agent --interactive
+
+# Usar um agente específico
+prometheus agent --agent coder
+
+# Sobrescrever provedor/modelo
+prometheus agent --provider openai --model gpt-4
+```
 
 **Funcionalidades:**
-- Ferramentas de sistema (file read/write, shell exec, git)
-- Gerenciamento de sessões e memória
-- Suporte a múltiplos provedores LLM (OpenAI, Anthropic, Ollama, Gemini)
+- Ferramentas de sistema integradas (leitura/escrita de arquivos, execução de shell, git)
+- Gerenciamento de contexto e histórico de conversas
+- Suporte a múltiplos provedores (OpenAI, Anthropic, Ollama, Gemini, Groq, DeepSeek)
+- Configuração via TOML em `~/.config/egocentric/config.toml`
 
 ---
+
 
 ## Testes
 
@@ -590,6 +610,7 @@ prometheus diagnosticar --scan-only
 - `licencas` — ferramentas de licenca e disclaimer
 - `names` — extracao de nomes de variaveis para mapeamento
 - `rename` — aplicacao de renomeacoes em massa
+- `agent` — interação com agentes IA e LLMs
 
 ## Flags globais
 

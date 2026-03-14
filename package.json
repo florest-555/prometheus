@@ -51,6 +51,7 @@
     "notices": "prometheus licencas notices generate",
     "adn": "prometheus licencas disclaimer add",
     "verify": "prometheus licencas disclaimer verify",
+    "agent": "prometheus agent",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest",
     "coverage": "vitest run --coverage --passWithNoTests",

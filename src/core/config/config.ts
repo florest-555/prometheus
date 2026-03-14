@@ -5,7 +5,7 @@ import { lerArquivoTexto } from '@shared/persistence/persistencia.js';
 
 import type { IncludeExcludeConfig } from '@';
 
-import { PROMETHEUS_ARQUIVOS,PROMETHEUS_DIRS } from '../registry/paths.js';
+import { PROMETHEUS_ARQUIVOS, PROMETHEUS_DIRS } from '@core/registry/paths.js';
 
 // Diretórios internos do Prometheus (agora usando paths centralizados)
 const PROMETHEUS_ESTADO = PROMETHEUS_DIRS.STATE;

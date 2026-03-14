@@ -16,7 +16,7 @@ export type {
   MarkdownProblemaTipo,
   MarkdownSeveridade,
   MarkdownWhitelistConfig,
-} from './markdown.js';
+} from '@pt-types/analistas/markdown.js';
 
 // Detectores
 export type {
@@ -40,13 +40,13 @@ export type {
   ProblemaTeste,
   ResultadoContexto,
   TipoFragilidade,
-} from './detectores.js';
+} from '@pt-types/analistas/detectores.js';
 
 // Contexto (já exportado em detectores, mas mantido para compatibilidade)
 export type {
   EvidenciaContexto,
   ResultadoDeteccaoContextual,
-} from './contexto.js';
+} from '@pt-types/analistas/contexto.js';
 
 // Estrategistas
 export type {
@@ -55,7 +55,7 @@ export type {
   ResultadoEstrutural,
   ResultadoPlanejamento,
   SinaisProjetoAvancados,
-} from './estrategistas.js';
+} from '@pt-types/analistas/estrategistas.js';
 
 // Correções
 export type {
@@ -64,4 +64,4 @@ export type {
   CorrecaoConfig,
   CorrecaoResult,
   ResultadoAnaliseEstrutural,
-} from './corrections.js';
+} from '@pt-types/analistas/corrections.js';

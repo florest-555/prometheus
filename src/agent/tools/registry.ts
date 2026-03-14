@@ -4,7 +4,7 @@ import { readdir, readFile, stat,writeFile } from 'fs/promises';
 import { join } from 'path';
 import { promisify } from 'util';
 
-import type { Tool, ToolEntry,ToolHandler } from '../../types/agent/index.js';
+import type { Tool, ToolEntry,ToolHandler } from '@';
 
 const execAsync = promisify(exec);
 type ToolParams = Record<string, unknown>;

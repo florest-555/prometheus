@@ -3,7 +3,7 @@
  * License normalizer ported from original JS implementation.
  */
 
-import type { SpdxCorrectFn,SpdxParseFn } from '../types/licensas.js';
+import type { SpdxCorrectFn,SpdxParseFn } from '@pt-types/licensas.js';
 
 type SpdxLicenseEntry = { name?: string } | string;
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT-0
 import {
   comandoAnalistas,
+  comandoAgent,
   comandoAtualizar,
   comandoDiagnosticar,
   comandoFormatar,
@@ -30,6 +31,7 @@ export function registrarComandos(
   program.addCommand(comandoReestruturar(aplicarFlagsGlobais));
   program.addCommand(comandoAtualizar(aplicarFlagsGlobais));
   program.addCommand(comandoAnalistas());
+  program.addCommand(comandoAgent(aplicarFlagsGlobais));
   program.addCommand(comandoMetricas());
   program.addCommand(criarComandoFixTypes());
   program.addCommand(comandoLicencas());

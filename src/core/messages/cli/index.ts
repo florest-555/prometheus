@@ -4,6 +4,7 @@
  */
 
 export * from './cli-arquetipo-handler-messages.js';
+export * from './cli-comando-agent-messages.js';
 export * from './cli-comando-analistas-messages.js';
 export * from './cli-comando-atualizar-messages.js';
 export * from './cli-comando-diagnosticar-messages.js';

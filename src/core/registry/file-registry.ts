@@ -19,8 +19,8 @@ import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 
 import type { MigrationResult } from '@';
 
-import { log } from '../messages/log/log.js';
-import { MIGRACAO_MAPA,PROMETHEUS_ARQUIVOS, PROMETHEUS_DIRS, type PrometheusFilePath } from './paths.js';
+import { log } from '@core/messages/log/log.js';
+import { MIGRACAO_MAPA, PROMETHEUS_ARQUIVOS, PROMETHEUS_DIRS, type PrometheusFilePath } from '@core/registry/paths.js';
 
 /**
  * Opções para operações de leitura

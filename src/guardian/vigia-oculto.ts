@@ -3,9 +3,9 @@ import { log } from '@core/messages/index.js';
 
 import type { FileEntry } from '@';
 
-import { REGISTRO_VIGIA_CAMINHO_PADRAO } from './constantes.js';
-import { gerarSnapshotDoConteudo } from './hash.js';
-import { carregarRegistros, salvarRegistros } from './registros.js';
+import { REGISTRO_VIGIA_CAMINHO_PADRAO } from '@guardian/constantes.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
+import { carregarRegistros, salvarRegistros } from '@guardian/registros.js';
 
 export async function vigiaOculta(
   arquivos: FileEntry[],

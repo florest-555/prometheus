@@ -5,9 +5,9 @@
 
 import type { Ocorrencia } from '@';
 
-import type { ArquetipoResult } from '../../cli/diagnostico/handlers/arquetipo-handler.js';
-import type { AutoFixResult } from '../../cli/diagnostico/handlers/auto-fix-handler.js';
-import type { GuardianResult } from '../../cli/diagnostico/handlers/guardian-handler.js';
+import type { ArquetipoResult } from '@cli/diagnostico/handlers/arquetipo-handler.js';
+import type { AutoFixResult } from '@cli/diagnostico/handlers/auto-fix-handler.js';
+import type { GuardianResult } from '@cli/diagnostico/handlers/guardian-handler.js';
 
 /* ================================
    JSON EXPORTER TYPES

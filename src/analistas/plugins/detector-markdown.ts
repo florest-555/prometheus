@@ -22,7 +22,7 @@ import { log } from '@core/messages/index.js';
 
 import type { ContextoExecucao, Ocorrencia, ReportEvent } from '@';
 
-import type { MarkdownAnaliseArquivo, MarkdownDetectorOptions, MarkdownLicensePatterns, MarkdownProblema, MarkdownWhitelistConfig } from '../../types/analistas/markdown.js';
+import type { MarkdownAnaliseArquivo, MarkdownDetectorOptions, MarkdownLicensePatterns, MarkdownProblema, MarkdownWhitelistConfig } from '@pt-types/analistas/markdown.js';
 
 /**
  * Padrões de licenças e cessões problemáticas

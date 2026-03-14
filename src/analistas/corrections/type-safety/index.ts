@@ -4,9 +4,9 @@
  * Exports principais
  */
 
-export * from './context-analyzer.js';
-export * from './type-analyzer.js';
-export * from './type-creator.js';
-export * from './type-inference.js';
-export * from './type-validator.js';
-export * from './usage-analyzer.js';
+export * from '@analistas/corrections/type-safety/context-analyzer.js';
+export * from '@analistas/corrections/type-safety/type-analyzer.js';
+export * from '@analistas/corrections/type-safety/type-creator.js';
+export * from '@analistas/corrections/type-safety/type-inference.js';
+export * from '@analistas/corrections/type-safety/type-validator.js';
+export * from '@analistas/corrections/type-safety/usage-analyzer.js';

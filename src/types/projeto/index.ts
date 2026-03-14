@@ -8,7 +8,7 @@ export type {
   DiagnosticoProjeto,
   SinaisProjeto,
   TipoProjeto,
-} from './deteccao.js';
+} from '@pt-types/projeto/deteccao.js';
 
 // Contexto de projeto (movido de shared/)
-export type { ContextoProjeto, DetectarContextoOpcoes } from './contexto.js';
+export type { ContextoProjeto, DetectarContextoOpcoes } from '@pt-types/projeto/contexto.js';

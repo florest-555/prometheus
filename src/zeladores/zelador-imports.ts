@@ -26,7 +26,7 @@ import type { AliasConfig, ImportCorrecao, ImportCorrecaoArquivo, ImportCorrecao
 const PADRAO_ALIAS_CONFIGURACAO: AliasConfig = {
   '@core': './core',
   '@analistas': './analistas',
-  '@types': './types',
+  '@pt-types': './types',
   '@shared': './shared',
   '@cli': './cli',
   '@guardian': './guardian',
@@ -38,8 +38,8 @@ const PADRAO_ALIAS_CONFIGURACAO: AliasConfig = {
  * Padrões de imports que devem ser corrigidos
  */
 const PADROES = {
-  // @types/types.js → @types/types
-  tiposComExtensao: /@types\/types\.js\b/g,
+  // @pt-types/types.js → @pt-types/types
+  tiposComExtensao: /@pt-types\/types\.js\b/g,
   // Imports relativos que podem ser convertidos em aliases
   importRelativo: /from\s+(['"])(\.\.[\/\\].+?)\1/g
 };
@@ -82,20 +82,20 @@ function corrigirImportsTipos(conteudo: string): {
   const correcoes: ImportCorrecao[] = [];
   let conteudoAtualizado = conteudo;
 
-  // Corrigir @types/types.js → @types/types
+  // Corrigir @pt-types/types.js → @pt-types/types
   conteudoAtualizado = conteudoAtualizado.replace(PADROES.tiposComExtensao, (match, offset) => {
     correcoes.push({
       tipo: 'tipos-extensao',
       de: match,
-      para: '@types/types',
+      para: '@pt-types/types',
       linha: conteudo.substring(0, offset).split('\n').length
     });
-    return '@types/types';
+    return '@pt-types/types';
   });
 
-  // Corrigir @types/<subpath> → @types/types
-  // Importante: não deve "corrigir" o que já está em @types/types (evita duplicar correções).
-  const regex = /(['"])@types\/([^'"\n]+?)\1/g;
+  // Corrigir @pt-types/<subpath> → @pt-types/types
+  // Importante: não deve "corrigir" o que já está em @pt-types/types (evita duplicar correções).
+  const regex = /(['"])@pt-types\/([^'"\n]+?)\1/g;
   conteudoAtualizado = conteudoAtualizado.replace(regex, (match, quote: string, subpath: string, offset: number) => {
     const normalized = String(subpath || '').trim();
 
@@ -104,20 +104,20 @@ function corrigirImportsTipos(conteudo: string): {
 
     // Caso ainda chegue aqui como types.js (por algum input estranho), não duplicar: trata como extensão.
     if (normalized === 'types.js') {
-      const novoImport = `${quote}@types/types${quote}`;
+      const novoImport = `${quote}@pt-types/types${quote}`;
       correcoes.push({
         tipo: 'tipos-extensao',
         de: match,
-        para: '@types/types',
+        para: '@pt-types/types',
         linha: conteudo.substring(0, offset).split('\n').length
       });
       return novoImport;
     }
-    const novoImport = `${quote}@types/types${quote}`;
+    const novoImport = `${quote}@pt-types/types${quote}`;
     correcoes.push({
       tipo: 'tipos-subpath',
       de: match,
-      para: '@types/types',
+      para: '@pt-types/types',
       linha: conteudo.substring(0, offset).split('\n').length
     });
     return novoImport;

@@ -12,8 +12,8 @@ import type {
   StreamEvent,
   ToolCall,
   Usage,
-} from '../types/agent/index.js';
-import { LlmError } from '../types/agent/index.js';
+} from '@';
+import { LlmError } from '@';
 
 export class OpenAiDriver implements LlmDriver {
   private client: AxiosInstance;

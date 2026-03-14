@@ -3,7 +3,7 @@ import { homedir } from 'os';
 import { dirname,join } from 'path';
 import toml from 'toml';
 
-import type { Config } from '../../types/agent/index.js';
+import type { Config } from '@';
 
 export function getConfigPath(): string { return join(homedir(), '.config', 'egocentric', 'config.toml'); }
 

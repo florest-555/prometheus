@@ -10,10 +10,10 @@ import { MENSAGENS_CORRECAO_TIPOS } from '@core/messages/index.js';
 
 import type { QuickFix, QuickFixResult, TypeSafetyWarning } from '@';
 
-import { isAnyInGenericFunction, isInStringOrComment, isLegacyOrVendorFile, isTypeScriptContext } from '../type-safety/context-analyzer.js';
-import { analyzeTypeUsage } from '../type-safety/type-analyzer.js';
-import { createTypeDefinition } from '../type-safety/type-creator.js';
-import { validateTypeReplacement } from '../type-safety/type-validator.js';
+import { isAnyInGenericFunction, isInStringOrComment, isLegacyOrVendorFile, isTypeScriptContext } from '@analistas/corrections/type-safety/context-analyzer.js';
+import { analyzeTypeUsage } from '@analistas/corrections/type-safety/type-analyzer.js';
+import { createTypeDefinition } from '@analistas/corrections/type-safety/type-creator.js';
+import { validateTypeReplacement } from '@analistas/corrections/type-safety/type-validator.js';
 
 const CONFIANCA_NIVEIS = {
   HIGH: 85,

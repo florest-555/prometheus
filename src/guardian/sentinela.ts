@@ -9,11 +9,11 @@ import micromatch from 'micromatch';
 import type { FileEntry, Snapshot } from '@';
 import { GuardianError, IntegridadeStatus } from '@';
 
-import { carregarAssinaturaBaseline, carregarBaseline, salvarBaseline } from './baseline.js';
-import { LINHA_BASE_CAMINHO } from './constantes.js';
-import { diffSnapshots, verificarErros } from './diff.js';
-import { assinarConteudo, verificarAssinatura, verificarGpgInstalado } from './gpg.js';
-import { gerarSnapshotDoConteudo } from './hash.js';
+import { carregarAssinaturaBaseline, carregarBaseline, salvarBaseline } from '@guardian/baseline.js';
+import { LINHA_BASE_CAMINHO } from '@guardian/constantes.js';
+import { diffSnapshots, verificarErros } from '@guardian/diff.js';
+import { assinarConteudo, verificarAssinatura, verificarGpgInstalado } from '@guardian/gpg.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 
 function construirSnapshot(fileEntries: FileEntry[]): Snapshot {
   const snapshot: Snapshot = {};

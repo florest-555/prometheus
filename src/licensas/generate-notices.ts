@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import type { GenerateNoticesOptions,HeaderOptions, RenderPackageMeta } from '../types/licensas.js';
+import type { GenerateNoticesOptions,HeaderOptions, RenderPackageMeta } from '@pt-types/licensas.js';
 
 const exec = promisify(_exec);
 const execFile = promisify(_execFile);

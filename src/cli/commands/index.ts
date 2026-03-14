@@ -7,25 +7,26 @@
  */
 
 // Comandos principais
-export { comandoAnalistas } from './comando-analistas.js';
-export { comandoAtualizar } from './comando-atualizar.js';
-export { comandoDiagnosticar } from './comando-diagnosticar.js';
-export { criarComandoFixTypes } from './comando-fix-types.js';
-export { comandoFormatar } from './comando-formatar.js';
-export { comandoGuardian } from './comando-guardian.js';
-export { comandoKit } from './comando-kit.js';
-export { comandoLicencas } from './comando-licensas.js';
-export { comandoMetricas } from './comando-metricas.js';
-export { comandoOtimizarSvg } from './comando-otimizar-svg.js';
-export { comandoPerf } from './comando-perf.js';
-export { comandoPodar } from './comando-podar.js';
-export { comandoReestruturar } from './comando-reestruturar.js';
+export { comandoAgent } from '@cli/commands/comando-agent.js';
+export { comandoAnalistas } from '@cli/commands/comando-analistas.js';
+export { comandoAtualizar } from '@cli/commands/comando-atualizar.js';
+export { comandoDiagnosticar } from '@cli/commands/comando-diagnosticar.js';
+export { criarComandoFixTypes } from '@cli/commands/comando-fix-types.js';
+export { comandoFormatar } from '@cli/commands/comando-formatar.js';
+export { comandoGuardian } from '@cli/commands/comando-guardian.js';
+export { comandoKit } from '@cli/commands/comando-kit.js';
+export { comandoLicencas } from '@cli/commands/comando-licensas.js';
+export { comandoMetricas } from '@cli/commands/comando-metricas.js';
+export { comandoOtimizarSvg } from '@cli/commands/comando-otimizar-svg.js';
+export { comandoPerf } from '@cli/commands/comando-perf.js';
+export { comandoPodar } from '@cli/commands/comando-podar.js';
+export { comandoReestruturar } from '@cli/commands/comando-reestruturar.js';
 
 // Comando de reversão (diferente padrão de export)
-export { registrarComandoReverter } from './comando-reverter.js';
+export { registrarComandoReverter } from '@cli/commands/comando-reverter.js';
 
 // Comandos de manutenção de nomes
-export { comandoNames } from './comando-names.js';
-export { comandoRename } from './comando-rename.js';
+export { comandoNames } from '@cli/commands/comando-names.js';
+export { comandoRename } from '@cli/commands/comando-rename.js';
 
 

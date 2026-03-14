@@ -11,23 +11,23 @@ export type PrioridadeNivel = 'critica' | 'alta' | 'media' | 'baixa';
 
   /* -------------------------- ANÁLISE ASYNC PATTERNS -------------------------- */
 
-export type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncCriticidade, AsyncIssuesArquivo } from './async-analysis.js';
+export type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncCriticidade, AsyncIssuesArquivo } from '@pt-types/relatorios/async-analysis.js';
 
   /* -------------------------- CONSELHEIRO PROMETHEUS -------------------------- */
 
-export type { ConselhoContextoPrometheus } from './conselheiro.js';
+export type { ConselhoContextoPrometheus } from '@pt-types/relatorios/conselheiro.js';
 
   /* -------------------------- ESTRUTURA -------------------------- */
 
-export type { AlinhamentoItemDiagnostico } from './estrutura.js';
+export type { AlinhamentoItemDiagnostico } from '@pt-types/relatorios/estrutura.js';
 
   /* -------------------------- FRAGMENTAÇÃO (movido de shared/) -------------------------- */
 
-export type { FileEntryFragmentacao, FragmentOptions, Manifest, ManifestPart as ManifestPartFragmentacao, RelatorioCompleto as RelatorioCompletoFragmentacao } from './fragmentacao.js';
+export type { FileEntryFragmentacao, FragmentOptions, Manifest, ManifestPart as ManifestPartFragmentacao, RelatorioCompleto as RelatorioCompletoFragmentacao } from '@pt-types/relatorios/fragmentacao.js';
 
   /* -------------------------- LEITOR (movido de shared/) -------------------------- */
 
-export type { LeitorRelatorioOptions } from './leitor.js';
+export type { LeitorRelatorioOptions } from '@pt-types/relatorios/leitor.js';
 
   /* -------------------------- PROCESSAMENTO -------------------------- */
 

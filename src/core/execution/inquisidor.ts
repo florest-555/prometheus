@@ -13,8 +13,8 @@ import * as path from 'path';
 import type { CacheValor, EstadoIncArquivo, ExecutorEventEmitter, FileEntry, FileEntryWithAst, InquisicaoOptions, MetricasGlobais, OcorrenciaParseErro, ReporterFn,ResultadoInquisicaoCompleto, SimbolosLog, Tecnica } from '@';
 import { ocorrenciaParseErro } from '@';
 
-import { executarInquisicao as executarExecucao, registrarUltimasMetricas } from './executor.js';
-import { scanRepository } from './scanner.js';
+import { executarInquisicao as executarExecucao, registrarUltimasMetricas } from '@core/execution/executor.js';
+import { scanRepository } from '@core/execution/scanner.js';
 // Fallback de símbolos para cenários de teste onde o mock de log não inclui `simbolos`.
 const SIMBOLOS_ALTERNATIVA: SimbolosLog = {
   info: '[i]',

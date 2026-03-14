@@ -3,7 +3,7 @@ import { execFile as _execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
-import type { DisclaimerOptions } from '../types/licensas.js';
+import type { DisclaimerOptions } from '@pt-types/licensas.js';
 
 function execFileAsync(cmd: string, args: string[], opts: Record<string, unknown> = {}): Promise<{
   stdout: string;

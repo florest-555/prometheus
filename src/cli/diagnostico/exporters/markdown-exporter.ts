@@ -15,9 +15,9 @@ import type {
   Ocorrencia,
 } from '@';
 
-import type { ArquetipoResult } from '../handlers/arquetipo-handler.js';
-import type { AutoFixResult } from '../handlers/auto-fix-handler.js';
-import type { GuardianResult } from '../handlers/guardian-handler.js';
+import type { ArquetipoResult } from '@cli/diagnostico/handlers/arquetipo-handler.js';
+import type { AutoFixResult } from '@cli/diagnostico/handlers/auto-fix-handler.js';
+import type { GuardianResult } from '@cli/diagnostico/handlers/guardian-handler.js';
 
 // Re-export para compatibilidade
 export type { DadosRelatorioMarkdown, MarkdownExportOptions };

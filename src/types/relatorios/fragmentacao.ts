@@ -3,7 +3,7 @@
  * Tipos para fragmentação de relatórios
  */
 
-import type { FileEntryWithAst, Ocorrencia } from '../shared/index.js';
+import type { FileEntryWithAst, Ocorrencia } from '@pt-types/shared/index.js';
 
 export type FileEntryFragmentacao = FileEntryWithAst | FileEntryFragmentacaoBasico;
 

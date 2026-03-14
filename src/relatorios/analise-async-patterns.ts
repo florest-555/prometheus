@@ -16,7 +16,7 @@ import { salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { Ocorrencia } from '@';
 
-import type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncIssuesArquivo } from '../types/relatorios/async-analysis.js';
+import type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncIssuesArquivo } from '@pt-types/relatorios/async-analysis.js';
 
 /**
  * Categoriza arquivo baseado no path

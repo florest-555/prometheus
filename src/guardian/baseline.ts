@@ -5,7 +5,7 @@ import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { BaselineComAssinatura, GpgSignature,SnapshotBaseline  } from '@';
 
-import { LINHA_BASE_CAMINHO } from './constantes.js';
+import { LINHA_BASE_CAMINHO } from '@guardian/constantes.js';
 
 export const CURRENT_BASELINE_VERSION = 2;
 

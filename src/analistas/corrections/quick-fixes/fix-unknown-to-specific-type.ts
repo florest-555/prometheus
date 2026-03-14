@@ -10,10 +10,10 @@ import { MENSAGENS_CORRECAO_TIPOS } from '@core/messages/index.js';
 
 import type { QuickFix, QuickFixResult, TypeSafetyWarning } from '@';
 
-import { isInStringOrComment, isLegacyOrVendorFile, isUnknownInGenericContext } from '../type-safety/context-analyzer.js';
-import { analyzeUnknownUsage } from '../type-safety/type-analyzer.js';
-import { createTypeDefinition } from '../type-safety/type-creator.js';
-import { validateTypeReplacement } from '../type-safety/type-validator.js';
+import { isInStringOrComment, isLegacyOrVendorFile, isUnknownInGenericContext } from '@analistas/corrections/type-safety/context-analyzer.js';
+import { analyzeUnknownUsage } from '@analistas/corrections/type-safety/type-analyzer.js';
+import { createTypeDefinition } from '@analistas/corrections/type-safety/type-creator.js';
+import { validateTypeReplacement } from '@analistas/corrections/type-safety/type-validator.js';
 
 export const fixUnknownToSpecificTipo: QuickFix = {
   id: 'fix-unknown-to-specific-type',

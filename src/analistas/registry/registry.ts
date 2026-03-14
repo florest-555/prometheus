@@ -25,7 +25,7 @@ import { comSupressaoInline } from '@shared/helpers/analista-wrapper.js';
 
 import type { Analista, EntradaRegistry, InfoAnalista, ModuloAnalista, Tecnica } from '@';
 
-import { discoverAnalistasPlugins } from './autodiscovery.js';
+import { discoverAnalistasPlugins } from '@analistas/registry/autodiscovery.js';
 
 let analistaCorrecaoAutomatica: EntradaRegistry = undefined;
 try {

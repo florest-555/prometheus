@@ -14,7 +14,7 @@
 
 import type { ConfigExcludesPadrao } from '@';
 
-import { config } from './config.js';
+import { config } from '@core/config/config.js';
 
 // Re-exporta o tipo para compatibilidade
 export type { ConfigExcludesPadrao };

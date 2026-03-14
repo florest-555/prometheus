@@ -9,7 +9,7 @@ import { isJsonMode } from '@shared/helpers/json-mode.js';
 
 import type { FileMap, LogContext, LogData, LogLevel, LogTemplate, ProjetoMetricas } from '@';
 
-import { ICONES_FEEDBACK } from '../ui/icons.js';
+import { ICONES_FEEDBACK } from '@core/messages/pt-BR/ui/icons.js';
 import { LogContextConfiguracao, LogMensagens } from './log-messages.js';
 
 class LogEngineAdaptativo {

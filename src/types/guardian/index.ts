@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT-0
 
-export * from './baseline.js';
-export * from './gpg.js';
-export * from './integridade.js';
-export * from './registros.js';
-export * from './resultado.js';
-export * from './snapshot.js';
+export * from '@pt-types/guardian/baseline.js';
+export * from '@pt-types/guardian/gpg.js';
+export * from '@pt-types/guardian/integridade.js';
+export * from '@pt-types/guardian/registros.js';
+export * from '@pt-types/guardian/resultado.js';
+export * from '@pt-types/guardian/snapshot.js';

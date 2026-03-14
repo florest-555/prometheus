@@ -6,7 +6,7 @@ import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/s
 
 import type { AutoFixConfig, PatternBasedQuickFix } from '@';
 
-import { hasMinimumConfidence, isCategoryAllowed, shouldExcludeFile } from './auto-fix-config.js';
+import { hasMinimumConfidence, isCategoryAllowed, shouldExcludeFile } from '@core/config/auto/auto-fix-config.js';
 
 // Re-exporta os tipos para compatibilidade
 export type { PatternBasedQuickFix };

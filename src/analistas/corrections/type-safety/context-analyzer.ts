@@ -18,7 +18,7 @@
  * Categoriza uso de unknown com nível de confiança
  * Retorna: 'legitimo' | 'melhoravel' | 'corrigir' + confiança (0-100)
  */
-import type { CategorizacaoUnknown } from '@';
+import type { CategorizacaoUnknown } from '@pt-types/index.js';
 
 export function isInString(code: string, position: number): boolean {
   // Normaliza line endings para \n (Windows compatibility)

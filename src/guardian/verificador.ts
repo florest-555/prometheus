@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT-0
 import type { FileEntry, RegistroIntegridade, ResultadoVerificacao } from '@';
 
-import { gerarSnapshotDoConteudo } from './hash.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 
 /**
  * Compara os arquivos atuais com os registros de integridade salvos e detecta divergências.

@@ -5,7 +5,7 @@
 
 import type { Analista, Ocorrencia } from '@';
 
-import { filtrarOcorrenciasSuprimidas } from './suppressao.js';
+import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
 
 /**
  * Envolve um analista para adicionar suporte a supressões inline

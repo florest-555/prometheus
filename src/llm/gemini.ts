@@ -1,8 +1,8 @@
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
 
-import type { CompletionRequest, CompletionResponse, Content, ContentPart, LlmDriver, MessageRole, StopReason, StreamEvent, Usage } from '../types/agent/index.js';
-import { LlmError } from '../types/agent/index.js';
+import type { CompletionRequest, CompletionResponse, Content, ContentPart, LlmDriver, MessageRole, StopReason, StreamEvent, Usage } from '@';
+import { LlmError } from '@';
 
 export class GeminiDriver implements LlmDriver {
   private client: AxiosInstance;

@@ -17,7 +17,7 @@ export type {
   OtimizarSvgOptions,
   PrometheusGlobalFlags,
   ResultadoValidacao,
-} from './options.js';
+} from '@pt-types/cli/options.js';
 
 // Handlers
 export type {
@@ -32,7 +32,7 @@ export type {
   PodaExportResult,
   ReestruturacaoExportOptions,
   ReestruturacaoExportResult,
-} from './handlers.js';
+} from '@pt-types/cli/handlers.js';
 
 // Exporters
 export type {
@@ -43,7 +43,7 @@ export type {
   ResultadoSharding,
   ShardInfo,
   ShardingOptions,
-} from './exporters.js';
+} from '@pt-types/cli/exporters.js';
 
 // Diagnostico Handlers
 export type {
@@ -53,14 +53,14 @@ export type {
   AutoFixResult,
   GuardianOptions,
   GuardianResultadoProcessamento,
-} from './diagnostico-handlers.js';
+} from '@pt-types/cli/diagnostico-handlers.js';
 
 // Diagnóstico Base
 export type {
   LocBabel,
   OpcoesDiagnosticoBase,
   ResultadoDiagnosticoBase,
-} from './diagnostico.js';
+} from '@pt-types/cli/diagnostico.js';
 
 // Comandos CLI
 export type {
@@ -68,16 +68,16 @@ export type {
   FormatResult,
   OtimizarSvgCommandOpts,
   ParentWithOpts,
-} from './comandos.js';
+} from '@pt-types/cli/comandos.js';
 
 // Log Extensions
-export type { LogExtensions } from './log-extensions.js';
+export type { LogExtensions } from '@pt-types/cli/log-extensions.js';
 
 // Processamento Diagnóstico (tipos completos)
 export type {
   OpcoesProcessamentoDiagnostico,
   ResultadoProcessamentoDiagnostico,
-} from './processamento-diagnostico.js';
+} from '@pt-types/cli/processamento-diagnostico.js';
 
 // Métricas
 export type {
@@ -85,4 +85,4 @@ export type {
   MetricaExecucao,
   MetricaExecucaoLike,
   SnapshotPerf,
-} from './metricas.js';
+} from '@pt-types/cli/metricas.js';

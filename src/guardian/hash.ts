@@ -3,7 +3,7 @@ import { createHash, getHashes } from 'node:crypto';
 
 import type { SnapshotArquivo } from '@';
 
-import { ALGORITMO_HASH } from './constantes.js';
+import { ALGORITMO_HASH } from '@guardian/constantes.js';
 
 /**
  * Gera um hash hexadecimal a partir do conte�do fornecido.

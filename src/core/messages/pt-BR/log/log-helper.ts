@@ -9,8 +9,8 @@
 
 import { config } from '@core/config/config.js';
 
-import { logEngine } from './log-engine.js';
-import { LogMensagens } from './log-messages.js';
+import { logEngine } from '@core/messages/pt-BR/log/log-engine.js';
+import { LogMensagens } from '@core/messages/pt-BR/log/log-messages.js';
 
 /**
  * Sistema de logs para analistas com controle de spam unificado

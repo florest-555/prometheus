@@ -3,7 +3,7 @@
  * Tipos para sistema de correções automáticas
  */
 
-import type { Ocorrencia } from '../shared/index.js';
+import type { Ocorrencia } from '@pt-types/shared/index.js';
 
 /**
  * Resultado de uma correção aplicada em um arquivo
@@ -36,4 +36,4 @@ export interface ResultadoAnaliseEstrutural {
 }
 
 // Re-exporta todos os tipos de type-safety (inclui ASTNode, CategorizacaoUnknown, etc)
-export * from './corrections/type-safety.js';
+export * from '@pt-types/analistas/corrections/type-safety.js';

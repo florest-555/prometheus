@@ -6,9 +6,9 @@
  * Infere tipos primitivos e cria interfaces para objetos complexos
  */
 
-import type { InferredInterface, PropertyUsage, TypeAnalysis, UsagePattern } from '@';
+import type { InferredInterface, PropertyUsage, TypeAnalysis, UsagePattern } from '@pt-types/index.js';
 
-import { toKebabCase } from './context-analyzer.js';
+import { toKebabCase } from '@analistas/corrections/type-safety/context-analyzer.js';
 
 /**
  * Infere tipo baseado em padrões de uso

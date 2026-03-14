@@ -10,9 +10,9 @@ import { XMLValidator } from 'fast-xml-parser';
 
 import type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
 
-import type { FormatterFn } from './formatter-registry.js';
-import { getFormatterForPath, registerFormatter } from './formatter-registry.js';
-import { getSyntaxInfoForPath } from './syntax-map.js';
+import type { FormatterFn } from '@shared/impar/formatter-registry.js';
+import { getFormatterForPath, registerFormatter } from '@shared/impar/formatter-registry.js';
+import { getSyntaxInfoForPath } from '@shared/impar/syntax-map.js';
 
 // Re-exportar para compatibilidade com código existente
 export type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';

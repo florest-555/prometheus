@@ -7,7 +7,7 @@ import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { FileEntry, RegistroIntegridade } from '@';
 
-import { gerarSnapshotDoConteudo } from './hash.js';
+import { gerarSnapshotDoConteudo } from '@guardian/hash.js';
 
 const DESTINO_PADRAO = path.join(config.STATE_DIR, 'integridade.json');
 
