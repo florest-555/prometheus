@@ -16,7 +16,7 @@ export async function processarAgent(opts: {
   agent?: string;
   model?: string;
   provider?: string;
-}) {
+}): Promise<void> {
   const config = loadConfig();
   const agentKey = opts.agent || config.defaults.agent || 'default';
   const agentConfig = config.agents[agentKey] || config.agents['default'];

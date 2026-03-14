@@ -27,7 +27,8 @@ async function mapTsConfigAliases(rootAbs: string): Promise<VitestAlias[]> {
     } catch {
       return [];
     }
-    const paths: Record<string, string[]> = ((json as any)?.compilerOptions?.paths as Record<string, string[]> | undefined) ?? {};
+    const compilerOptions = (json as { compilerOptions?: { paths?: Record<string, string[]> } }).compilerOptions;
+    const paths = compilerOptions?.paths ?? {};
     const entries: VitestAlias[] = [];
     const mapPrefix = (aliasPrefix: string, rel: string) => ({
       find: aliasPrefix,

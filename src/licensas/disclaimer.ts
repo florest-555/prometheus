@@ -39,8 +39,8 @@ async function listMarkdown(root: string): Promise<string[]> {
     async function walk(dir: string): Promise<string[]> {
       const out: string[] = [];
       const entries = await fs.readdir(dir).catch(() => []);
-      for (const e of (entries as any)) {
-        const name = typeof e === 'string' ? e : e.name;
+      for (const e of entries) {
+        const name = e;
         const p = path.join(dir, name);
         const stat = await fs.stat(p).catch(() => null);
         if (!stat) continue;

@@ -4,8 +4,6 @@
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import type { ErrorLike } from '@';
-import { extrairMensagemErro } from '@';
 
 // Resolve o diretório raiz do dist usando import.meta.url para funcionar em instalações globais
 const __filename = fileURLToPath(import.meta.url);
@@ -45,7 +43,8 @@ const entryUrl = pathToFileURL(entryCaminho).toString();
     if (code === 'commander.version' || code === 'commander.help' || code === 'commander.helpDisplayed' || message === 'outputHelp' || message === '(outputHelp)') {
       process.exit(0);
     }
-    const msg = typeof message === 'string' ? message : extrairMensagemErro(err);
+    const { extrairMensagemErro: extrair } = await import(pathToFileURL(path.resolve(distRaiz, 'types', 'index.js')).toString()) as { extrairMensagemErro: (err: unknown) => string };
+    const msg = typeof message === 'string' ? message : extrair(err);
     // prometheus-ignore: console-in-production - CLI point de entrada precisa mostrar erros
     console.error('Erro ao inicializar o prometheus:', msg);
     if (err && typeof err === 'object' && 'stack' in err) {
@@ -56,7 +55,10 @@ const entryUrl = pathToFileURL(entryCaminho).toString();
     }
     process.exit(1);
   }
-})().catch((err: ErrorLike) => {
+})().catch(async (err: unknown) => {
+  const distRaiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const { extrairMensagemErro: extrair } = await import(pathToFileURL(path.resolve(distRaiz, 'types', 'index.js')).toString()) as { extrairMensagemErro: (err: unknown) => string };
+
   const code = err && typeof err === 'object' && 'code' in err ? (err as {
     code?: unknown;
   }).code : undefined;
@@ -66,7 +68,7 @@ const entryUrl = pathToFileURL(entryCaminho).toString();
   if (code === 'commander.version' || code === 'commander.help' || code === 'commander.helpDisplayed' || message === 'outputHelp' || message === '(outputHelp)') {
     process.exit(0);
   }
-  const msg = typeof message === 'string' ? message : extrairMensagemErro(err);
+  const msg = typeof message === 'string' ? message : extrair(err);
   // prometheus-ignore: console-in-production - CLI point de entrada precisa mostrar erros
   console.error('Erro ao inicializar o prometheus:', msg);
   if (err && typeof err === 'object' && 'stack' in err) {
