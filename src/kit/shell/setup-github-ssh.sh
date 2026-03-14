@@ -25,12 +25,12 @@ while [[ $# -gt 0 ]]; do
     --user)  GITHUB_USER="$2"; shift 2 ;;
     --email) GITHUB_EMAIL="$2"; shift 2 ;;
     --help|-h)
-      echo "Uso: $0 [--user SEU_USER] [--email SEU_EMAIL]"
-      echo ""
-      echo "Configura SSH para GitHub, migrando repositórios de HTTPS para SSH."
-      echo "Se --user e --email não forem informados, serão solicitados interativamente."
-      exit 0
-      ;;
+    echo "Uso: $0 [--user SEU_USER] [--email SEU_EMAIL]"
+    echo ""
+    echo "Configura SSH para GitHub, migrando repositórios de HTTPS para SSH."
+    echo "Se --user e --email não forem informados, serão solicitados interativamente."
+    exit 0
+    ;;
     *) error "Argumento desconhecido: $1. Use --help para ver opções." ;;
   esac
 done
@@ -93,13 +93,13 @@ else
   mkdir -p "$HOME/.ssh"
   cat >> "$SSH_CONFIG" <<EOF
 
-# GitHub — $GITHUB_USER
-Host github.com
+  # GitHub — $GITHUB_USER
+  Host github.com
   HostName github.com
   User git
   IdentityFile $KEY_FILE
   IdentitiesOnly yes
-EOF
+  EOF
   chmod 600 "$SSH_CONFIG"
   info "~/.ssh/config atualizado"
 fi
@@ -108,8 +108,8 @@ fi
 section "4/6 — Limpando credenciais HTTPS antigas"
 # -------------------------------------------------------------
 git config --global --unset credential.helper 2>/dev/null && \
-  info "credential.helper removido" || \
-  warn "credential.helper não estava definido globalmente"
+info "credential.helper removido" || \
+warn "credential.helper não estava definido globalmente"
 
 git credential-cache exit 2>/dev/null || true
 info "Cache de credenciais limpo"

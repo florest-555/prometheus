@@ -4,13 +4,13 @@
 // Sistema inteligente de filtragem e priorização de relatórios
 // Agrupa problemas similares e prioriza por impacto para evitar sobrecarga de informação
 
+import { config } from '@core/config/config.js';
 import {
   AGRUPAMENTOS_MENSAGEM,
   ICONES_FEEDBACK,
   PRIORIDADES,
   RelatorioMensagens
 } from '@core/messages/index.js';
-import { config } from '@core/config/config.js';
 import { stripAnsi } from '@shared/helpers/ansi.js';
 
 import type { Ocorrencia, OcorrenciaNivel, ProblemaAgrupado, RankingItem, RelatorioResumo, ResumoExecutivo } from '@';

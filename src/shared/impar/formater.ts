@@ -949,7 +949,7 @@ function formatarCssMinimo(params: { code: string, relPath?: string }): Formatad
   let indent = 0;
   const indentStr = (n: number) => '  '.repeat(Math.max(0, n));
 
-  for (let line of lines) {
+  for (const line of lines) {
     let trimmed = line.trim();
     if (!trimmed) {
       if (out.length > 0 && out[out.length - 1] !== '') out.push('');
@@ -961,7 +961,7 @@ function formatarCssMinimo(params: { code: string, relPath?: string }): Formatad
     const closeBraces = (trimmed.match(/\}/g) || []).length;
 
     if (trimmed.startsWith('}')) indent = Math.max(0, indent - 1);
-    
+
     // Auto-spacing for selectors and properties
     if (trimmed.includes('{') && !trimmed.startsWith('@')) {
       trimmed = trimmed.replace(/\s*\{\s*/g, ' {');
@@ -974,7 +974,7 @@ function formatarCssMinimo(params: { code: string, relPath?: string }): Formatad
     }
 
     out.push(`${indentStr(indent)}${trimmed}`);
-    
+
     indent += openBraces;
     indent -= closeBraces;
     if (trimmed.startsWith('}')) {
@@ -986,7 +986,7 @@ function formatarCssMinimo(params: { code: string, relPath?: string }): Formatad
     const net = openBraces - closeBraces;
     if (trimmed.startsWith('}')) {
        // we already decremented once.
-       indent = indent + (net + 1); 
+       indent = indent + (net + 1);
     } else {
        // reset to what it should be after the line
        // (this is getting complex, let's simplify)
@@ -1000,12 +1000,12 @@ function formatarCssMinimo(params: { code: string, relPath?: string }): Formatad
       const trimmed = line.trim();
       const open = (trimmed.match(/\{/g) || []).length;
       const close = (trimmed.match(/\}/g) || []).length;
-      
+
       let lineIndent = currentIndent;
       if (trimmed.startsWith('}')) {
           lineIndent = Math.max(0, currentIndent - 1);
       }
-      
+
       finalOut.push(`${indentStr(lineIndent)}${trimmed}`);
       currentIndent += (open - close);
   }
@@ -1032,7 +1032,7 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
   const decKeywords = /\b(fi|done|esac)\b|\}|^\s*\)/;
   const midKeywords = /\b(else|elif)\b/;
 
-  for (let line of lines) {
+  for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) {
       if (out.length > 0 && out[out.length - 1] !== '') out.push('');
@@ -1046,7 +1046,7 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
     }
 
     let lineIndent = indent;
-    
+
     // Decrement rules
     if (trimmed.match(/^fi\b/) || trimmed.match(/^done\b/) || trimmed.match(/^esac\b/) || trimmed.startsWith('}') || trimmed.startsWith(')')) {
       lineIndent = Math.max(0, indent - 1);
@@ -1061,12 +1061,12 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
     const dos = (trimmed.match(/\bdo\b/g) || []).length;
     const thens = (trimmed.match(/\bthen\b/g) || []).length;
     const bracesOpen = (trimmed.match(/\{/g) || []).length;
-    
+
     const clos = (trimmed.match(/\b(fi|done|esac)\b/g) || []).length;
     const bracesClose = (trimmed.match(/\}/g) || []).length;
 
     indent += (opens + dos + thens + bracesOpen) - (clos + bracesClose);
-    
+
     // Special handling for keywords that are both open/close in context or shouldn't accumulate
     // This is a simplified indenter.
   }
@@ -1088,7 +1088,7 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
     // Keywords that should be indented RELATIVE to previous line but don't increase depth for next (unless specialized)
     const isDecrement = /^(fi|done|esac|}|elif|else|then|do)(\b|$)/.test(t);
     const useIndent = isDecrement ? Math.max(0, curr - 1) : curr;
-    
+
     resLines.push(`${indentStr(useIndent)}${t}`);
 
     // Updates
@@ -1096,7 +1096,7 @@ function formatarShellMinimo(code: string): FormatadorMinimoResult {
     if (/^then(\b|$)/.test(t)) { /* already handled by if or will handle if then is separate line */ }
     if (/^do(\b|$)/.test(t)) { /* similar */ }
     if (t.endsWith('{')) curr++;
-    
+
     if (/^(fi|done|esac)(\b|$)/.test(t)) curr = Math.max(0, curr - 1);
     if (t.startsWith('}')) curr = Math.max(0, curr - 1);
   }

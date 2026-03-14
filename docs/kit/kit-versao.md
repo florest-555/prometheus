@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # 🔑 Guia rápido de Git (versão simplificada)
 
 Este arquivo reúne os comandos mais usados para começar a trabalhar com Git e configurar
@@ -92,4 +100,5 @@ git stash pop
 > - `utils/git-cheatsheet.md` (fluxos de trabalho, rebase, tags, submódulos)
 > - `utils/linux-commands.md` (comandos Linux gerais)
 > - scripts em `shell/`, por exemplo o menu `kit.sh`.
+
 

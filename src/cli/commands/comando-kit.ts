@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT-0
+import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { existsSync } from 'node:fs';
 
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { CliComandoKitMensagens } from '@core/messages/cli/cli-comando-kit-messages.js';
@@ -43,6 +43,9 @@ const SCRIPTS: Record<string, { file: string; descricao: string }> = {
   'init-git-repo': { file: 'shell/init-git-repo.sh', descricao: CliComandoKitMensagens.scripts.initGitRepo },
   'setup-github-ssh': { file: 'shell/setup-github-ssh.sh', descricao: CliComandoKitMensagens.scripts.setupGithubSsh },
   'system-info': { file: 'shell/system-info.sh', descricao: CliComandoKitMensagens.scripts.systemInfo },
+  cleanup: { file: 'shell/cleanup.sh', descricao: CliComandoKitMensagens.scripts.cleanup },
+  'docker-helper': { file: 'shell/docker-helper.sh', descricao: CliComandoKitMensagens.scripts.dockerHelper },
+  'port-manager': { file: 'shell/port-manager.sh', descricao: CliComandoKitMensagens.scripts.portManager },
 };
 
 const DOCS: Record<string, { file: string; descricao: string }> = {

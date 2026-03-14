@@ -49,7 +49,7 @@ npx github:wolf-5-5-5/prometheus diagnosticar --help
 - [PERFORMANCE] **Performance**: Pool de workers para analise paralela de projetos grandes
 - [SEGURANCA] **Seguranca**: Guardian verifica integridade de arquivos via hashing
 - [METRICAS] **Metricas Inteligentes**: Pontuacao adaptativa baseada no tamanho do projeto
-- [MULTI] **Multi-linguagem**: JS/TS completo e cobertura heuristica para HTML/CSS/XML/Markdown/YAML
+- [MULTI] **Multi-linguagem**: JS/TS completo e suporte robusto para HTML/CSS/XML/Markdown/YAML
 - [I18N] **Internacionalizacao**: Portugues e Ingles em mensagens, logs e relatorios
 - [MODULAR] **Modular**: Analistas, detectores e plugins com autodiscovery e registro dinâmico
 - [AUTO-FIX] **Correcoes**: Auto-fix (tipos/estrutura/formatacao) com relatórios detalhados
@@ -377,6 +377,8 @@ O Prometheus inclui um **Kit de Sobrevivência** com scripts e guias para tarefa
 ```bash
 # Listar todos os scripts e guias disponíveis
 prometheus kit list
+# Ou via npm run (alias conveniente)
+npm run kit -- list
 
 # Executar um script
 prometheus kit run system-info
@@ -399,6 +401,9 @@ prometheus kit docs linux-commands
 | `init-git-repo` | Assistente para iniciar repositório Git |
 | `setup-github-ssh` | Configura SSH para GitHub |
 | `backup-dotfiles` | Backup de dotfiles |
+| `cleanup` | Limpeza de logs e cache do sistema |
+| `docker-helper` | Gerenciamento de containers Docker |
+| `port-manager` | Gerenciar processos em portas (lsof) |
 
 ### Guias Disponíveis
 
@@ -593,8 +598,8 @@ prometheus diagnosticar --scan-only
 ## Linguagens Suportadas
 
 - **Primário (AST Babel completo)**: `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`
-- **Analisadores Específicos**: `.html`, `.css`, `.xml`, `.svg`, `.md`
-- **Heurístico/Leve**: `.kt`, `.kts`, `.java`, `.gradle`, `.py`, `.php`
+- **Analisadores Específicos**: `.html`, `.css`, `.xml`, `.svg`, `.md` (suporte robusto e nativo)
+- **Heurístico/Leve**: `.kt`, `.kts`, `.java`, `.gradle`, `.py`, `.php`, `.sh`, `.bash`
 
 *Nota: Analistas que dependem de nós Babel atuam apenas em linguagens suportadas pelo Babel; demais arquivos são processados por plugins específicos quando disponíveis.*
 

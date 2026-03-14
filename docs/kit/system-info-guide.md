@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # 📊 Guia de Informações do Sistema
 
 Este guia explica como usar o script `system-info.sh` para obter informações detalhadas sobre seu sistema Linux.
@@ -100,3 +108,4 @@ As informações obtidas pelo `system-info.sh` podem ser úteis para:
 - Identificar problemas de desempenho (ver uso de memória/CPU)
 - Planejar upgrades de hardware (ver capacidade atual)
 - Solucionar problemas de rede (ver interfaces e IPs)
+

@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # 🖥️ Comandos Linux Úteis
 
 Pequeno manual com tarefas comuns no dia a dia de um usuário Debian/Ubuntu.
@@ -72,3 +80,4 @@ tar czf ~/dotfiles.tar.gz ~/.bashrc ~/.profile ~/.ssh/config
 O script `shell/backup-dotfiles.sh` automatiza esse backup com timestamp.
 
 > Este guia é complementar ao `README.md` do projeto.
+

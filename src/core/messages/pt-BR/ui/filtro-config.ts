@@ -4,6 +4,8 @@
  * Define prioridades, agrupamentos e categorização de problemas
  */
 
+import { i18n } from '@shared/helpers/i18n.js';
+
 import type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel } from '@';
 
 import {
@@ -11,7 +13,6 @@ import {
   ICONES_DIAGNOSTICO,
   ICONES_FEEDBACK,
 } from './icons.js';
-import { i18n } from '@shared/helpers/i18n.js';
 
 // Re-exporta os tipos para compatibilidade
 export type { AgrupamentoConfig, ConfigPrioridade, PrioridadeNivel };

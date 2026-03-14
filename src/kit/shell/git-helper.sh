@@ -6,15 +6,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Carrega utilitários comuns
 if [ -f "$SCRIPT_DIR/utils.sh" ]; then
-    source "$SCRIPT_DIR/utils.sh"
+  source "$SCRIPT_DIR/utils.sh"
 else
-    echo "Erro: utils.sh não encontrado"
-    exit 1
+  echo "Erro: utils.sh não encontrado"
+  exit 1
 fi
 
 if ! command_exists git; then
-    error "git não está instalado"
-    exit 1
+  error "git não está instalado"
+  exit 1
 fi
 
 while true; do
@@ -37,72 +37,72 @@ while true; do
 
   case $opt in
     1)
-      git status
-      wait_key ;;
+    git status
+    wait_key ;;
     2)
-      git add .
-      info "Todas as alterações foram adicionadas ao index."
-      wait_key ;;
+    git add .
+    info "Todas as alterações foram adicionadas ao index."
+    wait_key ;;
     3)
-      read -p "Mensagem de commit: " msg
-      if [ -n "$msg" ]; then
-        git commit -m "$msg"
-      else
-        warn "Mensagem de commit vazia. Operação cancelada."
-      fi
-      wait_key ;;
+    read -p "Mensagem de commit: " msg
+    if [ -n "$msg" ]; then
+      git commit -m "$msg"
+    else
+      warn "Mensagem de commit vazia. Operação cancelada."
+    fi
+    wait_key ;;
     4)
-      info "Enviando alterações..."
-      git push
-      wait_key ;;
+    info "Enviando alterações..."
+    git push
+    wait_key ;;
     5)
-      info "Buscando atualizações..."
-      git pull
-      wait_key ;;
+    info "Buscando atualizações..."
+    git pull
+    wait_key ;;
     6)
-      header "Branches"
-      git branch -a
-      wait_key ;;
+    header "Branches"
+    git branch -a
+    wait_key ;;
     7)
-      read -p "Nome da branch/commit: " br
-      if [ -n "$br" ]; then
-        git checkout "$br"
-      else
-        warn "Nome da branch vazio."
-      fi
-      wait_key ;;
+    read -p "Nome da branch/commit: " br
+    if [ -n "$br" ]; then
+      git checkout "$br"
+    else
+      warn "Nome da branch vazio."
+    fi
+    wait_key ;;
     8)
-      header "Histórico de Commits"
-      git log --oneline --graph --decorate -n 15
-      wait_key ;;
+    header "Histórico de Commits"
+    git log --oneline --graph --decorate -n 15
+    wait_key ;;
     9)
-      header "Git Stash"
-      echo "1) Stash (Save)"
-      echo "2) Pop (Apply & Remove last)"
-      echo "3) List"
-      read -p "Escolha: " stash_opt
-      case $stash_opt in
-        1) read -p "Mensagem (opcional): " smsg; git stash push -m "$smsg" ;;
-        2) git stash pop ;;
-        3) git stash list ;;
-      esac
-      wait_key ;;
+    header "Git Stash"
+    echo "1) Stash (Save)"
+    echo "2) Pop (Apply & Remove last)"
+    echo "3) List"
+    read -p "Escolha: " stash_opt
+    case $stash_opt in
+      1) read -p "Mensagem (opcional): " smsg; git stash push -m "$smsg" ;;
+      2) git stash pop ;;
+      3) git stash list ;;
+    esac
+    wait_key ;;
     10)
-      warn "Isso removerá arquivos NÃO rastreados pelo Git!"
-      read -p "Tem certeza? (s/N): " confirm
-      if [[ $confirm == [sS] ]]; then
-        git clean -fd
-        info "Arquivos limpos."
-      fi
-      wait_key ;;
+    warn "Isso removerá arquivos NÃO rastreados pelo Git!"
+    read -p "Tem certeza? (s/N): " confirm
+    if [[ $confirm == [sS] ]]; then
+      git clean -fd
+      info "Arquivos limpos."
+    fi
+    wait_key ;;
     11)
-      header "Remotes"
-      git remote -v
-      wait_key ;;
+    header "Remotes"
+    git remote -v
+    wait_key ;;
     12)
-      break ;;
+    break ;;
     *)
-      warn "Opção inválida"
-      sleep 1 ;;
+    warn "Opção inválida"
+    sleep 1 ;;
   esac
 done

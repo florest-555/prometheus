@@ -21,6 +21,9 @@ export const CliComandoKitMensagens = createI18nMessages({
     initGitRepo: 'Assistente para iniciar repositório Git',
     setupGithubSsh: 'Configura SSH e migra repositórios para GitHub',
     systemInfo: 'Informações detalhadas do sistema',
+    cleanup: 'Limpeza de logs e cache do sistema',
+    dockerHelper: 'Gerenciamento de containers e imagens Docker',
+    portManager: 'Identifica e gerencia processos em portas (lsof)',
   },
   docs: {
     kitVersao: 'Guia rápido de Git',
@@ -65,6 +68,9 @@ export const CliComandoKitMensagens = createI18nMessages({
     initGitRepo: 'Assistant to initialize a Git repository',
     setupGithubSsh: 'Configure SSH and migrate repos to GitHub',
     systemInfo: 'Detailed system information',
+    cleanup: 'System logs and cache cleanup',
+    dockerHelper: 'Docker containers and images management',
+    portManager: 'Identify and manage processes on ports (lsof)',
   },
   docs: {
     kitVersao: 'Quick Git guide',

@@ -6,18 +6,18 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Carrega utilitários comuns
 if [ -f "$SCRIPT_DIR/utils.sh" ]; then
-    source "$SCRIPT_DIR/utils.sh"
+  source "$SCRIPT_DIR/utils.sh"
 fi
 
 header "Informações do Sistema"
 
 echo -e "${BLUE}📋 Distribuição:${NC}"
 if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    echo "   Nome: $PRETTY_NAME"
-    echo "   Versão: $VERSION_ID ($VERSION_CODENAME)"
+  . /etc/os-release
+  echo "   Nome: $PRETTY_NAME"
+  echo "   Versão: $VERSION_ID ($VERSION_CODENAME)"
 else
-    echo "   Não foi possível determinar a distribuição"
+  echo "   Não foi possível determinar a distribuição"
 fi
 
 echo -e "\n${BLUE}🐂 Kernel:${NC}"
@@ -37,15 +37,15 @@ echo -e "\n${BLUE}🌐 Rede:${NC}"
 echo "   Hostname: $(hostname)"
 echo "   IP Local: $(hostname -I | awk '{print $1}')"
 if command_exists curl; then
-    echo "   IP Público: $(curl -s https://ifconfig.me || echo 'Erro ao obter')"
+  echo "   IP Público: $(curl -s https://ifconfig.me || echo 'Erro ao obter')"
 fi
 
 echo -e "\n${BLUE}⏰ Status:${NC}"
 echo "   Uptime: $(uptime -p)"
 if [ -f /var/run/reboot-required ]; then
-    warn "REINICIALIZAÇÃO NECESSÁRIA!"
+  warn "REINICIALIZAÇÃO NECESSÁRIA!"
 else
-    info "Sistema atualizado (sem necessidade de reboot)"
+  info "Sistema atualizado (sem necessidade de reboot)"
 fi
 
 echo -e "\n${BLUE}📦 Pacotes (apt):${NC}"
@@ -54,9 +54,9 @@ echo "   Atualizáveis: $(apt list --upgradable 2>/dev/null | grep -c '/' || ech
 
 echo -e "\n${BLUE}🔌 Portas em Escuta (Principais):${NC}"
 if command_exists ss; then
-    ss -tulpn | grep LISTEN | head -n 10 | awk '{print "   " $5 " -> " $1}'
+  ss -tulpn | grep LISTEN | head -n 10 | awk '{print "   " $5 " -> " $1}'
 else
-    echo "   Comando 'ss' não encontrado."
+  echo "   Comando 'ss' não encontrado."
 fi
 
 header "Fim das Informações"

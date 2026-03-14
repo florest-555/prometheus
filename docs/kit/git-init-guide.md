@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # 🚀 Guia de Inicialização de Repositório Git
 
 Este guia explica como usar o script `init-git-repo.sh` para configurar rapidamente um repositório Git com identidade e remote opcional.

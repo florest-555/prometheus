@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # Kit de Sobrevivência
 
 Este é o Kit de Sobrevivência do Prometheus - uma coleção de scripts e guias para tarefas comuns no dia a dia de um desenvolvedor.
@@ -45,6 +53,9 @@ prometheus kit
 | `init-git-repo` | Assistente para iniciar repositório Git |
 | `setup-github-ssh` | Configura SSH para GitHub |
 | `system-info` | Informações detalhadas do sistema |
+| `cleanup` | Limpeza de logs e cache do sistema |
+| `docker-helper` | Gerenciamento de containers e imagens Docker |
+| `port-manager` | Gerencia processos em portas (lsof) |
 
 ## Guias Disponíveis
 
@@ -84,3 +95,4 @@ prometheus kit run system-info
 ---
 
 Para mais detalhes, veja os guias individuais em `utils/` ou use `prometheus kit docs <guia>`.
+

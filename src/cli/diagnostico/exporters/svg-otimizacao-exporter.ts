@@ -2,9 +2,9 @@
 
 import path from 'node:path';
 
-import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
 import { config } from '@core/config/config.js';
 import { RelatorioMensagens } from '@core/messages/index.js';
+import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
 
 import type { FileEntryWithAst, SvgCandidate, SvgDirectoryStats, SvgExportResult } from '@';
 

@@ -3,21 +3,21 @@
 
 # Função para verificar se um comando existe
 command_exists() {
-    command -v "$1" >/dev/null 2>&1
+  command -v "$1" >/dev/null 2>&1
 }
 
 # Função para exibir mensagem de erro
 show_error() {
-    echo "Erro: $1" >&2
-    read -p "Pressione Enter para continuar..."
+  echo "Erro: $1" >&2
+  read -p "Pressione Enter para continuar..."
 }
 
 # Trap para capturar interrupções
 trap 'echo "Interrompido. Saindo..."; exit 1' INT TERM
 
 if ! command_exists ping; then
-    show_error "ping não disponível"
-    exit 1
+  show_error "ping não disponível"
+  exit 1
 fi
 
 echo "=== Ping para 8.8.8.8 ==="

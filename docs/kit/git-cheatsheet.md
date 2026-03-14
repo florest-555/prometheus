@@ -1,3 +1,11 @@
+---
+Proveniência e Autoria: Este documento integra o projeto Prometheus (licença MIT-0).
+Nada aqui implica cessão de direitos morais/autorais.
+Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
+Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
+---
+
+
 # 🧠 Git Cheat Sheet
 
 Um guia rápido com comandos úteis para versionamento Git.
@@ -114,3 +122,4 @@ git submodule update --remote
 ```
 
 > Consulte também o arquivo `utils/kit-versao.md` para comandos básicos e configuração SSH.
+
