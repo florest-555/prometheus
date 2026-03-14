@@ -47,6 +47,21 @@
     },
     "python": {
       "enabled": true
+    },
+    "json": {
+      "enabled": true
+    },
+    "yaml": {
+      "enabled": true
+    },
+    "markdown": {
+      "enabled": true
+    },
+    "shell": {
+      "enabled": true
+    },
+    "bash": {
+      "enabled": true
     }
   },
   "suppress": {
