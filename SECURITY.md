@@ -13,9 +13,9 @@ Se você descobrir uma vulnerabilidade de segurança no Prometheus, por favor, r
 
 ### Métodos de Relato:
 
-- **GitHub Security Advisories**: Use o [formulário de advisories do GitHub](https://github.com/wolf-5-5-5/prometheus/security/advisories/new) para relatar vulnerabilidades de forma privada.
+- **GitHub Security Advisories**: Use o [formulário de advisories do GitHub](https://github.com/lopo-5-5-5/prometheus/security/advisories/new) para relatar vulnerabilidades de forma privada.
 - **Issues Privadas**: Abra uma issue no repositório com o rótulo `security` e marque como privada, se possível. Evite incluir detalhes sensíveis no título ou descrição inicial.
-- **E-mail**: Contate o mantenedor diretamente via e-mail (consulte o perfil do GitHub de [@wolf-5-5-5](https://github.com/wolf-5-5-5) para obter o e-mail).
+- **E-mail**: Contate o mantenedor diretamente via e-mail (consulte o perfil do GitHub de [@lopo-5-5-5](https://github.com/lopo-5-5-5) para obter o e-mail).
 
 Forneça o máximo de detalhes possível, incluindo:
 
@@ -45,7 +45,7 @@ Apenas a versão mais recente e as versões ativas de manutenção recebem corre
 
 Para questões relacionadas à segurança, entre em contato:
 
-- **Mantenedor**: Italo C Lopes ([@wolf-5-5-5](https://github.com/wolf-5-5-5))
-- **Repositório**: [https://github.com/wolf-5-5-5/prometheus](https://github.com/wolf-5-5-5/prometheus)
+- **Mantenedor**: Italo C Lopes ([@lopo-5-5-5](https://github.com/lopo-5-5-5))
+- **Repositório**: [https://github.com/lopo-5-5-5/prometheus](https://github.com/lopo-5-5-5/prometheus)
 
 Obrigado por ajudar a manter o Prometheus seguro!

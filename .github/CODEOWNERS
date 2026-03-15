@@ -2,7 +2,7 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Maintainers (have final approval on all changes)
-* @wolf-5-5-5/maintainers
+* @lopos-5-5-5/maintainers
 
 # Core Team (can approve most changes)
 # Add your core team members here
@@ -10,28 +10,28 @@
 # @username2
 
 # Skills - Require review from skills team
-skills/** @wolf-5-5-5/maintainers
+skills/** @lopos-5-5-5/maintainers
 
 # CI/CD and GitHub Actions
-.github/workflows/* @wolf-5-5-5/maintainers
-.github/labeler.yml @wolf-5-5-5/maintainers
-.github/dependabot.yml @wolf-5-5-5/maintainers
+.github/workflows/* @lopos-5-5-5/maintainers
+.github/labeler.yml @lopos-5-5-5/maintainers
+.github/dependabot.yml @lopos-5-5-5/maintainers
 
 # Documentation
-docs/** @wolf-5-5-5/maintainers
-README.md @wolf-5-5-5/maintainers
-CONTRIBUTING.md @wolf-5-5-5/maintainers
-CHANGELOG.md @wolf-5-5-5/maintainers
-CODE_OF_CONDUCT.md @wolf-5-5-5/maintainers
+docs/** @lopos-5-5-5/maintainers
+README.md @lopos-5-5-5/maintainers
+CONTRIBUTING.md @lopos-5-5-5/maintainers
+CHANGELOG.md @lopos-5-5-5/maintainers
+CODE_OF_CONDUCT.md @lopos-5-5-5/maintainers
 
 # Configuration files
-*.config.js @wolf-5-5-5/maintainers
-*.config.json @wolf-5-5-5/maintainers
-tsconfig*.json @wolf-5-5-5/maintainers
-vitest.config.* @wolf-5-5-5/maintainers
-eslint.config.js @wolf-5-5-5/maintainers
+*.config.js @lopos-5-5-5/maintainers
+*.config.json @lopos-5-5-5/maintainers
+tsconfig*.json @lopos-5-5-5/maintainers
+vitest.config.* @lopos-5-5-5/maintainers
+eslint.config.js @lopos-5-5-5/maintainers
 
 # Security related
-SECURITY.md @wolf-5-5-5/maintainers
-.github/workflows/defender-for-devops.yml @wolf-5-5-5/maintainers
-.github/workflows/codeql.yml @wolf-5-5-5/maintainers
+SECURITY.md @lopos-5-5-5/maintainers
+.github/workflows/defender-for-devops.yml @lopos-5-5-5/maintainers
+.github/workflows/codeql.yml @lopos-5-5-5/maintainers
