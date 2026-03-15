@@ -117,3 +117,6 @@ export type {
   PackageInfo,
   ScanResult,
 } from '@pt-types/licensas.js';
+
+// Shell
+export * from '@pt-types/shell.js';

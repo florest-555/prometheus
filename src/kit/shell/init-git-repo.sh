@@ -23,6 +23,12 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+export BLUE='\033[0;34m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[1;33m'
+export RED='\033[0;31m'
+export NC='\033[0m'
+
 echo ".!. Inicializando repositório Git .!."
 
 # Verificar se já é um repositório Git
@@ -43,6 +49,7 @@ if ! git config --global user.name &>/dev/null; then
     show_error "Nome do Git não pode estar vazio"
     exit 1
   fi
+  export GIT_USER
   git config --global user.name "$GIT_USER"
 fi
 
@@ -52,6 +59,7 @@ if ! git config --global user.email &>/dev/null; then
     show_error "Email do Git não pode estar vazio"
     exit 1
   fi
+  export GIT_EMAIL
   git config --global user.email "$GIT_EMAIL"
 fi
 
@@ -60,8 +68,10 @@ git config --global --list | grep -E "user.(name|email)"
 
 # Perguntar se quer criar remote
 read -p "Deseja adicionar um remote agora? (y/n): " ADD_REMOTE
+export ADD_REMOTE
 if [[ "$ADD_REMOTE" =~ ^[Yy]$ ]]; then
   read -p "URL do repositório remoto (ex: git@github.com:usuario/repo.git): " REMOTE_URL
+  export REMOTE_URL
   if [ -z "$REMOTE_URL" ]; then
     show_error "URL do remote não pode estar vazia"
     exit 1
