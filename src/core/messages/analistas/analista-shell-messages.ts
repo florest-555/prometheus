@@ -1,0 +1,46 @@
+// SPDX-License-Identifier: MIT-0
+import { createI18nMessages } from '@shared/helpers/i18n.js';
+
+export const ShellMensagens = createI18nMessages({
+  globalVarSemDeclaracao: (varName: string) => `Variável global '${varName}' sem declaração local/export`,
+  evalUsado: 'Uso de eval() detectado - risco de injection',
+  rmWildcardSemConfirmacao: 'rm com wildcards sem -i (interactive)',
+  chmod777: (perms: string) => `Permissão muito aberta: chmod ${perms}`,
+  sudoSemCheck: 'sudo usado sem verificação de erro ou -n',
+  umaskTrocado: 'umask alterado no script - pode afetar processos filhos',
+  pipeDesnecessario: 'Pipe desnecessário detectado - considere otimizar',
+  subshellPipe: 'Subshell em pipe - considere variável intermediária',
+  grepVDesnecessario: 'grep -v pode ser substituído por grep invertendo padrão',
+  setESemTrap: 'set -e usado sem tratamento de erros (trap)',
+  varEnvSemAspas: 'Variável de ambiente sem aspas - risco de word splitting',
+  findExecSemPlus: 'find -exec sem + pode ser ineficiente',
+  pipeParaShRisco: 'Pipe para sh direto de curl/wget - risco de segurança!',
+  sourceSemExplicit: 'Fonte de script sem "source" explícito - prefira "source" ou "."',
+  exitCodigoSemPipefail: 'Exit com código > 0 sem pipefail - erro pode passar despercebido',
+  commandUsadoIncorrect: 'Uso de "command" incorreto - use command -v para checar',
+  comparacaoStringIncorreta: 'Comparação com = em vez de == ou =~ em [[ ]]',
+  testeAritmeticoComBrackets: 'Teste aritmético [ ] ao invés de (( ))',
+  teeSemAppend: 'tee sem >> - sobrescreve arquivo em vez de append',
+  sedInplaceSemBackup: 'sed -i sem backup - use -i.bak'
+}, {
+  globalVarSemDeclaracao: (varName: string) => `Global variable '${varName}' without local/export declaration`,
+  evalUsado: 'eval() usage detected - injection risk',
+  rmWildcardSemConfirmacao: 'rm with wildcards without -i (interactive)',
+  chmod777: (perms: string) => `Too open permission: chmod ${perms}`,
+  sudoSemCheck: 'sudo used without error check or -n',
+  umaskTrocado: 'umask changed in script - may affect child processes',
+  pipeDesnecessario: 'Unnecessary pipe detected - consider optimizing',
+  subshellPipe: 'Subshell in pipe - consider intermediate variable',
+  grepVDesnecessario: 'grep -v can be replaced by grep with inverted pattern',
+  setESemTrap: 'set -e used without error handling (trap)',
+  varEnvSemAspas: 'Environment variable without quotes - word splitting risk',
+  findExecSemPlus: 'find -exec without + may be inefficient',
+  pipeParaShRisco: 'Direct pipe to sh from curl/wget - security risk!',
+  sourceSemExplicit: 'Script sourcing without explicit "source" - prefer "source" or "."',
+  exitCodigoSemPipefail: 'Exit with code > 0 without pipefail - error may go unnoticed',
+  commandUsadoIncorrect: 'Incorrect "command" usage - use command -v to check',
+  comparacaoStringIncorreta: 'String comparison with = instead of == or =~ in [[ ]]',
+  testeAritmeticoComBrackets: 'Arithmetic test [ ] instead of (( ))',
+  teeSemAppend: 'tee without >> - overwrites file instead of append',
+  sedInplaceSemBackup: 'sed -i without backup - use -i.bak'
+});

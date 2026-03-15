@@ -23,8 +23,9 @@ import { analistaDocumentacao } from '@analistas/plugins/detector-documentacao.j
 import { detectorMarkdown } from '@analistas/plugins/detector-markdown.js';
 import { discoverAnalistasPlugins } from '@analistas/registry/autodiscovery.js';
 import { comSupressaoInline } from '@shared/helpers/analista-wrapper.js';
+import {analistaShell} from '@analistas/shell/analista-shell.js';
 
-import type { Analista, EntradaRegistry, InfoAnalista, ModuloAnalista, Tecnica } from '@';
+import type { Analista, EntradaRegistry, InfoAnalista, ModuloAnalista, Tecnica} from '@';
 
 let analistaCorrecaoAutomatica: EntradaRegistry = undefined;
 try {
@@ -51,6 +52,8 @@ comSupressaoInline(analistaArquitetura),
 comSupressaoInline(analistaDesempenho as unknown as Analista),
 comSupressaoInline(analistaEstiloModerno as unknown as Analista),
 comSupressaoInline(analistaSeguranca), comSupressaoInline(analistaDocumentacao), comSupressaoInline(detectorMarkdown as unknown as Analista), comSupressaoInline(detectorTiposInseguros as unknown as Analista), comSupressaoInline(detectorInterfacesInline as unknown as Analista),
+// Analista de Shell/Bash
+comSupressaoInline(analistaShell as unknown as Analista),
 // Plugins autodiscovered em src/analistas/plugins/
 ...pluginsAutodiscovered.map(p => comSupressaoInline(p as unknown as Analista) as Tecnica),
 // Analistas contextuais inteligentes

@@ -19,6 +19,8 @@ export const CAMADAS: Record<string, string> = {
   md: 'docs',
   yml: 'config',
   yaml: 'config',
+  shell: 'scripts',
+  bash: 'scripts',
   // Adicione mais mapeamentos conforme necessário
 };
 
